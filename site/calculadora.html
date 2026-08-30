@@ -109,7 +109,10 @@ legend {
 
 <section class="faixa" style="padding-top:12px">
   <div class="rail">
-    <form class="calc" id="calc" novalidate>
+    <!-- O evento que importa nesta pagina nao e clique: e "a pessoa chegou a um
+     resultado". Marcado no formulario e no painel; o disparo de verdade fica
+     especificado em docs/medicao.md, sem script nenhum aqui. -->
+    <form class="calc" id="calc" novalidate data-evento="calculadora-uso" data-secao="calculadora">
 
       <div>
         <fieldset>
@@ -167,7 +170,7 @@ legend {
         </fieldset>
       </div>
 
-      <aside class="painel" id="resultado" aria-live="polite">
+      <aside class="painel" id="resultado" aria-live="polite" data-evento="calculadora-resultado" data-secao="calculadora">
         <div class="painel-topo">
           <span class="rot">Preço ideal por sessão</span>
           <span class="grande" id="r-ideal">—</span>
@@ -216,7 +219,7 @@ legend {
 
 </main>
 
-<a class="barra" href="#resultado">
+<a class="barra" href="#resultado" data-evento="ver-resultado" data-secao="calculadora">
   <span><span class="rot">Preço ideal por sessão</span><span class="val" id="b-ideal">—</span></span>
   <span class="ir" aria-hidden="true">ver detalhes ↓</span>
 </a>
