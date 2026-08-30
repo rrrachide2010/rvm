@@ -94,22 +94,36 @@ src/tipos.ts       tipos compartilhados
 
 ## Site
 
-`site/` tem duas landings estáticas que compartilham `estilo.css`, sem build:
+`site/` é o site da empresa: HTML e CSS a mão, sem build. Publica apontando a
+pasta para qualquer host estático (no Vercel, Root Directory = `site`).
 
-- `index.html` — página para clínicas (funil B2B). É o destino de quem recebeu
-  o relatório de auditoria por e-mail.
-- `enfermeiras.html` — lista de espera das ferramentas para enfermeiras.
-  É o destino do link da bio no Instagram.
+Uma empresa, três públicos que compram por razões opostas. A estrutura que faz
+isso funcionar é: **a raiz posiciona, as internas convertem.**
 
-Abra os arquivos direto no navegador para conferir. Para publicar, aponte a
-Vercel (ou qualquer host estático) para a pasta `site/` — não há passo de build.
+| Página | Público | Papel |
+| --- | --- | --- |
+| `index.html` | quem chega sem contexto | A empresa: tese, estágio real, quem somos, e três portas rotuladas por *quem você é* |
+| `clinicas.html` | dona de clínica | Landing do serviço de agenda. Destino do e-mail de auditoria |
+| `enfermeiras.html` | enfermeira entrando em estética | As ferramentas. Destino do link da bio |
+| `calculadora.html` | idem | A ferramenta que já existe |
+| `especialistas.html` | enfermeira com título e casos | A proposta de co-produção. É por aqui que a parceria clínica entra |
 
-Três coisas ficam com marcação no HTML e precisam ser trocadas antes de ir ao ar:
+A home é a única página que faz o visitante escolher um caminho — e só funciona
+porque os três públicos se reconhecem na hora ("você tem uma clínica" / "você é
+enfermeira" / "você já é especialista"). Cada porta continua sendo uma landing
+de propósito único; não misture ofertas dentro delas.
 
-- **`<!-- MARCA -->`** — o nome "Retorno" aparece em três lugares por página.
-- **`<!-- CONTATO -->`** — o número do WhatsApp (`wa.me/55...`) e o e-mail.
+Antes de publicar, três marcações no HTML:
+
+- **`<!-- MARCA -->`** — "Pele &amp; Código" é provisório. Está no `<title>`, no
+  cabeçalho e no rodapé de cada página.
+- **`<!-- CONTATO -->`** — o `wa.me/55...` e o e-mail estão com placeholder.
 - **`<!-- FORMULARIO -->`** — a lista de espera está desabilitada de propósito,
-  para não coletar contato que se perderia. Ligue quando houver endpoint.
+  para não coletar contato sem endpoint que receba.
+
+O `robots.txt` bloqueia indexação enquanto o contato for de exemplo: um dono de
+clínica achando a página no Google cairia num número que não existe. O arquivo
+traz escrito o que trocar antes de lançar.
 
 ### Calculadora de precificação
 
