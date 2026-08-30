@@ -42,6 +42,30 @@ export type AnaliseSite = {
   erro?: string;
 };
 
+/**
+ * Estagio comercial da conversa com a clinica. Chaves sem acento porque sao
+ * digitadas na linha de comando; o rotulo bonito fica em ROTULO_ESTAGIO.
+ */
+export const ESTAGIOS = [
+  "nao-contactado",
+  "contactado",
+  "respondeu",
+  "reuniao",
+  "fechado",
+  "perdido",
+] as const;
+
+export type Estagio = (typeof ESTAGIOS)[number];
+
+export const ROTULO_ESTAGIO: Record<Estagio, string> = {
+  "nao-contactado": "não contactado",
+  contactado: "contactado",
+  respondeu: "respondeu",
+  reuniao: "reunião",
+  fechado: "fechado",
+  perdido: "perdido",
+};
+
 export type Auditoria = {
   clinicaId: string;
   auditadaEm: string;
@@ -53,6 +77,15 @@ export type Auditoria = {
     minutosParaResponder?: number;
     avaliacoesSemResposta?: number;
     observacoes?: string;
+    /**
+     * Estagio comercial. Opcional de proposito: base gravada antes deste campo
+     * existir carrega sem migracao, e ausencia significa "nao-contactado".
+     * Fica dentro de `manual` porque e dado digitado a mao — e porque `auditar
+     * --forcar` ja preserva `manual` inteiro ao reauditar.
+     */
+    estagio?: Estagio;
+    /** Quando o estagio mudou pela ultima vez, em ISO. */
+    estagioEm?: string;
   };
 };
 

@@ -6,7 +6,7 @@ import { analisarSite } from "./site.ts";
 import { avaliar } from "./score.ts";
 import { indice, relatorioClinica, type Remetente } from "./relatorio.ts";
 import { carregar, caminhoBase, salvar } from "./store.ts";
-import type { Clinica } from "./tipos.ts";
+import { ESTAGIOS, ROTULO_ESTAGIO, type Clinica, type Estagio } from "./tipos.ts";
 
 const AJUDA = `
 Auditoria de clínicas — prospecção para o serviço de agenda.
@@ -15,9 +15,14 @@ Auditoria de clínicas — prospecção para o serviço de agenda.
   npm run auditar   -- [--forcar] [--limite 40]
   npm run relatorio -- [--top 20]
   npm run listar
+  npm run estagio   -- [--para <estagio>] [--id <id da clinica>]
 
 Passos: buscar coleta as fichas do Google, auditar analisa os sites e pontua,
 relatorio gera os HTML em ./out (abra e imprima em PDF para enviar).
+
+estagio sem argumento mostra a base agrupada pelo estágio comercial.
+Com --id e --para, move uma clínica de estágio:
+  ${ESTAGIOS.join(" · ")}
 
 A chave da Places API vai no arquivo .env (veja .env.example). Nunca no código.
 `;
@@ -183,6 +188,85 @@ async function comandoListar(): Promise<void> {
   }
 }
 
+async function comandoEstagio(argv: string[]): Promise<void> {
+  const { values } = parseArgs({
+    args: argv,
+    options: { para: { type: "string" }, id: { type: "string" } },
+  });
+
+  const base = await carregar();
+  const porId = new Map(base.clinicas.map((c) => [c.id, c]));
+
+  // ---- mover uma clinica de estagio ----
+  if (values.para || values.id) {
+    if (!values.para || !values.id) {
+      console.error("Para mover, informe os dois: --id <id> --para <estagio>");
+      process.exit(1);
+    }
+    if (!(ESTAGIOS as readonly string[]).includes(values.para)) {
+      console.error(`Estágio inválido: ${values.para}
+Use um de: ${ESTAGIOS.join(", ")}`);
+      process.exit(1);
+    }
+    const clinica = porId.get(values.id);
+    if (!clinica) {
+      console.error(`Nenhuma clínica com id ${values.id}. Rode "npm run estagio" para ver os ids.`);
+      process.exit(1);
+    }
+    const auditoria = base.auditorias.find((a) => a.clinicaId === values.id);
+    if (!auditoria) {
+      console.error(`${clinica.nome} ainda não foi auditada. Rode "npm run auditar" antes.`);
+      process.exit(1);
+    }
+    const antes = auditoria.manual.estagio ?? "nao-contactado";
+    auditoria.manual.estagio = values.para as Estagio;
+    auditoria.manual.estagioEm = new Date().toISOString();
+    await salvar(base);
+    console.log(`${clinica.nome}: ${ROTULO_ESTAGIO[antes as Estagio]} → ${ROTULO_ESTAGIO[values.para as Estagio]}`);
+    return;
+  }
+
+  // ---- listar a base agrupada por estagio ----
+  const porEstagio = new Map<Estagio, Array<{ clinica: Clinica; indice: number }>>();
+  for (const e of ESTAGIOS) porEstagio.set(e, []);
+
+  for (const auditoria of base.auditorias) {
+    const clinica = porId.get(auditoria.clinicaId);
+    if (!clinica) continue;
+    // Ausencia de estagio significa "nao contactado": base antiga carrega sem migracao.
+    const estagio = auditoria.manual.estagio ?? "nao-contactado";
+    porEstagio.get(estagio)?.push({ clinica, indice: auditoria.indiceOportunidade });
+  }
+
+  const semAuditoria = base.clinicas.filter(
+    (c) => !base.auditorias.some((a) => a.clinicaId === c.id),
+  );
+
+  if (base.auditorias.length === 0) {
+    console.log('Nenhuma auditoria ainda. Rode: npm run buscar e depois npm run auditar.');
+    return;
+  }
+
+  for (const estagio of ESTAGIOS) {
+    const linhas = porEstagio.get(estagio) ?? [];
+    console.log(`
+${ROTULO_ESTAGIO[estagio].toUpperCase()}  (${linhas.length})`);
+    if (linhas.length === 0) {
+      console.log("  —");
+      continue;
+    }
+    for (const { clinica, indice } of linhas.sort((a, b) => b.indice - a.indice)) {
+      console.log(`  ${String(indice).padStart(3)}  ${clinica.nome}`);
+      console.log(`       ${clinica.id}`);
+    }
+  }
+
+  if (semAuditoria.length > 0) {
+    console.log(`
+${semAuditoria.length} clínica(s) na base ainda sem auditoria — rode "npm run auditar".`);
+  }
+}
+
 const [, , comando = "", ...resto] = process.argv;
 
 try {
@@ -198,6 +282,9 @@ try {
       break;
     case "listar":
       await comandoListar();
+      break;
+    case "estagio":
+      await comandoEstagio(resto);
       break;
     default:
       console.log(AJUDA);

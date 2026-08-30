@@ -45,6 +45,11 @@ npm run relatorio -- --top 20
   ordenada por oportunidade, e imprima cada relatório em PDF pelo navegador
   (Ctrl+P → Salvar como PDF; o CSS já tem regras de impressão).
 - **`listar`** mostra a base no terminal.
+- **`estagio`** mostra a base agrupada pelo estágio comercial (não contactado,
+  contactado, respondeu, reunião, fechado, perdido). Para mover uma clínica:
+  `npm run estagio -- --id <id> --para contactado`. O estágio fica em
+  `manual.estagio`, então reauditar não apaga — e base gravada antes deste campo
+  existir carrega sem migração: ausência significa "não contactado".
 
 ## O que o índice de oportunidade significa
 
