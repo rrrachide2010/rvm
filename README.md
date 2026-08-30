@@ -110,3 +110,24 @@ Três coisas ficam com marcação no HTML e precisam ser trocadas antes de ir ao
 - **`<!-- CONTATO -->`** — o número do WhatsApp (`wa.me/55...`) e o e-mail.
 - **`<!-- FORMULARIO -->`** — a lista de espera está desabilitada de propósito,
   para não coletar contato que se perderia. Ligue quando houver endpoint.
+
+### Calculadora de precificação
+
+`site/calculadora.html` — ferramenta gratuita, sem cadastro e sem back-end:
+todo o cálculo roda no navegador de quem acessa, e nenhum número sai do
+aparelho. Os valores digitados ficam em `localStorage` só para a pessoa não
+precisar redigitar; nada é enviado.
+
+O modelo está inteiro no `<script>` da própria página:
+
+- **custo real** = insumos + custo fixo rateado pelas sessões que de fato
+  acontecem (capacidade × ocupação). É o rateio pela ocupação que faz a agenda
+  vazia encarecer o atendimento de quem comparece.
+- **preço mínimo** = custo real ÷ (1 − alíquota). Empata; não remunera.
+- **preço ideal** = (custo real + retirada por sessão) ÷ (1 − alíquota).
+- **ponto de equilíbrio** = custo fixo ÷ (preço × (1 − alíquota) − insumos).
+
+Os invariantes que sustentam o modelo: cobrando o preço ideal a sobra do mês
+iguala a retirada desejada; cobrando o preço mínimo a sobra é zero; e no ponto
+de equilíbrio a margem acumulada iguala o custo fixo. Se alterar as fórmulas,
+confira os três antes de publicar.
