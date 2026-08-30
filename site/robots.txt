@@ -1,0 +1,10 @@
+# O site ainda usa contato de placeholder (WhatsApp e e-mail de exemplo).
+# Enquanto for assim, nao queremos que buscadores indexem: um dono de clinica
+# achando a pagina no Google cairia num numero que nao existe.
+#
+# ANTES DE LANCAR: troque o bloco abaixo por
+#   User-agent: *
+#   Allow: /
+#   Sitemap: https://SEU-DOMINIO/sitemap.xml
+User-agent: *
+Disallow: /
