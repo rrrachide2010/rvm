@@ -91,3 +91,22 @@ src/tipos.ts       tipos compartilhados
 - O coletor se identifica honestamente no `User-Agent` e lê no máximo 600 KB por site.
 - `data/` e `out/` não vão para o repositório: contêm dados de terceiros e são
   reproduzíveis a qualquer momento.
+
+## Site
+
+`site/` tem duas landings estáticas que compartilham `estilo.css`, sem build:
+
+- `index.html` — página para clínicas (funil B2B). É o destino de quem recebeu
+  o relatório de auditoria por e-mail.
+- `enfermeiras.html` — lista de espera das ferramentas para enfermeiras.
+  É o destino do link da bio no Instagram.
+
+Abra os arquivos direto no navegador para conferir. Para publicar, aponte a
+Vercel (ou qualquer host estático) para a pasta `site/` — não há passo de build.
+
+Três coisas ficam com marcação no HTML e precisam ser trocadas antes de ir ao ar:
+
+- **`<!-- MARCA -->`** — o nome "Retorno" aparece em três lugares por página.
+- **`<!-- CONTATO -->`** — o número do WhatsApp (`wa.me/55...`) e o e-mail.
+- **`<!-- FORMULARIO -->`** — a lista de espera está desabilitada de propósito,
+  para não coletar contato que se perderia. Ligue quando houver endpoint.
