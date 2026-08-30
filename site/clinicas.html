@@ -3,8 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- MARCA: o nome aparece em 3 lugares nesta pagina (title, cabecalho, rodape)
-     e nos mesmos 3 em enfermeiras.html. Trocar de nome = 6 substituicoes. -->
+<!-- MARCA: "Pele & Código" e provisorio. Aparece 18x em site/*.html:
+     4x em index, clinicas e enfermeiras (title, og:title, cabecalho, rodape) e
+     3x em especialistas e calculadora, que nao tem a marca no og:title.
+
+     CUIDADO AO RENOMEAR: a marca esta escrita de DUAS formas. No title, no
+     og:title e no rodape e "Pele &amp; Codigo"; no link do cabecalho e
+     "Pele <span>&amp;</span> Codigo", partida por um <span>. Buscar so pela
+     primeira forma acha 13 das 18 e deixa o logo de TODAS as paginas com o nome
+     velho. Busque por `Codigo` (ou `Pele`), que pega as duas. -->
 <title>Pele &amp; Código · agenda cheia para clínicas de estética</title>
 <meta name="description" content="Confirmação ativa, fila de espera e retorno programado no WhatsApp da sua clínica. Piloto de 30 dias com meta declarada: o no-show cai 30% ou a mensalidade do período volta.">
 <meta name="robots" content="index,follow">
