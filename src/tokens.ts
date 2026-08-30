@@ -1,0 +1,155 @@
+/**
+ * Gera site/tokens.css a partir de site/tokens.json (formato DTCG) e confere
+ * o contraste dos pares que o sistema manda usar.
+ *
+ *   npm run tokens          gera e confere
+ *   npm run tokens -- --ci  falha se algum par obrigatorio reprovar
+ */
+import { readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+
+type Token = { $value: unknown; $type?: string; $description?: string };
+type Grupo = Record<string, Token>;
+
+const ENTRADA = resolve(process.cwd(), "site/tokens.json");
+const SAIDA = resolve(process.cwd(), "site/tokens.css");
+
+/** Pares que a referencia prescreve — cada um vira um teste de contraste. */
+const PARES: Array<{ nome: string; frente: string; fundo: string; tamanho: "normal" | "grande" }> = [
+  { nome: "texto do botão coral", frente: "#fef6ee", fundo: "#ef6079", tamanho: "normal" },
+  { nome: "corpo sobre creme", frente: "#651c32", fundo: "#f2e2d5", tamanho: "normal" },
+  { nome: "corpo sobre bone", frente: "#651c32", fundo: "#fef6ee", tamanho: "normal" },
+  { nome: "texto sobre burgundy", frente: "#fef6ee", fundo: "#651c32", tamanho: "normal" },
+  { nome: "rótulo oliva sobre creme", frente: "#3e4938", fundo: "#f2e2d5", tamanho: "normal" },
+  { nome: "rótulo coral sobre creme", frente: "#ef6079", fundo: "#f2e2d5", tamanho: "normal" },
+  { nome: "rótulo coral-texto sobre creme", frente: "#aa4456", fundo: "#f2e2d5", tamanho: "normal" },
+  { nome: "botão coral-legível + bone", frente: "#fef6ee", fundo: "#ba4b5e", tamanho: "normal" },
+  { nome: "botão coral cheio + charcoal", frente: "#000000", fundo: "#ef6079", tamanho: "normal" },
+  { nome: "coral sobre burgundy", frente: "#ef6079", fundo: "#651c32", tamanho: "normal" },
+  { nome: "adesivo limoncello", frente: "#651c32", fundo: "#f0e87b", tamanho: "normal" },
+  { nome: "display sobre creme", frente: "#651c32", fundo: "#f2e2d5", tamanho: "grande" },
+];
+
+function canal(v: number): number {
+  const s = v / 255;
+  return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+}
+
+function luminancia(hex: string): number {
+  const n = hex.replace("#", "");
+  const r = Number.parseInt(n.slice(0, 2), 16);
+  const g = Number.parseInt(n.slice(2, 4), 16);
+  const b = Number.parseInt(n.slice(4, 6), 16);
+  return 0.2126 * canal(r) + 0.7152 * canal(g) + 0.0722 * canal(b);
+}
+
+function contraste(a: string, b: string): number {
+  const la = luminancia(a);
+  const lb = luminancia(b);
+  return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+}
+
+function cssVar(grupo: string, nome: string): string {
+  return `--${grupo}-${nome}`.toLowerCase();
+}
+
+function bloco(titulo: string, linhas: string[]): string {
+  return linhas.length ? `\n  /* ${titulo} */\n${linhas.join("\n")}\n` : "";
+}
+
+const CABECALHO = `/* GERADO POR \`npm run tokens\` A PARTIR DE site/tokens.json — NAO EDITE A MAO.
+ *
+ * Notas sobre a fonte destes valores, que valem para quem for implementar:
+ *
+ * 1. As duas famílias originais (Vivey 22 Positive e FHA Condensed French NC)
+ *    são licenciadas e não estão publicadas. As variáveis --font-* já trazem os
+ *    substitutos que usamos: Lora no lugar da Vivey e Oswald no lugar da FHA.
+ *    Lora foi escolhida entre os substitutos sugeridos por ser a única legível
+ *    em corpo de 14px — Playfair e DM Serif são faces de display.
+ *
+ * 2. --color-smoke-gray (#e5e7eb) é um cinza frio dentro de uma paleta
+ *    mediterrânea quente. Sobre o creme ele aparece como um fio acinzentado
+ *    que destoa. Para fios de borda sobre creme, prefira --color-dusty-rose.
+ *
+ * 3. Contraste: o par prescrito de texto bone sobre coral não alcança o mínimo
+ *    de 4.5:1 da WCAG AA em corpo normal. \`npm run tokens\` imprime a tabela
+ *    completa. Use o coral em botão com texto grande ou aumente o corpo.
+ */`;
+
+async function main(): Promise<void> {
+  const ci = process.argv.includes("--ci");
+  const doc = JSON.parse(await readFile(ENTRADA, "utf8")) as Record<string, unknown>;
+
+  const cores: string[] = [];
+  const fontes: string[] = [];
+  const tipo: string[] = [];
+  const espaco: string[] = [];
+  const raio: string[] = [];
+  const superficie: string[] = [];
+  const leiaute: string[] = [];
+
+  const emitir = (grupo: string, alvo: string[]) => {
+    const g = doc[grupo] as Grupo | undefined;
+    if (!g) return;
+    for (const [nome, token] of Object.entries(g)) {
+      if (token.$type === "typography") continue;
+      alvo.push(`  ${cssVar(grupo, nome)}: ${String(token.$value)};`);
+    }
+  };
+
+  emitir("color", cores);
+  emitir("spacing", espaco);
+  emitir("radius", raio);
+  emitir("surface", superficie);
+  emitir("layout", leiaute);
+
+  // As familias originais nao sao publicas: a variavel ja entrega o substituto.
+  fontes.push(`  --font-texto: Lora, Georgia, "Times New Roman", serif;`);
+  fontes.push(`  --font-display: Oswald, "Arial Narrow", Impact, sans-serif;`);
+
+  const tg = doc["typography"] as Record<string, { $value: Record<string, unknown> }>;
+  for (const [nome, token] of Object.entries(tg ?? {})) {
+    const v = token.$value;
+    const familia = String(v["fontFamily"]).startsWith("FHA") ? "var(--font-display)" : "var(--font-texto)";
+    tipo.push(`  --texto-${nome}-familia: ${familia};`);
+    tipo.push(`  --texto-${nome}-tamanho: ${String(v["fontSize"])};`);
+    tipo.push(`  --texto-${nome}-peso: ${String(v["fontWeight"])};`);
+    tipo.push(`  --texto-${nome}-entrelinha: ${String(v["lineHeight"])};`);
+  }
+
+  const css =
+    `${CABECALHO}\n\n:root {` +
+    bloco("Cores", cores) +
+    bloco("Famílias (substitutos das originais)", fontes) +
+    bloco("Escala tipográfica", tipo) +
+    bloco("Espaçamento", espaco) +
+    bloco("Raios", raio) +
+    bloco("Superfícies", superficie) +
+    bloco("Leiaute", leiaute) +
+    `}\n`;
+
+  await writeFile(SAIDA, css, "utf8");
+
+  let reprovados = 0;
+  console.log(`\n${SAIDA.split("/").slice(-2).join("/")} gerado.\n`);
+  console.log("Contraste dos pares prescritos (WCAG AA: 4.5 normal, 3.0 grande)\n");
+  for (const p of PARES) {
+    const razao = contraste(p.frente, p.fundo);
+    const minimo = p.tamanho === "grande" ? 3 : 4.5;
+    const passa = razao >= minimo;
+    if (!passa) reprovados++;
+    const marca = passa ? "ok  " : "FALHA";
+    console.log(
+      `  ${marca} ${razao.toFixed(2).padStart(5)}:1  ${p.nome}${p.tamanho === "grande" ? " (texto grande)" : ""}`,
+    );
+  }
+  if (reprovados > 0) {
+    console.log(
+      `\n${reprovados} par(es) abaixo do mínimo. Não é motivo para abandonar a paleta —\n` +
+        `é motivo para usar essas combinações só em texto grande, ou escurecer o tom.`,
+    );
+    if (ci) process.exitCode = 1;
+  }
+}
+
+await main();

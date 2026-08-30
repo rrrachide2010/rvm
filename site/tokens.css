@@ -1,0 +1,116 @@
+/* GERADO POR `npm run tokens` A PARTIR DE site/tokens.json — NAO EDITE A MAO.
+ *
+ * Notas sobre a fonte destes valores, que valem para quem for implementar:
+ *
+ * 1. As duas famílias originais (Vivey 22 Positive e FHA Condensed French NC)
+ *    são licenciadas e não estão publicadas. As variáveis --font-* já trazem os
+ *    substitutos que usamos: Lora no lugar da Vivey e Oswald no lugar da FHA.
+ *    Lora foi escolhida entre os substitutos sugeridos por ser a única legível
+ *    em corpo de 14px — Playfair e DM Serif são faces de display.
+ *
+ * 2. --color-smoke-gray (#e5e7eb) é um cinza frio dentro de uma paleta
+ *    mediterrânea quente. Sobre o creme ele aparece como um fio acinzentado
+ *    que destoa. Para fios de borda sobre creme, prefira --color-dusty-rose.
+ *
+ * 3. Contraste: o par prescrito de texto bone sobre coral não alcança o mínimo
+ *    de 4.5:1 da WCAG AA em corpo normal. `npm run tokens` imprime a tabela
+ *    completa. Use o coral em botão com texto grande ou aumente o corpo.
+ */
+
+:root {
+  /* Cores */
+  --color-ghia-burgundy: #651c32;
+  --color-coral-cta: #ef6079;
+  --color-aperitivo-cream: #f2e2d5;
+  --color-bone-white: #fef6ee;
+  --color-smoke-gray: #e5e7eb;
+  --color-charcoal: #000000;
+  --color-olive-grove: #3e4938;
+  --color-dusty-rose: #dfcac8;
+  --color-riviera-blue: #abd2eb;
+  --color-limoncello-yellow: #f0e87b;
+  --color-sage-mist: #b6cfd0;
+  --color-coral-texto: #aa4456;
+  --color-coral-cta-legivel: #ba4b5e;
+
+  /* Famílias (substitutos das originais) */
+  --font-texto: Lora, Georgia, "Times New Roman", serif;
+  --font-display: Oswald, "Arial Narrow", Impact, sans-serif;
+
+  /* Escala tipográfica */
+  --texto-caption-familia: var(--font-texto);
+  --texto-caption-tamanho: 10px;
+  --texto-caption-peso: 400;
+  --texto-caption-entrelinha: 1.3;
+  --texto-small-familia: var(--font-texto);
+  --texto-small-tamanho: 12px;
+  --texto-small-peso: 400;
+  --texto-small-entrelinha: 1.33;
+  --texto-body-familia: var(--font-texto);
+  --texto-body-tamanho: 14px;
+  --texto-body-peso: 400;
+  --texto-body-entrelinha: 1.43;
+  --texto-body-lg-familia: var(--font-texto);
+  --texto-body-lg-tamanho: 16px;
+  --texto-body-lg-peso: 400;
+  --texto-body-lg-entrelinha: 1.5;
+  --texto-subheading-familia: var(--font-texto);
+  --texto-subheading-tamanho: 18px;
+  --texto-subheading-peso: 700;
+  --texto-subheading-entrelinha: 1.3;
+  --texto-heading-sm-familia: var(--font-display);
+  --texto-heading-sm-tamanho: 24px;
+  --texto-heading-sm-peso: 400;
+  --texto-heading-sm-entrelinha: 1.33;
+  --texto-heading-familia: var(--font-display);
+  --texto-heading-tamanho: 32px;
+  --texto-heading-peso: 400;
+  --texto-heading-entrelinha: 1.1;
+  --texto-heading-lg-familia: var(--font-display);
+  --texto-heading-lg-tamanho: 44px;
+  --texto-heading-lg-peso: 400;
+  --texto-heading-lg-entrelinha: 1.1;
+  --texto-heading-xl-familia: var(--font-display);
+  --texto-heading-xl-tamanho: 52px;
+  --texto-heading-xl-peso: 400;
+  --texto-heading-xl-entrelinha: 1;
+  --texto-display-familia: var(--font-display);
+  --texto-display-tamanho: 72px;
+  --texto-display-peso: 400;
+  --texto-display-entrelinha: 1;
+
+  /* Espaçamento */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-200: 200px;
+  --spacing-unit: 4px;
+
+  /* Raios */
+  --radius-lg: 8px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+
+  /* Superfícies */
+  --surface-canvas: #f2e2d5;
+  --surface-light-card: #fef6ee;
+  --surface-dark-statement: #651c32;
+  --surface-deep-accent: #3e4938;
+
+  /* Leiaute */
+  --layout-page-max-width: 1280px;
+  --layout-section-gap: 64px;
+  --layout-card-padding: 24px;
+  --layout-element-gap: 16px;
+}
