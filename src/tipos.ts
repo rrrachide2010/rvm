@@ -1,3 +1,18 @@
+/**
+ * Estagio da conversa comercial. A ordem do array e a ordem do funil, e e ela
+ * que o subcomando `estagio` usa para ordenar a saida — nao a ordem alfabetica.
+ */
+export const ESTAGIOS = [
+  "nao-contactado",
+  "contactado",
+  "respondeu",
+  "reuniao",
+  "fechado",
+  "perdido",
+] as const;
+
+export type EstagioComercial = (typeof ESTAGIOS)[number];
+
 /** Uma clinica como o Google Places devolve, antes de qualquer auditoria. */
 export type Clinica = {
   id: string;
@@ -12,6 +27,21 @@ export type Clinica = {
   temHorarioPublicado: boolean;
   coletadaEm: string;
   consulta: string;
+  /**
+   * Estagio da conversa, preenchido a mao pelo subcomando `estagio`.
+   *
+   * Fica NA CLINICA e nao no `manual` da auditoria de proposito: o estagio e uma
+   * propriedade da relacao com a clinica, e existe antes de qualquer auditoria.
+   * Uma clinica recem-buscada e "nao contactado" mesmo sem nunca ter sido
+   * auditada, e nesse momento nao existe objeto de auditoria para hospedar o
+   * campo.
+   *
+   * Opcional para que base ANTERIOR a este campo continue carregando: ausente
+   * significa "nao-contactado", e nada precisa ser migrado.
+   */
+  estagio?: EstagioComercial;
+  /** Quando o estagio mudou pela ultima vez. So existe se `estagio` existir. */
+  estagioEm?: string;
 };
 
 export type Severidade = "alta" | "media" | "baixa";

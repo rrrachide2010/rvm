@@ -6,7 +6,7 @@ import { analisarSite } from "./site.ts";
 import { avaliar } from "./score.ts";
 import { indice, relatorioClinica, type Remetente } from "./relatorio.ts";
 import { carregar, caminhoBase, salvar } from "./store.ts";
-import type { Clinica } from "./tipos.ts";
+import { ESTAGIOS, type Clinica, type EstagioComercial } from "./tipos.ts";
 
 const AJUDA = `
 Auditoria de clínicas — prospecção para o serviço de agenda.
@@ -15,6 +15,8 @@ Auditoria de clínicas — prospecção para o serviço de agenda.
   npm run auditar   -- [--forcar] [--limite 40]
   npm run relatorio -- [--top 20]
   npm run listar
+  npm run estagio   -- [--de contactado]
+  npm run estagio   -- --clinica "parte do nome" --para contactado
 
 Passos: buscar coleta as fichas do Google, auditar analisa os sites e pontua,
 relatorio gera os HTML em ./out (abra e imprima em PDF para enviar).
@@ -169,6 +171,114 @@ async function comandoRelatorio(argv: string[]): Promise<void> {
   }
 }
 
+/**
+ * Registro de estagio comercial.
+ *
+ * POR QUE AQUI, E NAO NUM CRM: a base tem uma ordem de grandeza de dezenas a
+ * poucas centenas de clinicas por cidade, um operador so, e ja mora num JSON
+ * local que nunca sai da maquina. Um CRM externo custaria uma conta a mais para
+ * administrar, um lugar a mais onde dado de terceiro passa a existir, e uma
+ * sincronizacao para manter — para resolver um problema que sao seis valores
+ * numa string. Quando isso deixar de bastar (mais de um operador, ou histórico
+ * de conversa por clinica), o caminho de saida e exportar CSV e importar num
+ * CRM; nao ha nada aqui que prenda.
+ */
+function estagioDe(c: Clinica): EstagioComercial {
+  // Ausente e "nao-contactado": e o que permite base antiga carregar sem migrar.
+  return c.estagio ?? "nao-contactado";
+}
+
+function normalizar(texto: string): string {
+  return texto
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase();
+}
+
+async function comandoEstagio(argv: string[]): Promise<void> {
+  const { values } = parseArgs({
+    args: argv,
+    options: {
+      clinica: { type: "string" },
+      para: { type: "string" },
+      de: { type: "string" },
+    },
+  });
+
+  const base = await carregar();
+
+  // ---------------------------------------------------------- marcar ------
+  if (values.clinica || values.para) {
+    if (!values.clinica || !values.para) {
+      console.error('Use as duas: --clinica "parte do nome" --para contactado');
+      process.exit(1);
+    }
+    if (!(ESTAGIOS as readonly string[]).includes(values.para)) {
+      console.error(`Estágio inválido. Use um de: ${ESTAGIOS.join(", ")}`);
+      process.exit(1);
+    }
+    const alvo = normalizar(values.clinica);
+    const achadas = base.clinicas.filter(
+      (c) => c.id === values.clinica || normalizar(c.nome).includes(alvo),
+    );
+    if (achadas.length === 0) {
+      console.error(`Nenhuma clínica bate com "${values.clinica}".`);
+      process.exit(1);
+    }
+    // Ambiguidade nunca vira escolha silenciosa: marcar a clinica errada e um
+    // erro que so aparece semanas depois, na hora de cobrar o retorno.
+    if (achadas.length > 1) {
+      console.error(`"${values.clinica}" bate com ${achadas.length} clínicas:`);
+      for (const c of achadas) console.error(`  ${c.id}  ${c.nome}`);
+      console.error("\nSeja mais específico, ou use o id.");
+      process.exit(1);
+    }
+    const clinica = achadas[0]!;
+    const antes = estagioDe(clinica);
+    clinica.estagio = values.para as EstagioComercial;
+    clinica.estagioEm = new Date().toISOString();
+    await salvar(base);
+    console.log(`${clinica.nome}: ${antes} → ${clinica.estagio}`);
+    return;
+  }
+
+  // ----------------------------------------------------------- listar -----
+  if (values.de && !(ESTAGIOS as readonly string[]).includes(values.de)) {
+    console.error(`Estágio inválido. Use um de: ${ESTAGIOS.join(", ")}`);
+    process.exit(1);
+  }
+
+  const porId = new Map(base.auditorias.map((a) => [a.clinicaId, a]));
+  let vazio = true;
+
+  for (const estagio of ESTAGIOS) {
+    if (values.de && values.de !== estagio) continue;
+    const grupo = base.clinicas
+      .filter((c) => estagioDe(c) === estagio)
+      .sort(
+        (x, y) =>
+          (porId.get(y.id)?.indiceOportunidade ?? -1) -
+          (porId.get(x.id)?.indiceOportunidade ?? -1),
+      );
+    if (grupo.length === 0) continue;
+    vazio = false;
+    console.log(`\n${estagio.toUpperCase()} · ${grupo.length}`);
+    for (const c of grupo) {
+      const a = porId.get(c.id);
+      const indice = a ? String(a.indiceOportunidade).padStart(3) : "  —";
+      console.log(`  ${indice}  ${c.nome}`);
+    }
+  }
+
+  if (vazio) {
+    console.log(
+      base.clinicas.length === 0
+        ? "Base vazia. Rode: npm run buscar"
+        : "Nenhuma clínica nesse estágio.",
+    );
+  }
+}
+
 async function comandoListar(): Promise<void> {
   const base = await carregar();
   const porId = new Map(base.auditorias.map((a) => [a.clinicaId, a]));
@@ -179,7 +289,9 @@ async function comandoListar(): Promise<void> {
   console.log(`${base.clinicas.length} clínicas · ${base.auditorias.length} auditadas\n`);
   for (const { c, a } of linhas) {
     const indice = a ? String(a.indiceOportunidade).padStart(3) : "  —";
-    console.log(`${indice}  ${c.nome}${c.site ? "" : "  (sem site)"}`);
+    const est = estagioDe(c);
+    const marca = est === "nao-contactado" ? "" : `  [${est}]`;
+    console.log(`${indice}  ${c.nome}${c.site ? "" : "  (sem site)"}${marca}`);
   }
 }
 
@@ -198,6 +310,9 @@ try {
       break;
     case "listar":
       await comandoListar();
+      break;
+    case "estagio":
+      await comandoEstagio(resto);
       break;
     default:
       console.log(AJUDA);
