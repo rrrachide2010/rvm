@@ -106,7 +106,12 @@ Vercel (ou qualquer host estático) para a pasta `site/` — não há passo de b
 
 Três coisas ficam com marcação no HTML e precisam ser trocadas antes de ir ao ar:
 
-- **`<!-- MARCA -->`** — o nome "Retorno" aparece em três lugares por página.
+- **`<!-- MARCA -->`** — a marca "Retorno" aparece 11 vezes no site: 4 em
+  `index.html`, 4 em `enfermeiras.html` e 3 em `calculadora.html`. Cuidado ao
+  substituir, duas armadilhas: `index.html` também tem "Retorno programado",
+  nome de uma das sete rotinas do produto, que não deve mudar junto; e o
+  cabeçalho das três páginas escreve `Reto<span>rno</span>`, que uma busca por
+  "Retorno" não encontra.
 - **`<!-- CONTATO -->`** — o número do WhatsApp (`wa.me/55...`) e o e-mail.
 - **`<!-- FORMULARIO -->`** — a lista de espera está desabilitada de propósito,
   para não coletar contato que se perderia. Ligue quando houver endpoint.

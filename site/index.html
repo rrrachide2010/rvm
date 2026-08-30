@@ -3,8 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- MARCA: o nome aparece em 3 lugares nesta pagina (title, cabecalho, rodape)
-     e nos mesmos 3 em enfermeiras.html. Trocar de nome = 6 substituicoes. -->
+<!-- MARCA: a marca "Retorno" aparece 4x nesta pagina — title, og:title,
+     cabecalho (a.marca) e rodape. Nas outras paginas: 4x em enfermeiras.html
+     e 3x em calculadora.html (esta nao tem og:title). Trocar de nome = 11
+     substituicoes no site inteiro.
+
+     DUAS ARMADILHAS ao trocar o nome:
+     1. mais abaixo nesta pagina existe "Retorno programado", que e o nome de uma
+        das sete rotinas do produto e NAO a marca. Find-replace cego de "Retorno"
+        renomeia a rotina junto.
+     2. o cabecalho escreve a marca como Reto<span>rno</span> — find-replace de
+        "Retorno" NAO encontra essa ocorrencia. Ela existe nas tres paginas.
+     Troque ocorrencia por ocorrencia. -->
 <title>Retorno · agenda cheia para clínicas de estética</title>
 <meta name="description" content="Confirmação ativa, fila de espera e retorno programado no WhatsApp da sua clínica. Piloto de 30 dias com meta declarada: o no-show cai 30% ou a mensalidade do período volta.">
 <meta name="robots" content="index,follow">
