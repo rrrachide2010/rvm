@@ -1,8 +1,10 @@
 name: CI
 
+# push so na main: em branch com PR aberto o gatilho pull_request ja cobre,
+# e manter os dois faz cada commit rodar a CI duas vezes.
 on:
   push:
-    branches: ["**"]
+    branches: [main]
   pull_request:
 
 jobs:
