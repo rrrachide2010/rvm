@@ -16,15 +16,52 @@
         "Retorno" NAO encontra essa ocorrencia. Ela existe nas tres paginas.
      Troque ocorrencia por ocorrencia. -->
 <title>Retorno · agenda cheia para clínicas de estética</title>
-<meta name="description" content="Confirmação ativa, fila de espera e retorno programado no WhatsApp da sua clínica. Piloto de 30 dias com meta declarada: o no-show cai 30% ou a mensalidade do período volta.">
-<meta name="robots" content="index,follow">
-<meta property="og:title" content="Retorno · agenda cheia para clínicas de estética">
-<meta property="og:description" content="O no-show cai 30% em 30 dias ou a mensalidade volta.">
+<meta name="description" content="Confirmação, fila de espera e retorno automáticos no WhatsApp da sua clínica de estética. Piloto de 30 dias: o no-show cai 30% ou a mensalidade volta.">
+<!-- PRE-LANCAMENTO: noindex enquanto o contato for placeholder. Ver docs/seo.md,
+     secao "O interruptor". Trocar por index,follow no dia do lancamento. -->
+<meta name="robots" content="noindex,nofollow">
+<!-- DOMINIO: placeholder. docs/seo.md lista os arquivos a trocar. -->
+<link rel="canonical" href="https://EXEMPLO-DOMINIO.com.br/">
+<meta property="og:site_name" content="Retorno">
+<meta property="og:locale" content="pt_BR">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://EXEMPLO-DOMINIO.com.br/">
+<meta property="og:title" content="Retorno · agenda cheia para clínicas de estética">
+<meta property="og:description" content="Confirmação, fila de espera e retorno automáticos no WhatsApp da sua clínica de estética. Piloto de 30 dias: o no-show cai 30% ou a mensalidade volta.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap">
 <link rel="stylesheet" href="./estilo.css">
+<!-- JSON-LD: apenas campos que ja sao verdade nesta pagina. Sem address,
+     telephone, aggregateRating nem areaServed — nenhum desses dado existe
+     ainda, e inventar qualquer um deles e motivo de penalizacao alem de ser
+     mentira. Ver docs/seo.md para o que acrescentar quando existirem. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Retorno",
+  "url": "https://EXEMPLO-DOMINIO.com.br/",
+  "description": "Confirmação, fila de espera e retorno automáticos no WhatsApp da sua clínica de estética. Piloto de 30 dias: o no-show cai 30% ou a mensalidade volta.",
+  "serviceType": "Automação de agenda para clínicas de estética",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Implantação",
+      "price": "1200",
+      "priceCurrency": "BRL",
+      "description": "Cobrança única: medição inicial, conexão da agenda e escrita das mensagens."
+    },
+    {
+      "@type": "Offer",
+      "name": "Mensalidade",
+      "price": "350",
+      "priceCurrency": "BRL",
+      "description": "Sem fidelidade."
+    }
+  ]
+}
+</script>
 </head>
 <body>
 

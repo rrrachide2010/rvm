@@ -1,10 +1,27 @@
-# O site ainda usa contato de placeholder (WhatsApp e e-mail de exemplo).
-# Enquanto for assim, nao queremos que buscadores indexem: um dono de clinica
-# achando a pagina no Google cairia num numero que nao existe.
+# ---------------------------------------------------------------------------
+# ESTADO ATUAL: pre-lancamento. Indexacao bloqueada de proposito.
 #
-# ANTES DE LANCAR: troque o bloco abaixo por
-#   User-agent: *
-#   Allow: /
-#   Sitemap: https://SEU-DOMINIO/sitemap.xml
+# O contato do site ainda e placeholder (wa.me/5500000000000 e
+# contato@exemplo.com.br). Uma dona de clinica achando a pagina no Google e
+# caindo num numero que nao existe e pior do que ela nao achar a pagina.
+#
+# O bloqueio tem duas camadas, e as duas precisam mudar no lancamento:
+#   1. este arquivo (Disallow abaixo)
+#   2. <meta name="robots" content="noindex,nofollow"> nas tres paginas
+#
+# Ver docs/seo.md, secao "O interruptor", para a troca exata.
+# ---------------------------------------------------------------------------
+
 User-agent: *
 Disallow: /
+
+# ---------------------------------------------------------------------------
+# NO LANCAMENTO: apague o bloco acima e descomente este.
+# Troque EXEMPLO-DOMINIO.com.br pelo dominio real (docs/seo.md lista os
+# arquivos que tambem precisam da troca).
+#
+# User-agent: *
+# Allow: /
+#
+# Sitemap: https://EXEMPLO-DOMINIO.com.br/sitemap.xml
+# ---------------------------------------------------------------------------
