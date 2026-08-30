@@ -16,7 +16,11 @@ const FIELD_MASK = [
   "places.userRatingCount",
   "places.businessStatus",
   "places.googleMapsUri",
-  "places.regularOpeningHours.openNow",
+  // O campo exato que prova horario PUBLICADO e weekdayDescriptions: e o texto
+  // dos sete dias que aparece na ficha. Antes pediamos openNow, que responde
+  // "esta aberto agora" — uma leitura instantanea que a auditoria nunca usava.
+  // Pagavamos por um campo e descartavamos o valor.
+  "places.regularOpeningHours.weekdayDescriptions",
   "nextPageToken",
 ].join(",");
 
@@ -31,7 +35,7 @@ type RespostaPlaces = {
     userRatingCount?: number;
     businessStatus?: string;
     googleMapsUri?: string;
-    regularOpeningHours?: { openNow?: boolean };
+    regularOpeningHours?: { weekdayDescriptions?: string[] };
   }>;
   nextPageToken?: string;
   error?: { message?: string; status?: string };
@@ -90,7 +94,11 @@ export async function buscarClinicas(opcoes: OpcoesBusca): Promise<Clinica[]> {
         totalAvaliacoes: lugar.userRatingCount,
         status: lugar.businessStatus,
         mapsUrl: lugar.googleMapsUri,
-        temHorarioPublicado: lugar.regularOpeningHours !== undefined,
+        // Presenca do objeto nao bastava: o mask antigo so trazia openNow, que
+        // some quando o Google nao consegue calcular o estado do momento.
+        // Agora a pergunta e a certa — existe descricao de dia da semana?
+        temHorarioPublicado:
+          (lugar.regularOpeningHours?.weekdayDescriptions?.length ?? 0) > 0,
         coletadaEm: new Date().toISOString(),
         consulta: textQuery,
       });
