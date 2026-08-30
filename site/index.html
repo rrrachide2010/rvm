@@ -13,15 +13,52 @@
      primeira forma acha 13 das 18 e deixa o logo de TODAS as paginas com o nome
      velho. Busque por `Codigo` (ou `Pele`), que pega as duas. -->
 <title>Pele &amp; Código · cuidado clínico e software na mesma casa</title>
-<meta name="description" content="Uma enfermeira e um desenvolvedor construindo ferramentas para o setor de estética: automação de agenda para clínicas, ferramentas para enfermeiras e co-produção de conteúdo com especialistas.">
+<meta name="description" content="Automação de agenda para clínicas de estética, ferramentas gratuitas para enfermeiras e co-produção de conteúdo com quem já é especialista da área.">
 <meta name="robots" content="index,follow">
+<link rel="canonical" href="https://EXEMPLO-DOMINIO.com.br/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pele &amp; Código">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://EXEMPLO-DOMINIO.com.br/">
 <meta property="og:title" content="Pele &amp; Código">
 <meta property="og:description" content="Cuidado clínico e software na mesma casa.">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap">
 <link rel="stylesheet" href="./estilo.css">
+<!-- Dados estruturados. REGRA DESTE BLOCO: so entra campo que ja e verdade.
+     Sem address, sem telephone, sem aggregateRating, sem review — nao existe
+     endereco publicado, o telefone e placeholder e nao ha avaliacao nenhuma.
+     Inventar qualquer um deles e o tipo de erro que o Google pune e que o
+     cliente descobre.
+
+     Preco tambem ficou de fora de proposito: ele esta publicado em clinicas.html
+     e repeti-lo aqui criaria duas fontes de verdade para o mesmo numero. Na
+     primeira vez que uma mudasse sem a outra, o resultado de busca passaria a
+     mostrar preco errado. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Pele & Código",
+  "url": "https://EXEMPLO-DOMINIO.com.br/",
+  "description": "Automação de agenda para clínicas de estética, ferramentas gratuitas para enfermeiras e co-produção de conteúdo com quem já é especialista da área.",
+  "inLanguage": "pt-BR",
+  "areaServed": { "@type": "Country", "name": "Brasil" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Frentes de trabalho",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service",
+        "name": "Automação de agenda para clínicas de estética", "url": "https://EXEMPLO-DOMINIO.com.br/clinicas" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service",
+        "name": "Ferramentas para enfermeiras entrando em estética", "url": "https://EXEMPLO-DOMINIO.com.br/enfermeiras" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service",
+        "name": "Co-produção de conteúdo com enfermeiras especialistas", "url": "https://EXEMPLO-DOMINIO.com.br/especialistas" } }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 

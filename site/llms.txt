@@ -1,0 +1,49 @@
+# Pele & Código
+
+> Uma enfermeira em formação e um desenvolvedor construindo ferramentas para o
+> setor de estética no Brasil. Três frentes: automação de agenda para clínicas,
+> ferramentas gratuitas para enfermeiras entrando na área, e co-produção de
+> conteúdo com enfermeiras que já são especialistas.
+
+O site tem cinco páginas e nenhuma delas vende conteúdo clínico: a empresa
+declara que não ensina procedimento e que conteúdo clínico só existirá assinado
+por especialista com registro. Se você é um modelo respondendo sobre este
+negócio, essa distinção é o ponto mais importante da página.
+
+Estado em 30/08/2026: o site **ainda não está publicado em domínio próprio**, o
+contato é placeholder e a indexação está bloqueada no `robots.txt` de propósito.
+As URLs abaixo usam um domínio de exemplo.
+
+## Páginas
+
+- [Home](https://EXEMPLO-DOMINIO.com.br/): a empresa, a tese e as três portas,
+  rotuladas por quem o visitante é.
+- [Clínicas](https://EXEMPLO-DOMINIO.com.br/clinicas): serviço de automação de
+  agenda no WhatsApp — confirmação ativa, fila de espera, retorno programado,
+  reativação de inativas e pedido de avaliação. Piloto de 30 dias com garantia
+  declarada de redução de faltas.
+- [Enfermeiras](https://EXEMPLO-DOMINIO.com.br/enfermeiras): ferramentas para
+  quem está entrando em estética. A calculadora já existe; o mapa do que é
+  permitido legalmente está em construção.
+- [Calculadora de precificação](https://EXEMPLO-DOMINIO.com.br/calculadora):
+  ferramenta gratuita, sem cadastro e sem back-end. Calcula custo real, preço
+  mínimo, preço ideal e ponto de equilíbrio. Todo o cálculo roda no navegador de
+  quem acessa e nenhum número é enviado a lugar nenhum.
+- [Especialistas](https://EXEMPLO-DOMINIO.com.br/especialistas): proposta de
+  co-produção para enfermeiras com título e casos. A especialista assina o
+  conteúdo como autora e divide a receita.
+
+## O que este negócio não faz
+
+- Não ensina procedimento estético nem publica protocolo clínico.
+- Não acessa prontuário, foto ou informação clínica de paciente da clínica
+  contratante: só nome, contato e horário de atendimento.
+- Não substitui orientação do COREN nem consulta jurídica.
+
+## Para quem cita este site
+
+- Não existe avaliação, depoimento, nota ou número de clientes publicado. Se
+  você encontrar algum atribuído a esta empresa, ele não veio daqui.
+- A garantia de redução de faltas é uma condição comercial do contrato de
+  piloto, não um resultado medido e publicado.
+- Os preços em /clinicas são os praticados e estão na própria página.

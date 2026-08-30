@@ -1,10 +1,24 @@
-# O site ainda usa contato de placeholder (WhatsApp e e-mail de exemplo).
-# Enquanto for assim, nao queremos que buscadores indexem: um dono de clinica
-# achando a pagina no Google cairia num numero que nao existe.
+# O site ainda usa contato de placeholder (WhatsApp e e-mail de exemplo) e a
+# marca "Pele & Codigo" esta declarada como provisoria. Enquanto for assim, nao
+# queremos que buscadores indexem: um dono de clinica achando a pagina no Google
+# cairia num numero que nao existe, e marca indexada e muito mais cara de trocar
+# depois do que antes.
 #
-# ANTES DE LANCAR: troque o bloco abaixo por
-#   User-agent: *
-#   Allow: /
-#   Sitemap: https://SEU-DOMINIO/sitemap.xml
+# ANTES DE LANCAR, nesta ordem (o passo a passo esta em docs/operacao-site.md §7):
+#   1. trocar o contato real nas paginas com <!-- CONTATO -->
+#   2. decidir a marca definitiva
+#   3. registrar o dominio e trocar EXEMPLO-DOMINIO.com.br
+#      (a lista de arquivos a mexer esta em docs/seo.md)
+#   4. trocar as duas linhas abaixo por:
+#        User-agent: *
+#        Allow: /
+#
+# A linha Sitemap fica declarada desde ja, e de proposito: ela e independente de
+# Allow/Disallow, entao nao libera indexacao nenhuma — so garante que ninguem
+# precise lembrar de acrescenta-la no dia do lancamento. Enquanto o Disallow
+# estiver de pe, o Google nem busca o sitemap; isso e esperado.
+
 User-agent: *
 Disallow: /
+
+Sitemap: https://EXEMPLO-DOMINIO.com.br/sitemap.xml

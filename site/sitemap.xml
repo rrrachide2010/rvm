@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  As CINCO paginas do site. A tarefa pedia "as duas paginas", mas o site tem
+  cinco desde o commit "Site vira uma empresa so": index, clinicas, enfermeiras,
+  especialistas e calculadora. Deixar tres de fora derrotaria o proposito do
+  arquivo — e /calculadora e justamente o destino do link da bio.
+
+  URLs SEM EXTENSAO porque vercel.json tem cleanUrls:true. Listar
+  /clinicas.html apontaria para um endereco que redireciona, e sitemap nao deve
+  apontar para redirecionamento.
+
+  SEM <lastmod> DE PROPOSITO. Data de alteracao so ajuda se for verdadeira, e
+  aqui ela envelheceria no primeiro commit que ninguem lembrasse de refletir
+  aqui. Buscador que confere e ve lastmod mentindo passa a ignorar o campo no
+  site inteiro. Sem o campo, ele usa a data que ele mesmo observa, que e sempre
+  correta. Se um dia a geracao do sitemap for automatica, o lastmod volta.
+
+  SEM <priority> e SEM <changefreq>: o Google declara publicamente que ignora os
+  dois. Preenche-los seria enfeite.
+
+  TROCAR EXEMPLO-DOMINIO.com.br quando o dominio existir — ver docs/seo.md.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://EXEMPLO-DOMINIO.com.br/</loc></url>
+  <url><loc>https://EXEMPLO-DOMINIO.com.br/clinicas</loc></url>
+  <url><loc>https://EXEMPLO-DOMINIO.com.br/enfermeiras</loc></url>
+  <url><loc>https://EXEMPLO-DOMINIO.com.br/calculadora</loc></url>
+  <url><loc>https://EXEMPLO-DOMINIO.com.br/especialistas</loc></url>
+</urlset>
