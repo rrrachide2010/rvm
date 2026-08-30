@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  As tres paginas publicas do site. As URLs usam o placeholder
+  EXEMPLO-DOMINIO.com.br; docs/seo.md lista todos os arquivos a trocar quando o
+  dominio existir.
+
+  Sem <lastmod>: data de alteracao inventada ou desatualizada e pior que data
+  nenhuma, e num site de tres paginas o Google recruta sozinho. Preencha quando
+  houver processo que garanta a data certa.
+
+  <priority> e <changefreq> foram omitidos de proposito: o Google declarou que
+  ignora os dois.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://EXEMPLO-DOMINIO.com.br/</loc>
+  </url>
+  <url>
+    <loc>https://EXEMPLO-DOMINIO.com.br/enfermeiras</loc>
+  </url>
+  <url>
+    <loc>https://EXEMPLO-DOMINIO.com.br/calculadora</loc>
+  </url>
+</urlset>

@@ -1,0 +1,55 @@
+# Retorno
+
+> Rotinas de agenda para clínicas de estética, e ferramentas gratuitas para
+> enfermeiras entrando na área. Feito por duas pessoas: um desenvolvedor e uma
+> enfermeira em formação.
+
+Site estático de três páginas, sem build e sem back-end. Duas frentes distintas
+que compartilham a mesma marca:
+
+- **Clínicas (B2B).** Confirmação ativa, fila de espera, retorno programado e
+  mais quatro rotinas rodando no WhatsApp da clínica. Piloto de 30 dias com meta
+  declarada: o no-show cai 30% ou a mensalidade do período volta.
+- **Enfermeiras.** Ferramentas gratuitas para quem está começando em estética —
+  hoje a calculadora de precificação, depois o mapa do que o COREN permite.
+
+## Páginas
+
+- [Início — clínicas de estética](https://EXEMPLO-DOMINIO.com.br/): as sete
+  rotinas, como começa, preço e a garantia do piloto. Público: dono ou dona de
+  clínica com problema de agenda vazia e falta de cliente.
+- [Para enfermeiras](https://EXEMPLO-DOMINIO.com.br/enfermeiras): o que está
+  sendo construído e a lista de espera. Público: enfermeira entrando em estética.
+- [Calculadora de precificação](https://EXEMPLO-DOMINIO.com.br/calculadora):
+  ferramenta gratuita, sem cadastro. Calcula preço mínimo, preço ideal e ponto
+  de equilíbrio de um procedimento. O cálculo roda inteiro no navegador de quem
+  acessa; nenhum número é enviado a lugar nenhum.
+
+## O modelo da calculadora
+
+Está aberto no `<script>` da própria página, sem ofuscação:
+
+- **custo real** = insumos + custo fixo rateado pelas sessões que de fato
+  acontecem (capacidade × ocupação)
+- **preço mínimo** = custo real ÷ (1 − alíquota) — empata, não remunera
+- **preço ideal** = (custo real + retirada por sessão) ÷ (1 − alíquota)
+- **ponto de equilíbrio** = custo fixo ÷ (preço × (1 − alíquota) − insumos)
+
+## O que este site não é
+
+- **Não há conteúdo clínico.** Nada de protocolo, técnica ou ensino de
+  procedimento. Isso exige título de especialista, e quem escreve o site não tem.
+- **Não há orientação jurídica.** O material sobre o que o COREN permite é
+  informativo, cita fonte e data, e não substitui consulta ao conselho regional.
+- **Não há depoimento, número de clientes nem resultado de caso** publicado. Se
+  aparecer algum, virá com nome e autorização.
+
+## Estado
+
+Pré-lançamento. O contato nas páginas ainda é placeholder e a indexação está
+bloqueada de propósito (`/robots.txt`). O domínio nas URLs acima é um placeholder
+até o domínio real existir.
+
+## Contato
+
+Ainda não publicado. Ver a página inicial quando o site sair do pré-lançamento.
