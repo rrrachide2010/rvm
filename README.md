@@ -53,8 +53,13 @@ resolver** — ou seja, melhor o prospecto. Uma clínica com índice 70 tem muit
 e uma conversa fácil; uma com índice 10 já resolveu a vitrine, e o argumento com ela
 precisa ser a operação da agenda, não a presença digital.
 
-Os pesos estão em `src/score.ts`, em um lugar só. Ajuste conforme aprender o que
-realmente faz o dono responder.
+Os pesos estão na tabela `PESO`, no topo de `src/score.ts` — um lugar só, de
+verdade. Ajuste ali conforme aprender o que realmente faz o dono responder, nunca
+no meio do texto do achado.
+
+Índice **0** tem dois significados diferentes: ou a clínica já resolveu tudo, ou o
+Google marca a ficha como encerrada (`CLOSED_PERMANENTLY`) e não há o que vender.
+O relatório distingue os dois casos.
 
 ## O que a ferramenta não mede
 
