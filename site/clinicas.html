@@ -36,7 +36,7 @@
       <a href="./clinicas.html" class="opcional ativo">Para clínicas</a>
       <a href="./enfermeiras.html" class="opcional">Para enfermeiras</a>
       <a href="./especialistas.html" class="opcional">Para especialistas</a>
-      <a href="#contato">Falar com a gente</a>
+      <a href="#contato" data-evento="ir_contato" data-local="clinicas-topo">Falar com a gente</a>
     </nav>
   </div>
 </header>
@@ -49,7 +49,7 @@
     <h1>Quantos horários a sua clínica <em>perdeu</em> este mês?</h1>
     <p class="lede">A primeira coisa que fazemos é medir esse número, que quase nenhuma clínica sabe qual é. Depois, confirmação ativa, fila de espera e retorno programado passam a rodar sozinhos no WhatsApp da sua clínica.</p>
     <div class="acoes">
-      <a class="botao" href="#contato">Quero o piloto de 30 dias</a>
+      <a data-evento="ir_contato" data-local="clinicas-heroi" class="botao" href="#contato">Quero o piloto de 30 dias</a>
     </div>
     <p class="nota-acao">Piloto com meta declarada. Se o no-show não cair 30%, a mensalidade do período volta.</p>
 
@@ -213,8 +213,8 @@
 
     <div class="acoes">
       <!-- CONTATO: troque pelo numero real, no formato 55DDDNUMERO -->
-      <a class="botao" href="https://wa.me/5500000000000?text=Oi!%20Quero%20saber%20sobre%20o%20piloto%20de%2030%20dias." rel="noopener">Chamar no WhatsApp</a>
-      <a class="botao botao-vazado" href="mailto:contato@exemplo.com.br?subject=Piloto%20de%2030%20dias">Mandar um e-mail</a>
+      <a data-evento="clique_whatsapp" data-local="clinicas-contato" class="botao" href="https://wa.me/5500000000000?text=Oi!%20Quero%20saber%20sobre%20o%20piloto%20de%2030%20dias." rel="noopener">Chamar no WhatsApp</a>
+      <a data-evento="clique_email" data-local="clinicas-contato" class="botao botao-vazado" href="mailto:contato@exemplo.com.br?subject=Piloto%20de%2030%20dias">Mandar um e-mail</a>
     </div>
     <p class="nota-acao">Sem formulário, sem cadastro e sem sequência de e-mails atrás de você.</p>
   </div>
@@ -230,7 +230,7 @@
     </div>
     <div>
       <p><a href="./enfermeiras.html">Para enfermeiras</a></p>
-      <p><a href="#contato">Falar com a gente</a></p>
+      <p><a data-evento="ir_contato" data-local="clinicas-rodape" href="#contato">Falar com a gente</a></p>
     </div>
   </div>
 </footer>

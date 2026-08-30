@@ -36,7 +36,7 @@
       <a href="./clinicas.html" class="opcional">Para clínicas</a>
       <a href="./enfermeiras.html" class="opcional ativo">Para enfermeiras</a>
       <a href="./especialistas.html" class="opcional">Para especialistas</a>
-      <a href="#lista">Entrar na lista</a>
+      <a href="#lista" data-evento="ir_lista" data-local="enfermeiras-topo">Entrar na lista</a>
     </nav>
   </div>
 </header>
@@ -49,7 +49,7 @@
     <h1>Ninguém te ensinou <em>quanto cobrar</em>. Nem o que você pode fazer.</h1>
     <p class="lede">Duas perguntas que travam quase todo mundo no começo — e nenhuma delas se resolve com mais um curso de procedimento. A primeira resposta já está pronta.</p>
     <div class="acoes">
-      <a class="botao" href="./calculadora.html">Calcular meu preço</a>
+      <a data-evento="abrir_calculadora" data-local="enfermeiras-heroi" class="botao" href="./calculadora.html">Calcular meu preço</a>
     </div>
     <p class="nota-acao">A calculadora é gratuita e não pede cadastro. O cálculo acontece no seu navegador.</p>
   </div>
@@ -110,7 +110,7 @@
         Seu e-mail
         <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" disabled>
       </label>
-      <button class="botao" type="submit" disabled>Entrar na lista</button>
+      <button data-evento="enviar_lista" data-local="enfermeiras-formulario" class="botao" type="submit" disabled>Entrar na lista</button>
       <p class="nota-acao" id="aviso-form">O formulário ainda não está conectado — é a próxima coisa a ser ligada.</p>
     </form>
   </div>
@@ -126,7 +126,7 @@
     </div>
     <div>
       <p><a href="./clinicas.html">Para clínicas</a></p>
-      <p><a href="#lista">Entrar na lista</a></p>
+      <p><a data-evento="ir_lista" data-local="enfermeiras-rodape" href="#lista">Entrar na lista</a></p>
     </div>
   </div>
 </footer>
