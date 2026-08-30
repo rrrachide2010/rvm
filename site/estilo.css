@@ -384,3 +384,66 @@ p { max-width: var(--texto); margin: 0 0 16px; }
 .dupla { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin-top: 34px; }
 .dupla h3 { font-family: Newsreader, Georgia, serif; font-weight: 600; font-size: 20px; margin-bottom: 8px; }
 .dupla p { font-size: 15.5px; color: var(--ink-2); }
+
+/* ---------- prova social ----------
+   Estilo pronto, conteudo nao. A secao correspondente em index.html esta com o
+   atributo `hidden` e traz tres espacos marcados <!-- DEPOIMENTO -->. Ela nasce
+   escondida de proposito: secao de prova social vazia no ar e pior que secao
+   nenhuma, porque anuncia que ninguem elogiou. Tire o `hidden` quando houver
+   pelo menos DOIS depoimentos reais — um so parece o unico cliente que existe. */
+
+.provas { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 38px; }
+
+.prova {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px 26px 22px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+/* A citacao usa serifa e um corpo maior que o do cartao comum: e a unica voz da
+   pagina que nao e a nossa, e precisa soar diferente do resto. */
+.prova blockquote {
+  margin: 0 0 18px;
+  font-family: Newsreader, Georgia, serif;
+  font-size: 18.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.prova blockquote p { margin: 0 0 10px; }
+.prova blockquote p:last-child { margin-bottom: 0; }
+
+.prova figcaption { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+.prova .quem { display: block; font-weight: 700; font-size: 15px; }
+.prova .onde { display: block; font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+
+/* O numero que a pessoa cita, quando ela citar um. Fica em mono porque e dado,
+   e dado precisa parecer dado. So use se o numero tiver vindo da propria
+   clinica e puder ser mostrado a um terceiro. */
+.prova .numero {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Aviso de secao ainda nao preenchida. So aparece se alguem tirar o `hidden`
+   antes de por depoimento — e a rede de seguranca contra publicar vazio. */
+.provas:empty::before,
+.prova-vazia {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  color: var(--rose);
+  background: var(--rose-soft);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
