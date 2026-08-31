@@ -10,9 +10,22 @@
 <meta property="og:title" content="Sua agenda para de furar em 30 dias, ou você não paga">
 <meta property="og:description" content="Você não precisa de mais clientes. Precisa que as que você já tem não sumam.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@400;500&display=swap">
+<!-- DOMINIO: troque SEU-DOMINIO.com.br pelo dominio real em todas as
+     paginas, no sitemap.xml e no robots.txt antes de liberar a indexacao. -->
+<link rel="canonical" href="https://SEU-DOMINIO.com.br/">
+<meta property="og:url" content="https://SEU-DOMINIO.com.br/">
+<meta property="og:site_name" content="Pele &amp; Código">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://SEU-DOMINIO.com.br/compartilhamento.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- As fontes sao servidas por este mesmo dominio: nada de terceiro no
+     caminho critico. O preload cobre so o subconjunto latin, que e o que
+     a primeira tela usa; o latin-ext entra sob demanda. -->
+<link rel="preload" href="./fontes/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fontes/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="./fontes.css">
 <link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./estilo.css">
 </head>
@@ -254,6 +267,13 @@
       <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
       <p>Cuidado clínico e software na mesma casa.</p>
       <p>Conteúdo informativo. Não substitui orientação do COREN do seu estado, consulta jurídica nem orientação contábil.</p>
+      <p class="identidade">
+        <!-- EMPRESA: troque pela razao social e pelo CNPJ reais assim que a
+             empresa estiver aberta. Enquanto for placeholder, o site nao pode
+             ser indexado — quem vende tratamento de dado de paciente precisa
+             dizer quem e. -->
+        RAZÃO SOCIAL LTDA · CNPJ 00.000.000/0001-00 · Cidade/UF
+      </p>
     </div>
     <div class="coluna">
       <span class="tit">Para clínicas</span>
@@ -262,6 +282,10 @@
     <div class="coluna">
       <span class="tit">Outras frentes</span>
       <a href="./calculadora.html">Calculadora de preço</a><a href="./enfermeiras.html">Para enfermeiras</a><a href="./especialistas.html">Para especialistas</a>
+    </div>
+    <div class="coluna">
+      <span class="tit">Legal</span>
+      <a href="./privacidade.html">Privacidade e dados</a>
     </div>
   </div>
 </footer>

@@ -1,4 +1,5 @@
 import type { AnaliseSite } from "./tipos.ts";
+import { buscarRobots, permite } from "./robots.ts";
 
 const TIMEOUT_MS = 12_000;
 const LIMITE_BYTES = 600_000;
@@ -31,6 +32,21 @@ export async function analisarSite(url: string): Promise<AnaliseSite> {
     temTitulo: false,
     temDescricao: false,
   };
+
+  // O site pode ter pedido para nao ser rastreado. Perguntar antes de buscar
+  // e o minimo — ainda mais numa ferramenta cujo produto e dizer ao dono da
+  // clinica que a presenca digital dele esta desleixada.
+  const robots = await buscarRobots(url);
+  let caminho = "/";
+  try {
+    caminho = new URL(url).pathname || "/";
+  } catch { /* url torta: o fetch abaixo falha e o erro fica registrado */ }
+
+  if (!permite(robots, caminho)) {
+    base.bloqueadoPorRobots = true;
+    base.erro = "robots.txt do site nao permite a leitura desta pagina";
+    return base;
+  }
 
   const controlador = new AbortController();
   const relogio = setTimeout(() => controlador.abort(), TIMEOUT_MS);

@@ -21,6 +21,18 @@ export function avaliar(clinica: Clinica, site: AnaliseSite | undefined): Audito
       detalhe:
         "Quem procura no Google encontra apenas a ficha do Maps. Sem site, não há como explicar procedimentos, mostrar a equipe nem receber agendamento fora do horário comercial.",
     });
+  } else if (site?.bloqueadoPorRobots) {
+    // Nao e achado, e ausencia de dado. Acusar a clinica de ter site fora do ar
+    // porque o robots.txt dela nos barrou seria mentir no relatorio que ela vai
+    // ler — e peso zero mantem o indice de oportunidade honesto.
+    achados.push({
+      chave: "site-nao-verificado",
+      severidade: "baixa",
+      peso: 0,
+      titulo: "O site não pôde ser verificado",
+      detalhe:
+        "O robots.txt do site pede que ferramentas automatizadas não o leiam, e nós respeitamos o pedido. Os itens que dependem de abrir a página ficaram de fora desta análise — o que não quer dizer que estejam certos ou errados.",
+    });
   } else if (site && !site.alcancavel) {
     achados.push({
       chave: "site-fora",

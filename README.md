@@ -76,19 +76,27 @@ de novo. Reauditar não apaga o que foi anotado à mão.
 src/cli.ts         subcomandos e argumentos
 src/places.ts      cliente da Places API (New)
 src/site.ts        busca o site e extrai os sinais
+src/robots.ts      lê o robots.txt do alvo e decide se a busca é permitida
 src/score.ts       transforma sinais em achados e pontuação  ← ajuste os pesos aqui
 src/relatorio.ts   HTML do relatório e do índice
 src/store.ts       persistência em data/clinicas.json
 src/tipos.ts       tipos compartilhados
+test/              testes das duas peças que não podem errar em silêncio
+scripts/og.mjs     gera a imagem de compartilhamento
 ```
 
-`npm run check` roda o typecheck.
+`npm run check` roda o typecheck e `npm test` roda os testes. A CI roda os dois,
+mais a auditoria de contraste dos tokens.
 
 ## Limites e cuidados
 
 - Os dados vêm de fontes públicas: ficha do Maps e site da clínica. Nenhum dado de
   paciente é acessado, e o relatório diz isso ao destinatário.
-- O coletor se identifica honestamente no `User-Agent` e lê no máximo 600 KB por site.
+- O coletor se identifica honestamente no `User-Agent`, lê no máximo 600 KB por
+  site e **consulta o `robots.txt` do alvo antes de buscar**. Se o site pediu
+  para não ser lido por robô, a página não é buscada e a clínica entra no
+  relatório com "não pôde ser verificado", peso zero — nunca como "site fora do
+  ar", que seria acusá-la de um problema que ela não tem.
 - `data/` e `out/` não vão para o repositório: contêm dados de terceiros e são
   reproduzíveis a qualquer momento.
 
@@ -108,9 +116,42 @@ motivo para ficar. Uma home que faz escolher não vende nada.
 | `enfermeiras.html` | enfermeira entrando | As ferramentas. Destino do link da bio |
 | `calculadora.html` | idem | A ferramenta que já existe |
 | `especialistas.html` | enfermeira com título | Proposta de co-produção |
+| `privacidade.html` | quem quiser conferir | O que fazemos com dado — o do visitante e o das clientes das clínicas |
 
 As outras duas frentes aparecem numa faixa da home, com gancho próprio — não
 como um menu de portas iguais.
+
+### Antes de liberar a indexação
+
+O `robots.txt` bloqueia buscadores de propósito, e continua assim até que
+**quatro** coisas mudem. As três primeiras estão marcadas por comentário no
+ponto exato do código:
+
+| Marcador | O que trocar |
+| --- | --- |
+| `CONTATO` | `wa.me/5500000000000` e `contato@exemplo.com.br`, em `index.html`, `especialistas.html` e `privacidade.html` |
+| `EMPRESA` | razão social e CNPJ no rodapé das cinco páginas |
+| `DOMINIO` | `SEU-DOMINIO.com.br` no `canonical`, no `og:url`, no `og:image`, no `sitemap.xml` e na linha `Sitemap:` do `robots.txt` |
+| — | as molduras de foto vazias: ou entram as imagens, ou os marcadores `F1`–`F10` saem da página |
+
+Só depois disso troque o bloco final do `robots.txt` por `Allow: /`. O
+`<meta name="robots">` das páginas já diz `index,follow` — os dois precisam
+concordar, senão o site sobe invisível ou sobe quebrado.
+
+### Fontes e compartilhamento
+
+As fontes são servidas por `site/fontes/` e declaradas em `site/fontes.css`,
+não pelo Google. Tira as requisições bloqueantes a um terceiro do caminho
+crítico da primeira tela, e evita que a página de privacidade tenha que
+declarar uma transferência de IP do visitante para outro domínio.
+
+Jost é fonte variável: os arquivos de peso 400 e 500 que o Google entrega são
+byte a byte idênticos, então guardamos um só e declaramos `font-weight: 400 500`.
+São 76 KB no total, em quatro arquivos (latin e latin-ext de cada família).
+
+A imagem de compartilhamento (`site/compartilhamento.png`, 1200×630) é gerada a
+partir de `site/midia/og.html` com `npm run og` — que precisa de Chromium e por
+isso fica fora da CI. Regere e versione o PNG quando o texto ou a paleta mudarem.
 
 ### O sistema visual
 
@@ -154,7 +195,8 @@ todo o cálculo roda no navegador de quem acessa, e nenhum número sai do
 aparelho. Os valores digitados ficam em `localStorage` só para a pessoa não
 precisar redigitar; nada é enviado.
 
-O modelo está inteiro no `<script>` da própria página:
+O modelo vive em `site/precificacao.js`, um módulo ES sem DOM, importado tanto
+pela página quanto pelos testes — para que a fórmula exista num lugar só:
 
 - **custo real** = insumos + custo fixo rateado pelas sessões que de fato
   acontecem (capacidade × ocupação). É o rateio pela ocupação que faz a agenda
@@ -165,5 +207,11 @@ O modelo está inteiro no `<script>` da própria página:
 
 Os invariantes que sustentam o modelo: cobrando o preço ideal a sobra do mês
 iguala a retirada desejada; cobrando o preço mínimo a sobra é zero; e no ponto
-de equilíbrio a margem acumulada iguala o custo fixo. Se alterar as fórmulas,
-confira os três antes de publicar.
+de equilíbrio a margem acumulada iguala o custo fixo. Os três estão em
+`test/precificacao.test.js` e a CI falha se algum quebrar — antes eram só esta
+prosa, e prosa não segura refactor.
+
+O teste cobre também o cálculo de quantos atendimentos extras fecham a conta,
+que já esteve errado: dividia a retirada inteira pela margem em vez do déficit,
+e anunciava "reajuste de 2% — ou 42 atendimentos a mais", números que não
+falavam da mesma realidade.

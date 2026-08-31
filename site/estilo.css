@@ -398,3 +398,40 @@ body > * { position: relative; z-index: 2; }
 /* Numa moldura em arco o canto superior esquerdo é recortado: o marcador
    do slot desce para o pé, senão some pela metade. */
 .foto.arco .cod { top: auto; bottom: var(--spacing-16); }
+
+/* ═══════════════ TEXTO CORRIDO ═══════════════
+   Paginas de leitura (privacidade), onde a medida importa mais que o ritmo
+   de secoes curtas. */
+
+.texto-corrido { max-width: 68ch; margin-inline: auto; }
+.texto-corrido h3 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 22px; line-height: 1.25; letter-spacing: -.01em;
+  margin: var(--spacing-40) 0 var(--spacing-12);
+}
+.texto-corrido > *:first-child { margin-top: 0; }
+.texto-corrido p { margin: 0 0 var(--spacing-16); }
+.texto-corrido a { color: inherit; text-underline-offset: 3px; }
+.faixa-escura .texto-corrido h3 { color: var(--color-porcelana); }
+
+/* Identificacao da empresa no rodape: obrigatoria e discreta, nao escondida. */
+.rodape .identidade {
+  /* Greige, nao areia: areia sobre espresso da 4.37:1, que so passa em texto
+     grande — e esta linha e miuda de proposito. */
+  font-size: 12.5px; color: var(--color-greige); opacity: .85;
+  margin-top: var(--spacing-12); max-width: 46ch;
+}
+
+/* ═══════════════ ALVOS DE TOQUE ═══════════════
+   Links de rodape e da barra de anuncio ficavam com menos de 40px de altura
+   no celular. O padding vertical resolve sem mexer no ritmo visual, porque a
+   coluna ja usa `gap` — o alvo cresce, o espacamento aparente nao. */
+
+@media (max-width: 760px) {
+  .rodape .coluna { gap: 0; }
+  .rodape .coluna a { min-height: 44px; display: flex; align-items: center; }
+  .anuncio { padding-block: var(--spacing-8); }
+  /* inline-flex com altura minima: o alvo chega aos 44px sem que a barra
+     inteira engorde, porque o texto continua centralizado na mesma linha. */
+  .anuncio a { display: inline-flex; align-items: center; min-height: 44px; }
+}

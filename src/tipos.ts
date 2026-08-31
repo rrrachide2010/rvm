@@ -28,6 +28,8 @@ export type Achado = {
 
 export type AnaliseSite = {
   alcancavel: boolean;
+  /** true quando o robots.txt do site pediu para nao buscarmos esta pagina. */
+  bloqueadoPorRobots?: boolean;
   urlFinal?: string;
   status?: number;
   https: boolean;

@@ -9,7 +9,7 @@ on:
 
 jobs:
   verificar:
-    name: Typecheck e smoke test
+    name: Typecheck, testes e smoke test
     runs-on: ubuntu-latest
 
     steps:
@@ -25,6 +25,18 @@ jobs:
 
       - name: Typecheck
         run: npm run check
+
+      # A matematica da calculadora e o leitor de robots.txt: as duas pecas
+      # onde um erro silencioso custa caro — uma da numero errado para a
+      # enfermeira decidir preco, a outra faz o coletor buscar pagina que o
+      # dono do site pediu para nao buscarmos.
+      - name: Testes
+        run: npm test
+
+      # Contraste dos pares prescritos pelo design system. Falha o build
+      # quando um par obrigatorio reprova na WCAG AA.
+      - name: Tokens e contraste
+        run: node src/tokens.ts --ci
 
       # Garante que os .ts realmente executam nesta versao do Node —
       # o tsc sozinho nao provaria isso.
