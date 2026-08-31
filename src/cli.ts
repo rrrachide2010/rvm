@@ -185,7 +185,36 @@ async function comandoRelatorio(argv: string[]): Promise<void> {
  */
 function estagioDe(c: Clinica): EstagioComercial {
   // Ausente e "nao-contactado": e o que permite base antiga carregar sem migrar.
-  return c.estagio ?? "nao-contactado";
+  if (!c.estagio) return "nao-contactado";
+  // Valor invalido cai no primeiro estagio EM VEZ de ser devolvido cru.
+  //
+  // Sem isto, uma clinica com "contatado" (erro de digitacao de "contactado")
+  // nao casava com nenhum grupo do funil e SUMIA da listagem inteira: sem erro,
+  // sem aviso, e sem aparecer em lugar nenhum. O README manda editar
+  // data/clinicas.json a mao, entao o erro de digitacao e o caminho documentado,
+  // nao um caso teorico. Quem some da fila e um cliente que ninguem cobra.
+  return (ESTAGIOS as readonly string[]).includes(c.estagio) ? c.estagio : "nao-contactado";
+}
+
+/** Clinicas cujo `estagio` gravado nao pertence ao funil. */
+function comEstagioInvalido(clinicas: Clinica[]): Clinica[] {
+  return clinicas.filter(
+    (c) => c.estagio !== undefined && !(ESTAGIOS as readonly string[]).includes(c.estagio),
+  );
+}
+
+/** Avisa, uma vez, sobre valores que nao existem no funil. */
+function avisarEstagiosInvalidos(clinicas: Clinica[]): void {
+  const ruins = comEstagioInvalido(clinicas);
+  if (ruins.length === 0) return;
+  console.error(
+    `
+Aviso: ${ruins.length} ${ruins.length === 1 ? "clínica tem estágio" : "clínicas têm estágio"} que não existe no funil.`,
+  );
+  for (const c of ruins) console.error(`  ${c.id}  ${c.nome}  →  "${c.estagio}"`);
+  console.error(`Elas aparecem em NAO-CONTACTADO até serem corrigidas.`);
+  console.error(`Válidos: ${ESTAGIOS.join(", ")}
+`);
 }
 
 function normalizar(texto: string): string {
@@ -248,6 +277,7 @@ async function comandoEstagio(argv: string[]): Promise<void> {
     process.exit(1);
   }
 
+  avisarEstagiosInvalidos(base.clinicas);
   const porId = new Map(base.auditorias.map((a) => [a.clinicaId, a]));
   let vazio = true;
 
@@ -281,6 +311,7 @@ async function comandoEstagio(argv: string[]): Promise<void> {
 
 async function comandoListar(): Promise<void> {
   const base = await carregar();
+  avisarEstagiosInvalidos(base.clinicas);
   const porId = new Map(base.auditorias.map((a) => [a.clinicaId, a]));
   const linhas = base.clinicas
     .map((c) => ({ c, a: porId.get(c.id) }))
