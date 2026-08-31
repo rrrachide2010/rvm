@@ -16,18 +16,15 @@ const SAIDA = resolve(process.cwd(), "site/tokens.css");
 
 /** Pares que a referencia prescreve — cada um vira um teste de contraste. */
 const PARES: Array<{ nome: string; frente: string; fundo: string; tamanho: "normal" | "grande" }> = [
-  { nome: "texto do botão coral", frente: "#fef6ee", fundo: "#ef6079", tamanho: "normal" },
-  { nome: "corpo sobre creme", frente: "#651c32", fundo: "#f2e2d5", tamanho: "normal" },
-  { nome: "corpo sobre bone", frente: "#651c32", fundo: "#fef6ee", tamanho: "normal" },
-  { nome: "texto sobre burgundy", frente: "#fef6ee", fundo: "#651c32", tamanho: "normal" },
-  { nome: "rótulo oliva sobre creme", frente: "#3e4938", fundo: "#f2e2d5", tamanho: "normal" },
-  { nome: "rótulo coral sobre creme", frente: "#ef6079", fundo: "#f2e2d5", tamanho: "normal" },
-  { nome: "rótulo coral-texto sobre creme", frente: "#aa4456", fundo: "#f2e2d5", tamanho: "normal" },
-  { nome: "botão coral-legível + bone", frente: "#fef6ee", fundo: "#ba4b5e", tamanho: "normal" },
-  { nome: "botão coral cheio + charcoal", frente: "#000000", fundo: "#ef6079", tamanho: "normal" },
-  { nome: "coral sobre burgundy", frente: "#ef6079", fundo: "#651c32", tamanho: "normal" },
-  { nome: "adesivo limoncello", frente: "#651c32", fundo: "#f0e87b", tamanho: "normal" },
-  { nome: "display sobre creme", frente: "#651c32", fundo: "#f2e2d5", tamanho: "grande" },
+  { nome: "corpo sobre canvas", frente: "#33291f", fundo: "#efe9e7", tamanho: "normal" },
+  { nome: "corpo sobre porcelana", frente: "#33291f", fundo: "#f6f0f2", tamanho: "normal" },
+  { nome: "título espresso sobre canvas", frente: "#5c4a3b", fundo: "#efe9e7", tamanho: "normal" },
+  { nome: "título espresso sobre greige", frente: "#5c4a3b", fundo: "#e1d7d3", tamanho: "normal" },
+  { nome: "botão espresso + porcelana", frente: "#f6f0f2", fundo: "#5c4a3b", tamanho: "normal" },
+  { nome: "botão eucalipto + porcelana", frente: "#f6f0f2", fundo: "#5c6b58", tamanho: "normal" },
+  { nome: "rótulo eucalipto sobre canvas", frente: "#5c6b58", fundo: "#efe9e7", tamanho: "normal" },
+  { nome: "texto suave sobre espresso", frente: "#e1d7d3", fundo: "#5c4a3b", tamanho: "normal" },
+  { nome: "areia sobre espresso (só filete)", frente: "#c9b8a8", fundo: "#5c4a3b", tamanho: "grande" },
 ];
 
 function canal(v: number): number {
@@ -104,13 +101,13 @@ async function main(): Promise<void> {
   emitir("layout", leiaute);
 
   // As familias originais nao sao publicas: a variavel ja entrega o substituto.
-  fontes.push(`  --font-texto: Lora, Georgia, "Times New Roman", serif;`);
-  fontes.push(`  --font-display: Oswald, "Arial Narrow", Impact, sans-serif;`);
+  fontes.push(`  --font-texto: Jost, "Helvetica Neue", Arial, sans-serif;`);
+  fontes.push(`  --font-display: Marcellus, Georgia, "Times New Roman", serif;`);
 
   const tg = doc["typography"] as Record<string, { $value: Record<string, unknown> }>;
   for (const [nome, token] of Object.entries(tg ?? {})) {
     const v = token.$value;
-    const familia = String(v["fontFamily"]).startsWith("FHA") ? "var(--font-display)" : "var(--font-texto)";
+    const familia = String(v["fontFamily"]) === "Marcellus" ? "var(--font-display)" : "var(--font-texto)";
     tipo.push(`  --texto-${nome}-familia: ${familia};`);
     tipo.push(`  --texto-${nome}-tamanho: ${String(v["fontSize"])};`);
     tipo.push(`  --texto-${nome}-peso: ${String(v["fontWeight"])};`);

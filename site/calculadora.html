@@ -11,53 +11,53 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@400;500&display=swap">
 <link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./estilo.css">
 <style>
 .calc { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: var(--spacing-48); align-items: start; margin-top: var(--spacing-32); }
 @media (max-width: 940px) { .calc { grid-template-columns: 1fr; gap: var(--spacing-32); } }
 
-fieldset { border: 1px solid var(--color-dusty-rose); border-radius: var(--radius-2xl); padding: var(--spacing-24); margin: 0 0 var(--spacing-20); background: var(--surface-light-card); }
-legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-coral-texto); padding: 0 var(--spacing-8); }
+fieldset { border: 1px solid var(--color-areia); border-radius: var(--radius-card); padding: var(--spacing-24); margin: 0 0 var(--spacing-20); background: var(--surface-elevada); }
+legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-eucalipto); padding: 0 var(--spacing-8); }
 .campos { display: grid; gap: var(--spacing-20); }
 .campo { display: grid; gap: 6px; }
 .campo > span { font-weight: 700; font-size: 16px; }
-.campo em { font-style: normal; font-weight: 400; color: var(--color-olive-grove); font-size: 14px; display: block; }
+.campo em { font-style: normal; font-weight: 400; color: var(--color-eucalipto); font-size: 14px; display: block; }
 .entrada { display: flex; align-items: center; gap: var(--spacing-8); }
-.entrada .unidade { font-size: 14px; color: var(--color-olive-grove); white-space: nowrap; }
+.entrada .unidade { font-size: 14px; color: var(--color-eucalipto); white-space: nowrap; }
 .campo input {
   font: inherit; font-size: 17px; font-variant-numeric: tabular-nums;
-  padding: 11px var(--spacing-16); border: 1px solid var(--color-dusty-rose);
+  padding: 11px var(--spacing-16); border: 1px solid var(--color-areia);
   border-radius: var(--radius-full); background: var(--surface-canvas);
-  color: var(--color-ghia-burgundy); width: 100%; max-width: 170px; min-height: 46px;
+  color: var(--color-espresso); width: 100%; max-width: 170px; min-height: 46px;
 }
-.campo input:focus { background: var(--surface-light-card); }
+.campo input:focus { background: var(--surface-elevada); }
 
-.painel { position: sticky; top: 88px; border-radius: var(--radius-3xl); background: var(--color-ghia-burgundy); color: var(--color-bone-white); overflow: hidden; }
+.painel { position: sticky; top: 88px; border-radius: var(--radius-grande); background: var(--color-espresso); color: var(--color-porcelana); overflow: hidden; }
 @media (max-width: 940px) { .painel { position: static; } }
-.painel-topo { padding: var(--spacing-28) var(--spacing-32); border-bottom: 1px solid var(--color-coral-texto); }
-.painel-topo .rot { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-dusty-rose); margin-bottom: var(--spacing-8); }
+.painel-topo { padding: var(--spacing-24) var(--spacing-32); border-bottom: 1px solid var(--color-eucalipto); }
+.painel-topo .rot { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-areia); margin-bottom: var(--spacing-8); }
 .painel-topo .grande { font-family: var(--font-display); font-size: 56px; line-height: 1; font-variant-numeric: tabular-nums; }
-.painel-topo p { font-size: 15px; color: var(--color-dusty-rose); margin: var(--spacing-12) 0 0; max-width: none; }
+.painel-topo p { font-size: 15px; color: var(--color-areia); margin: var(--spacing-12) 0 0; max-width: none; }
 .linhas { padding: var(--spacing-8) var(--spacing-32) var(--spacing-20); margin: 0; }
-.linha { display: flex; justify-content: space-between; align-items: baseline; gap: var(--spacing-16); padding: 13px 0; border-bottom: 1px solid rgba(223, 202, 200, .22); }
+.linha { display: flex; justify-content: space-between; align-items: baseline; gap: var(--spacing-16); padding: 13px 0; border-bottom: 1px solid rgba(201, 184, 168, .3); }
 .linha:last-child { border-bottom: none; }
 .linha dt { font-size: 15px; }
-.linha dt small { display: block; color: var(--color-dusty-rose); font-size: 13px; }
+.linha dt small { display: block; color: var(--color-areia); font-size: 13px; }
 .linha dd { margin: 0; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.linha dd.alerta { color: var(--color-limoncello-yellow); }
-.linha dd.bom { color: var(--color-limoncello-yellow); }
+.linha dd.alerta { color: var(--color-areia); }
+.linha dd.bom { color: var(--color-areia); }
 
 .veredito { padding: var(--spacing-20) var(--spacing-32); font-size: 15.5px; line-height: 1.5; }
-.veredito.ruim { background: var(--color-coral-cta-legivel); color: var(--color-bone-white); }
-.veredito.ok { background: var(--color-limoncello-yellow); color: var(--color-ghia-burgundy); }
+.veredito.ruim { background: var(--color-eucalipto); color: var(--color-porcelana); }
+.veredito.ok { background: var(--color-greige); color: var(--color-espresso); }
 .veredito strong { display: block; margin-bottom: 4px; }
 
-.privado { font-size: 15px; color: var(--color-olive-grove); margin-top: var(--spacing-16); }
+.privado { font-size: 15px; color: var(--color-eucalipto); margin-top: var(--spacing-16); }
 
 .explica dt { font-weight: 700; margin-top: var(--spacing-20); font-size: 17px; }
-.explica dd { margin: 6px 0 0; color: var(--color-olive-grove); font-size: 16px; max-width: 66ch; }
+.explica dd { margin: 6px 0 0; color: var(--color-eucalipto); font-size: 16px; max-width: 66ch; }
 
 /* No celular o painel fica abaixo dos campos: sem esta barra, a pessoa edita
    sem ver o número mudar — que é o valor inteiro da ferramenta. */
@@ -67,11 +67,11 @@ legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; lett
     display: flex; position: fixed; inset: auto 0 0 0; z-index: 20;
     align-items: center; justify-content: space-between; gap: var(--spacing-16);
     padding: 12px var(--spacing-20) calc(12px + env(safe-area-inset-bottom, 0px));
-    background: var(--color-ghia-burgundy); color: var(--color-bone-white); text-decoration: none;
+    background: var(--color-espresso); color: var(--color-porcelana); text-decoration: none;
   }
-  .barra .rot { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-dusty-rose); }
+  .barra .rot { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-areia); }
   .barra .val { font-family: var(--font-display); font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .barra .ir { font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--color-limoncello-yellow); }
+  .barra .ir { font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--color-areia); }
   body { padding-bottom: 80px; }
 }
 </style>
@@ -180,7 +180,7 @@ legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; lett
   </div>
 </section>
 
-<section class="faixa faixa-clara" id="entender">
+<section class="faixa faixa-elevada" id="entender">
   <div class="rail rail-estreito">
     <p class="olho">Como a conta é feita</p>
     <h2 class="disp">Sem caixa-preta</h2>
@@ -203,7 +203,7 @@ legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; lett
   </div>
 </section>
 
-<section class="faixa faixa-oliva">
+<section class="faixa faixa-escura">
   <div class="rail rail-estreito">
     <p class="olho">Descobriu que a agenda vazia é o problema?</p>
     <h2 class="disp">Ela também tem conserto</h2>

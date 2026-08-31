@@ -114,24 +114,38 @@ como um menu de portas iguais.
 
 ### O sistema visual
 
+Direção **med spa / clínica dermatológica**, extraída de duas referências que o
+dono do repositório forneceu. As imagens em si não puderam ser abertas daqui,
+mas as páginas guardavam a cor dominante de cada uma — e é dela que a paleta
+vem, não de chute:
+
+| Referência | Dominante | Fundo |
+| --- | --- | --- |
+| Dermatologist & Cosmetology Clinic | `#f6f0f2` | `#efe9e7` |
+| Luxury Med Spa | `#5c4a3b` | `#e1d7d3` |
+
+Tipografia: **Marcellus** (serifada romana) nos títulos e **Jost** (geométrica)
+no corpo. A forma assinatura é o **arco** nas fotos.
+
 `tokens.css` (gerado) carrega as variáveis; `estilo.css` só as consome. **Não
-escreva hex em `estilo.css`** — mexa em `tokens.json` e rode `npm run tokens`.
+escreva hex em `estilo.css`** — mexa em `tokens.json` e rode `npm run tokens`,
+que também audita o contraste de cada par prescrito.
 
-Isso torna a direção visual reversível: trocar a paleta inteira é editar o JSON
-e regerar, sem tocar em nenhuma página.
+### Fotos e animação
 
-Antes de publicar, três marcações no HTML:
+O site tem dez molduras de foto vazias, cada uma com um código visível (`F1`…
+`F10`) enquanto não recebe imagem — de propósito, para ninguém publicar com
+buraco sem perceber. **`site/MIDIA.md` traz o prompt de cada uma**, mais a base
+de estilo comum que mantém as dez parecendo do mesmo lugar, e as recomendações
+de animação.
 
-- **`MARCA`** — "Pele &amp; Código" é provisório; aparece no `title`, no
-  cabeçalho e no rodapé de cada página.
-- **`CONTATO`** — o `wa.me/55...` e o e-mail estão com placeholder.
-- **`FORMULARIO`** — a lista de espera está desabilitada de propósito, para não
-  coletar contato sem endpoint que receba.
+Três limites estão escritos lá e valem repetir: `F6` é foto real de vocês (uma
+pessoa gerada apresentada como fundadora seria enganosa), nenhuma imagem de
+paciente ou de resultado, e nenhum rosto.
 
-E um bloco `.reservado` na home guarda o espaço do primeiro case, escrito como
-espaço vazio assumido em vez de depoimento inventado.
-
-O `robots.txt` bloqueia indexação enquanto o contato for de exemplo.
+O movimento do site é um só — revelação ao rolar e zoom lento nas fotos —, em
+`animation-timeline` nativo, sem biblioteca, e desliga sozinho para quem pediu
+menos movimento no sistema.
 
 ### Calculadora de precificação
 
