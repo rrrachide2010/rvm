@@ -154,9 +154,6 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
   padding: 4px 10px; border-radius: var(--radius-full);
 }
 
-.mosaico { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spacing-16); margin-top: var(--spacing-48); }
-@media (max-width: 800px) { .mosaico { grid-template-columns: 1fr 1fr; } }
-
 /* ---------- grades e cartões ---------- */
 
 .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-24); margin-top: var(--spacing-48); }
@@ -285,3 +282,119 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ═══════════════ COMPOSIÇÃO CENTRADA ═══════════════ */
+
+.centro { text-align: center; }
+.centro h1, .centro h2, .centro .lede, .centro .sub, .centro p { margin-inline: auto; }
+.centro .filete { margin-inline: auto; }
+.centro .acoes { justify-content: center; }
+.centro .olho { margin-inline: auto; }
+.centro h1 { max-width: 19ch; }
+.centro h2 { max-width: 22ch; }
+
+/* Cabeçalho de seção centrado, conteúdo abaixo com seu próprio alinhamento. */
+.cabecalho { text-align: center; max-width: 720px; margin-inline: auto; margin-bottom: var(--spacing-16); }
+.cabecalho .filete { margin-inline: auto; }
+.cabecalho .sub { margin-inline: auto; }
+
+/* ═══════════════ FUNDO VIVO ═══════════════
+   Duas coisas, e só duas: grão de filme parado sobre a página inteira, e
+   manchas de luz que atravessam o fundo muito devagar. A referência
+   fotográfica é "luz natural difusa vindo de uma janela" — o movimento
+   imita isso, não um gradiente animado. */
+
+/* Grão: turbulência SVG, fixa, quase imperceptível. Custo zero de runtime. */
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .04; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+body > * { position: relative; z-index: 2; }
+
+/* Manchas de luz. Ficam atrás do conteúdo da faixa e nunca encostam no texto. */
+.viva-fundo { position: relative; overflow: hidden; isolation: isolate; }
+.viva-fundo > .rail { position: relative; z-index: 1; }
+.brilho { position: absolute; inset: -20% -10%; z-index: 0; pointer-events: none; filter: blur(90px); }
+.brilho span { position: absolute; display: block; border-radius: 50%; opacity: .55; }
+.brilho span:nth-child(1) { width: 46vw; height: 46vw; left: -6%;  top: -14%; background: var(--color-greige); animation: derivaA 54s ease-in-out infinite alternate; }
+.brilho span:nth-child(2) { width: 38vw; height: 38vw; right: -4%; top: 18%;  background: var(--color-areia);  animation: derivaB 68s ease-in-out infinite alternate; }
+.brilho span:nth-child(3) { width: 30vw; height: 30vw; left: 38%;  bottom: -18%; background: var(--color-porcelana); opacity: .7; animation: derivaC 46s ease-in-out infinite alternate; }
+
+/* No escuro a mancha aparece muito mais: menos opacidade e mais desfoque,
+   senão vira um anel visível em vez de luz. */
+.faixa-escura .brilho { filter: blur(130px); }
+.faixa-escura .brilho span:nth-child(1) { background: #6d5949; opacity: .5; }
+.faixa-escura .brilho span:nth-child(2) { background: var(--color-eucalipto); opacity: .22; }
+.faixa-escura .brilho span:nth-child(3) { background: #4a3b2f; opacity: .5; }
+
+@keyframes derivaA { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(6vw, 4vh, 0) scale(1.14); } }
+@keyframes derivaB { from { transform: translate3d(0,0,0) scale(1.08); } to { transform: translate3d(-5vw, -5vh, 0) scale(1); } }
+@keyframes derivaC { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(-7vw, -3vh, 0) scale(1.2); } }
+
+@media (prefers-reduced-motion: reduce) { .brilho span { animation: none !important; } }
+
+/* ═══════════════ TRIO DE ARCOS ═══════════════
+   A composição assinatura do herói: três molduras, a do meio mais alta. */
+
+.arcos {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-24); align-items: end;
+  margin-top: var(--spacing-64); max-width: 980px; margin-inline: auto;
+}
+.arcos .foto { margin: 0; aspect-ratio: 4 / 5; }
+.arcos .foto:nth-child(2) { margin-bottom: var(--spacing-40); }
+@media (max-width: 820px) {
+  .arcos { grid-template-columns: 1fr; max-width: 420px; }
+  .arcos .foto:nth-child(2) { margin-bottom: 0; }
+  .arcos .foto:nth-child(3) { display: none; }
+}
+
+/* Um floreio contido: os arcos sobem em sequência ao entrarem na tela. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .arcos .foto { animation: subir linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+    .arcos .foto:nth-child(2) { animation-range: entry 4% cover 28%; }
+    .arcos .foto:nth-child(3) { animation-range: entry 8% cover 32%; }
+  }
+}
+
+/* ═══════════════ REFINOS ═══════════════ */
+
+.heroi.centro h1 { letter-spacing: -.015em; }
+.heroi.centro .lede { font-size: clamp(18px, 2vw, 21px); }
+
+/* Ornamento no lugar do filete reto, quando a seção é centrada. */
+.centro .filete, .cabecalho .filete {
+  width: 168px; height: 10px; background: none; border: 0;
+  margin-block: var(--spacing-32); position: relative;
+}
+.centro .filete::before, .cabecalho .filete::before {
+  content: ""; position: absolute; inset: 0; top: 50%; height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0, var(--color-areia) 18%, var(--color-areia) 42%,
+    transparent 42%, transparent 58%,
+    var(--color-areia) 58%, var(--color-areia) 82%, transparent 100%);
+}
+.centro .filete::after, .cabecalho .filete::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  background: var(--color-eucalipto); transform: rotate(45deg);
+}
+.faixa-escura .filete::after { background: var(--color-areia); }
+
+/* Foto única sob um herói centrado: larga, mas sem encostar nas bordas. */
+.larga-central { max-width: 900px; margin: var(--spacing-64) auto 0; }
+@media (max-width: 700px) { .larga-central { aspect-ratio: 3 / 4; } }
+
+/* Respiro depois de um cabeçalho centrado, seja o que vier. */
+.cabecalho + .foto, .cabecalho + .menu, .cabecalho + div { margin-top: var(--spacing-48); }
+.cabecalho + .grade { margin-top: var(--spacing-24); }
+
+/* A faixa elevada usa uma foto larga única. */
+.faixa-elevada .foto.larga { max-width: 1000px; margin-inline: auto; }
+
+/* Numa moldura em arco o canto superior esquerdo é recortado: o marcador
+   do slot desce para o pé, senão some pela metade. */
+.foto.arco .cod { top: auto; bottom: var(--spacing-16); }

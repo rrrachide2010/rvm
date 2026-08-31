@@ -38,15 +38,15 @@ flash, estética de banco de imagens, colagem, moldura.
 
 | Cód | Onde | Proporção | Prompt (some a base de estilo acima) |
 | --- | --- | --- | --- |
-| **F1** | Home, herói | 3:4 retrato | Recepção de uma clínica de estética pequena e bem cuidada, balcão de madeira clara, uma planta de folhas largas ao lado, cadeira de espera com estofado bege, parede off-white, luz da manhã entrando pela esquerda |
+| **F1** | Home, herói — arco central (mais alto) | 3:4 retrato | Recepção de uma clínica de estética pequena e bem cuidada, balcão de madeira clara, uma planta de folhas largas ao lado, cadeira de espera com estofado bege, parede off-white, luz da manhã entrando pela esquerda |
 | **F2** | Home, "o que roda" | 4:3 paisagem | Celular apoiado sobre uma mesa de madeira clara ao lado de uma xícara, tela ligada mostrando uma conversa de mensagens sem texto legível, foco raso no aparelho |
-| **F3** | Home, mosaico | 1:1 | Agenda de papel aberta sobre bancada clara, caneta ao lado, páginas com marcações genéricas ilegíveis, sombra suave de janela |
-| **F4** | Home, mosaico | 1:1 | Bancada de atendimento organizada, frascos âmbar e brancos alinhados, toalha dobrada, tudo em neutros quentes, sem rótulos legíveis |
-| **F5** | Home, mosaico | 1:1 | Maca de atendimento preparada com lençol branco e toalha dobrada, luminária de haste desligada ao lado, sala vazia e calma |
+| **F3** | Home, herói — arco da esquerda | 3:4 retrato | Agenda de papel aberta sobre bancada clara, caneta ao lado, páginas com marcações genéricas ilegíveis, sombra suave de janela |
+| **F4** | Home, "a operação" — foto larga única | 16:9 | Bancada de atendimento organizada, frascos âmbar e brancos alinhados, toalha dobrada, tudo em neutros quentes, sem rótulos legíveis |
+| **F5** | Home, herói — arco da direita (some no celular) | 3:4 retrato | Maca de atendimento preparada com lençol branco e toalha dobrada, luminária de haste desligada ao lado, sala vazia e calma |
 | **F6** | Home, quem somos | 3:4 retrato | **Foto real de vocês dois — não gerar.** Sugestão: os dois lado a lado perto de uma janela, roupa neutra, fundo liso, sorriso natural |
-| **F7** | Enfermeiras, herói | 3:4 retrato | Mesa de trabalho com caderno aberto, calculadora simples, xícara de café e um vaso pequeno, madeira clara, luz de janela pela direita |
+| **F7** | Enfermeiras, herói — foto larga sob o texto | 4:3 paisagem | Mesa de trabalho com caderno aberto, calculadora simples, xícara de café e um vaso pequeno, madeira clara, luz de janela pela direita |
 | **F8** | Enfermeiras, quem faz | 4:3 paisagem | Pilha de livros e um caderno com marcadores coloridos sobre mesa escura, luz lateral quente, atmosfera de estudo à noite |
-| **F9** | Especialistas, herói | 3:4 retrato | Consultório de estética vazio e bem equipado, cadeira de atendimento em couro claro, armário de madeira, luz suave, ambiente premium e silencioso |
+| **F9** | Especialistas, herói — foto larga sob o texto | 4:3 paisagem | Consultório de estética vazio e bem equipado, cadeira de atendimento em couro claro, armário de madeira, luz suave, ambiente premium e silencioso |
 | **F10** | Especialistas, perfil | 4:3 paisagem | Tripé de celular apontado para uma bancada clara e organizada, anel de luz desligado ao lado, cenário de gravação caseira e simples |
 
 ## Como colocar a imagem na moldura
@@ -107,3 +107,22 @@ Os ganchos das páginas já são falas de vídeo. Estes três reaproveitam:
 
 Para gerar cenas do zero em vídeo, mantenha a base de estilo e acrescente:
 *plano fixo, câmera na mão quase imperceptível, 24 fps, sem música épica.*
+
+## Composição do herói (trio de arcos)
+
+O herói da home é centrado: olho, título, filete, texto, botões e, abaixo, três
+molduras em arco — **F3 à esquerda, F1 no centro (elevada 32px), F5 à direita**.
+As três precisam parecer da mesma sessão de fotos: mesma temperatura de luz,
+mesma altura de câmera, mesma paleta. Se só houver orçamento para uma imagem,
+gere **F1** e deixe as outras duas como moldura — o vazio é honesto, imagem
+desencontrada não é.
+
+No celular o trio vira uma coluna e **F5 é escondida por CSS**, então nada do
+que for essencial pode estar só nela.
+
+## Movimento do fundo
+
+O fundo dos heróis e das faixas escuras tem três manchas de luz desfocadas
+(90px) atravessando a tela em 46s, 54s e 68s, mais grão de filme fixo a 4% de
+opacidade. É CSS puro, não precisa de imagem nem de vídeo. Com
+`prefers-reduced-motion: reduce` o movimento para e o grão fica.
