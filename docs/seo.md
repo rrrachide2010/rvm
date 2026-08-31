@@ -154,16 +154,21 @@ maiúsculas, com hífen e sem parecer um domínio real, para que qualquer busca 
 
 ### Arquivos a trocar quando o domínio existir
 
-Dezesseis ocorrências em seis arquivos do site:
+Dezenove ocorrências em seis arquivos do site:
 
 | arquivo | onde | quantas |
 | --- | --- | --- |
-| `site/index.html` | `canonical`, `og:url`, `url` no JSON-LD | 3 |
-| `site/enfermeiras.html` | `canonical`, `og:url` | 2 |
-| `site/calculadora.html` | `canonical`, `og:url` | 2 |
+| `site/index.html` | `canonical`, `og:url`, `og:image`, `url` no JSON-LD | 4 |
+| `site/enfermeiras.html` | `canonical`, `og:url`, `og:image` | 3 |
+| `site/calculadora.html` | `canonical`, `og:url`, `og:image` | 3 |
 | `site/robots.txt` | comentário + linha `Sitemap:` do bloco de lançamento | 2 |
 | `site/sitemap.xml` | comentário + os três `<loc>` | 4 |
 | `site/llms.txt` | os três links das páginas | 3 |
+
+As imagens de compartilhamento vivem em `site/og/` (`index.png`,
+`enfermeiras.png`, `calculadora.png`, 1200×630). São PNG de cor chapada, geradas
+a partir da paleta do `estilo.css`; não dependem de fonte instalada nem de foto.
+Ao trocar o domínio, o caminho delas acompanha o `og:image` de cada página.
 
 Fora do site, `docs/seo.md` e `docs/operacao-site.md` também citam o placeholder;
 esses são prosa e podem ser atualizados depois, sem pressa.
