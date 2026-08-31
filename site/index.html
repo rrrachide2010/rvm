@@ -3,29 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- MARCA: "Pele & Código" aparece no title, no cabecalho e no rodape de cada
-     pagina. Trocar de nome = buscar por "Pele &amp; Código" em site/*.html. -->
-<title>Pele &amp; Código · cuidado clínico e software na mesma casa</title>
-<meta name="description" content="Uma enfermeira e um desenvolvedor construindo ferramentas para o setor de estética: automação de agenda para clínicas, ferramentas para enfermeiras e co-produção de conteúdo com especialistas.">
+<!-- MARCA: o nome aparece no title, no cabeçalho e no rodapé de cada página. -->
+<title>Pele &amp; Código · sua agenda para de furar em 30 dias, ou você não paga</title>
+<meta name="description" content="Confirmação, remarcação e retorno rodando sozinhos no WhatsApp da sua clínica de estética. Medimos sua taxa de falta antes de ligar nada. Se não cair 30% em 30 dias, a mensalidade volta.">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Pele &amp; Código">
-<meta property="og:description" content="Cuidado clínico e software na mesma casa.">
+<meta property="og:title" content="Sua agenda para de furar em 30 dias, ou você não paga">
+<meta property="og:description" content="Você não precisa de mais clientes. Precisa que as que você já tem não sumam.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500&display=swap">
+<link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./estilo.css">
 </head>
 <body>
+
+<div class="anuncio">É enfermeira, não dona de clínica? <a href="./calculadora.html">Calcule seu preço de graça, sem cadastro →</a></div>
 
 <header class="topo">
   <div class="rail">
     <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
     <nav>
-      <a href="./clinicas.html" class="opcional">Para clínicas</a>
+      <a href="#rotinas" class="opcional">O que roda</a>
+      <a href="#garantia" class="opcional">Garantia</a>
+      <a href="#preco" class="opcional">Preço</a>
       <a href="./enfermeiras.html" class="opcional">Para enfermeiras</a>
-      <a href="./especialistas.html" class="opcional">Para especialistas</a>
-      <a href="#contato">Contato</a>
+      <a class="botao" href="#comecar">Medir minha agenda</a>
     </nav>
   </div>
 </header>
@@ -34,130 +37,163 @@
 
 <section class="faixa heroi">
   <div class="rail">
-    <p class="eyebrow">Enfermagem estética + tecnologia</p>
-    <h1>Cuidado clínico e software na <em>mesma casa</em>.</h1>
-    <div class="tese">
-      <p class="lede">Somos duas pessoas: uma enfermeira em formação com interesse em estética, e um desenvolvedor. Em vez de escolher um dos dois caminhos, estamos construindo o que só existe quando os dois se encontram — ferramentas para um setor que entende de pele e não entende de sistema.</p>
+    <div class="heroi-grade">
+      <div>
+        <p class="olho">Para clínicas de estética</p>
+        <h1 class="disp">Você não precisa de mais clientes. Precisa que as que você já tem não sumam.</h1>
+        <p class="lede" style="margin-top: 20px;">Confirmação, remarcação e retorno programado rodando sozinhos no WhatsApp da sua clínica. Sem trocar de sistema, sem ninguém precisar lembrar.</p>
+        <div class="acoes">
+          <a class="botao" href="#comecar">Medir minha agenda de graça</a>
+          <a class="botao botao-vazado" href="#rotinas">Ver o que roda</a>
+        </div>
+        <p class="nota-acao">A medição é gratuita e leva 20 minutos. Só depois dela é que existe proposta.</p>
+      </div>
+      <div>
+        <div class="selo">
+          <span class="numero">30%</span>
+          <span class="risco"></span>
+          <span class="rotulo">é o quanto a sua taxa de falta precisa cair em 30 dias. Se não cair, a mensalidade do período volta.</span>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<div class="marquise">
+  <span>Implantação em 7 dias</span> <i>·</i>
+  <span>Sem fidelidade</span> <i>·</i>
+  <span>Sem trocar de sistema</span> <i>·</i>
+  <span>Preço na página</span> <i>·</i>
+  <span>Garantia por escrito</span>
+</div>
+
+<section class="faixa faixa-clara" id="rotinas">
+  <div class="rail">
+    <p class="olho">O que roda sozinho</p>
+    <h2 class="disp">A cliente não faltou porque não gostou.<br>Faltou porque esqueceu.</h2>
+    <p class="sub" style="margin-top: 16px;">Falta de estética quase nunca é insatisfação — é agenda marcada com três semanas de antecedência e nenhum lembrete no meio. São sete rotinas, cada uma fechando um buraco específico.</p>
+
+    <div class="grade">
+      <div class="cartao"><span class="quando">Véspera e 3h antes</span><h3>Confirmação ativa</h3><p>A cliente confirma ou remarca em um toque. É aqui que a falta por esquecimento morre.</p></div>
+      <div class="cartao"><span class="quando">Quando alguém desmarca</span><h3>Remarcação na hora</h3><p>Em vez de perder a cliente, o sistema oferece os três próximos horários livres na mesma conversa.</p></div>
+      <div class="cartao"><span class="quando">Buraco na agenda</span><h3>Fila de espera</h3><p>O horário vago vai para quem estava esperando. Cancelamento vira remarcação no mesmo dia.</p></div>
+      <div class="cartao"><span class="quando">21 ou 30 dias depois</span><h3>Retorno programado</h3><p>Cada procedimento tem seu intervalo. A recompra deixa de depender da memória da recepção.</p></div>
+      <div class="cartao"><span class="quando">90 dias sem vir</span><h3>Reativação de inativas</h3><p>Receita que já está na sua base e ninguém foi buscar. Costuma ser a primeira surpresa boa.</p></div>
+      <div class="cartao"><span class="quando">2h após o atendimento</span><h3>Pedido de avaliação</h3><p>Mais avaliações no Google sobem sua posição na busca do bairro. É o efeito percebido mais rápido.</p></div>
+      <div class="cartao"><span class="quando">Todo dia 1º</span><h3>Relatório do mês</h3><p>Faltas, retornos, reativações e avaliações novas. Você vê o que a mensalidade fez sem precisar perguntar.</p></div>
+    </div>
+
     <div class="acoes">
-      <a class="botao" href="#frentes">Ver o que fazemos</a>
-      <a class="botao botao-vazado" href="#quem">Quem somos</a>
+      <a class="botao" href="#comecar">Quero isso rodando na minha clínica</a>
+    </div>
+  </div>
+</section>
+
+<section class="faixa faixa-escura" id="garantia">
+  <div class="rail">
+    <div class="heroi-grade">
+      <div>
+        <p class="olho">A garantia</p>
+        <h2 class="disp">O número vai para a mesa antes de você pagar</h2>
+        <p class="lede" style="margin-top: 18px;">A primeira coisa que fazemos é levantar a sua taxa de falta dos últimos 60 dias. Sem essa linha de base, ninguém consegue provar resultado depois — só opinar.</p>
+        <p>No fim dos 30 dias de piloto a gente compara. Se a falta não caiu pelo menos 30%, devolvemos a mensalidade do período e você fica com as rotinas rodando enquanto decide o que fazer.</p>
+        <p>Conseguimos prometer isso porque lembrar a pessoa duas vezes realmente funciona. Não é otimismo, é o efeito conhecido de confirmação ativa.</p>
+        <div class="acoes">
+          <a class="botao" href="#comecar">Começar pela medição</a>
+        </div>
+      </div>
+      <div>
+        <ol class="passos">
+          <li><span class="n">1</span><div><h3>Medimos, antes de ligar nada</h3><p>Levantamos sua taxa de falta atual. Leva uma conversa de 20 minutos com a agenda aberta.</p></div></li>
+          <li><span class="n">2</span><div><h3>Conectamos a agenda que você já usa</h3><p>Não trocamos seu sistema nem sua rotina. As rotinas passam a rodar em cima do que existe.</p></div></li>
+          <li><span class="n">3</span><div><h3>As mensagens saem do seu número</h3><p>Com o texto que você aprovou. A cliente continua falando com a sua clínica.</p></div></li>
+          <li><span class="n">4</span><div><h3>30 dias depois, comparamos</h3><p>Caiu o combinado, seguimos. Não caiu, você não paga aquele mês.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faixa" id="preco">
+  <div class="rail">
+    <p class="olho">Preço</p>
+    <h2 class="disp">Está aqui na página, não numa proposta de dez páginas</h2>
+    <div class="numeros">
+      <div><span class="rot">Implantação</span><span class="val">R$ 1.200</span><p class="obs">Uma vez. Inclui a medição inicial, a conexão da agenda e a escrita das mensagens.</p></div>
+      <div><span class="rot">Mensalidade</span><span class="val">R$ 350</span><p class="obs">Sem fidelidade. Cancelou, para no fim do mês.</p></div>
+      <div><span class="rot">Conteúdo (opcional)</span><span class="val">+ R$ 100</span><p class="obs">Roteiros de post prontos, já filtrados pelas regras de publicidade em saúde.</p></div>
+    </div>
+
+    <div class="reservado">
+      <b>Aqui vai o resultado da primeira clínica.</b> Ainda não temos caso para mostrar, e preferimos deixar o espaço vazio a inventar um depoimento. É por isso que a garantia existe: enquanto não há prova de terceiros, o risco fica com a gente, não com você.
+      <br><br>[ESPAÇO PARA O CASE — taxa de falta antes e depois, com autorização da clínica]
+    </div>
+
+    <div class="acoes">
+      <a class="botao" href="#comecar">Quero ser a primeira clínica</a>
     </div>
   </div>
 </section>
 
 <section class="faixa faixa-clara" id="frentes">
   <div class="rail">
-    <p class="eyebrow">Três frentes</p>
-    <h2>Escolha por onde você entra</h2>
-    <p class="sub">Cada frente resolve um problema diferente, para uma pessoa diferente. Elas se sustentam entre si — mas você provavelmente só precisa de uma.</p>
-
-    <div class="portas">
-      <a class="porta" href="./clinicas.html">
-        <span class="quem">Você tem uma clínica</span>
-        <h3>Agenda que não fura</h3>
-        <p>Confirmação ativa, fila de espera, retorno programado e reativação de inativas rodando sozinhos no WhatsApp da clínica. Piloto de 30 dias com meta declarada.</p>
-        <span class="estado">Atendendo</span>
-        <span class="leva">Ver o serviço →</span>
-      </a>
-
-      <a class="porta" href="./enfermeiras.html">
+    <p class="olho">Não tem clínica?</p>
+    <h2 class="disp">Tem duas outras portas aqui</h2>
+    <div class="grade grade-2">
+      <a class="porta" href="./calculadora.html">
         <span class="quem">Você é enfermeira</span>
-        <h3>Ferramentas para começar</h3>
-        <p>Quanto cobrar, o que é permitido fazer, como divulgar sem infringir o código de ética. As perguntas que travam quem está entrando — respondidas em ferramenta, não em PDF.</p>
-        <span class="estado">Calculadora no ar</span>
-        <span class="leva">Ver as ferramentas →</span>
+        <h3 class="disp">Seu preço paga suas contas?</h3>
+        <p>A maioria descobre na calculadora que o pacote promocional dava prejuízo. Insumo, tempo de sala, custo fixo e imposto — o cálculo sai em dois minutos, no seu navegador, sem cadastro.</p>
+        <span class="adesivo">Gratuita, no ar agora</span>
+        <span class="leva">Calcular meu preço →</span>
       </a>
-
       <a class="porta" href="./especialistas.html">
         <span class="quem">Você já é especialista</span>
-        <h3>Co-produção de conteúdo</h3>
-        <p>Você tem título, casos e nenhum tempo. Nós temos produção, plataforma e audiência. Você assina o conteúdo clínico como autora e divide a receita.</p>
-        <span class="estado breve">Buscando parceira</span>
+        <h3 class="disp">Você ensina de graça no WhatsApp toda semana</h3>
+        <p>Tem título, casos e nenhum tempo de produzir. A gente faz roteiro, edição, plataforma, tráfego e suporte; você grava, assina como autora e divide a receita. Você investe um fim de semana, nós investimos todo o resto.</p>
+        <span class="adesivo">Buscando parceira</span>
         <span class="leva">Ver a proposta →</span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="faixa" id="tese">
-  <div class="rail rail-estreito">
-    <p class="eyebrow">Por que uma empresa só</p>
-    <h2>As três frentes se alimentam</h2>
-    <p>Poderiam ser três negócios separados. Não são, porque cada uma resolve um problema que as outras têm.</p>
-    <p>O serviço para clínicas paga as contas e, mais importante, coloca a gente dentro da operação real de um consultório — é ali que se aprende o que o setor precisa de verdade. Dessas mesmas clínicas saem as especialistas com quem faz sentido co-produzir conteúdo: gente com título e casos documentados, que já ensina informalmente e nunca teve tempo de produzir.</p>
-    <p>E o conteúdo clínico é o que traz a audiência de enfermeiras que usa as ferramentas. O mesmo gerador de roteiros que a clínica assina como serviço, a enfermeira autônoma assina sozinha. Construído uma vez.</p>
-    <p>É um circuito, não um portfólio.</p>
-  </div>
-</section>
-
-<section class="faixa faixa-clara" id="agora">
-  <div class="rail">
-    <p class="eyebrow">Estágio</p>
-    <h2>Onde estamos, sem enfeite</h2>
-    <p class="sub">Somos novos e preferimos dizer isso do que fingir tamanho. O que está pronto está pronto; o que não está, está marcado.</p>
-
-    <div class="agora">
-      <div>
-        <span class="quando">No ar</span>
-        <p><strong>Calculadora de precificação</strong> Gratuita, sem cadastro, com a conta aberta na própria página.</p>
-      </div>
-      <div>
-        <span class="quando">No ar</span>
-        <p><strong>Automação de agenda para clínicas</strong> As sete rotinas, com piloto de 30 dias e garantia de resultado.</p>
-      </div>
-      <div>
-        <span class="quando">Construindo</span>
-        <p><strong>Mapa do escopo legal</strong> O que enfermeira pode fazer em estética, com fonte e data em cada linha — e atualizado quando a disputa entre os conselhos muda.</p>
-      </div>
-      <div>
-        <span class="quando">Construindo</span>
-        <p><strong>Gerador de conteúdo dentro da norma</strong> Roteiros de post já filtrados pelas restrições de publicidade em saúde, com o motivo de cada substituição à vista.</p>
-      </div>
-      <div>
-        <span class="quando">Depois da formatura</span>
-        <p><strong>Atendimento clínico</strong> Ela ainda está no último ano e não pode atender: sem diploma e registro no COREN, prestar assistência é exercício irregular da profissão. Quando puder, entra aqui.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="faixa" id="quem">
-  <div class="rail">
-    <p class="eyebrow">Quem somos</p>
-    <h2>Duas metades que normalmente não se falam</h2>
-
-    <div class="dupla">
-      <div>
-        <h3>A metade clínica</h3>
-        <p>Último ano de enfermagem, com interesse específico em estética. É quem entende de pele, de anamnese, de medicação de uso contínuo e de por que um protocolo funciona numa pessoa e não na outra — e é quem sabe como uma clínica funciona por dentro, porque está lá.</p>
-        <p>O que ela <strong>não</strong> faz hoje: atender. Isso exige diploma e registro no COREN, e ambos vêm depois da formatura.</p>
-      </div>
-      <div>
-        <h3>A metade técnica</h3>
-        <p>Desenvolvimento de sistemas, integrações, automação e IA. É quem transforma o conhecimento clínico em ferramenta que funciona sozinha — e quem garante que dado de paciente seja tratado como o passivo sério que é, não como planilha.</p>
-        <p>O que ele <strong>não</strong> faz: decidir nada de conteúdo clínico. Isso é dela, ou de uma especialista parceira com registro.</p>
-      </div>
-    </div>
-
-    <div class="destaque">
-      <h2>A linha que a gente não atravessa</h2>
-      <p>Nada do que vendemos hoje ensina execução clínica — como aplicar, em quem, com qual parâmetro. Isso exige título de especialista, prática e responsabilidade técnica. O que temos a oferecer é o trabalho de organizar o que é confuso: legislação, dinheiro, documentação, abertura de consultório, divulgação e agenda.</p>
-      <p>Quando houver conteúdo clínico aqui, ele virá assinado por uma especialista com registro e casos reais.</p>
+  <div class="rail rail-estreito">
+    <p class="olho">Quem está por trás</p>
+    <h2 class="disp">Uma enfermeira e um desenvolvedor</h2>
+    <p class="lede" style="margin-top: 16px;">É essa combinação que faz as mensagens não parecerem robô. Quem escreve o que a sua cliente vai ler entende de anamnese, de intervalo entre procedimentos e de por que uma pessoa some depois da terceira sessão.</p>
+    <p>Ela está no último ano de enfermagem, com interesse específico em estética — e por isso conhece a rotina de uma clínica por dentro. Ele desenvolve os sistemas, e trata dado de paciente como o passivo sério que é: a clínica é a controladora, nós somos operadores, e isso vai no contrato.</p>
+    <p>Somos pequenos e novos. É exatamente por isso que damos garantia em vez de discurso — não temos dez anos de portfólio para mostrar, temos risco nosso para assumir.</p>
+    <div class="acoes">
+      <a class="botao botao-vazado" href="#comecar">Conversar com a gente</a>
     </div>
   </div>
 </section>
 
-<section class="faixa faixa-clara" id="contato">
+<section class="faixa faixa-clara" id="duvidas">
   <div class="rail rail-estreito">
-    <p class="eyebrow">Falar com a gente</p>
-    <h2>Somos pequenos, então respondemos rápido</h2>
-    <p class="sub">Clínica querendo o piloto, enfermeira com dúvida, especialista interessada em co-produzir — é o mesmo canal, e quem responde é uma de nós duas.</p>
+    <p class="olho">Antes de você perguntar</p>
+    <h2 class="disp">As cinco dúvidas que sempre aparecem</h2>
+    <details class="pergunta"><summary>Vocês vão ter acesso aos dados das minhas clientes?</summary><div><p>Só ao necessário para as rotinas funcionarem: nome, contato e horário. Nada de prontuário, foto ou informação clínica. No contrato, a clínica é a controladora dos dados e nós somos operadores — escrito, não combinado de boca.</p></div></details>
+    <details class="pergunta"><summary>Preciso trocar meu sistema de agenda?</summary><div><p>Não. As rotinas rodam em cima do que você já usa. Se hoje a agenda é um caderno, aí sim precisamos conversar sobre um passo anterior.</p></div></details>
+    <details class="pergunta"><summary>As mensagens vão parecer robô?</summary><div><p>Saem do número da clínica, com o texto que você aprovou. Dúvida clínica, reclamação ou assunto sensível vai direto para uma pessoa da sua equipe — a automação não tenta responder o que não deve.</p></div></details>
+    <details class="pergunta"><summary>E se não funcionar na minha clínica?</summary><div><p>Você recebe a mensalidade do piloto de volta e a gente encerra. Preferimos isso a manter cliente insatisfeito pagando por algo que não entregou.</p></div></details>
+    <details class="pergunta"><summary>Quanto tempo da minha equipe isso consome?</summary><div><p>A implantação leva cerca de duas horas suas, divididas em duas conversas. Depois disso, nada: as rotinas rodam sozinhas e o relatório chega todo dia 1º.</p></div></details>
+  </div>
+</section>
+
+<section class="faixa faixa-oliva" id="comecar">
+  <div class="rail rail-estreito">
+    <p class="olho">Começar</p>
+    <h2 class="disp">Vinte minutos, com a sua agenda aberta na tela</h2>
+    <p class="lede" style="margin-top: 16px;">A gente levanta sua taxa de falta e mostra as rotinas funcionando de verdade — não slide. Se não fizer sentido para a sua clínica, a gente diz na hora e não insiste.</p>
     <div class="acoes">
-      <!-- CONTATO: troque pelo numero real, no formato 55DDDNUMERO -->
-      <a class="botao" href="https://wa.me/5500000000000?text=Oi!%20Vim%20pelo%20site." rel="noopener">Chamar no WhatsApp</a>
-      <a class="botao botao-vazado" href="mailto:contato@exemplo.com.br">Mandar um e-mail</a>
+      <!-- CONTATO: troque pelo número real, no formato 55DDDNUMERO -->
+      <a class="botao" href="https://wa.me/5500000000000?text=Oi!%20Quero%20medir%20a%20taxa%20de%20falta%20da%20minha%20cl%C3%ADnica." rel="noopener">Chamar no WhatsApp</a>
+      <a class="botao botao-vazado" href="mailto:contato@exemplo.com.br?subject=Medi%C3%A7%C3%A3o%20da%20agenda">Mandar um e-mail</a>
     </div>
+    <p class="nota-acao">Sem formulário, sem cadastro e sem sequência de e-mails atrás de você. A medição é gratuita mesmo que você não contrate nada.</p>
   </div>
 </section>
 
@@ -166,13 +202,22 @@
 <footer class="rodape">
   <div class="rail">
     <div>
-      <p><strong>Pele &amp; Código</strong> — cuidado clínico e software na mesma casa.</p>
+      <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
+      <p>Cuidado clínico e software na mesma casa.</p>
       <p>Conteúdo informativo. Não substitui orientação do COREN do seu estado, consulta jurídica nem orientação contábil.</p>
     </div>
-    <div>
-      <p><a href="./clinicas.html">Para clínicas</a></p>
-      <p><a href="./enfermeiras.html">Para enfermeiras</a></p>
-      <p><a href="./especialistas.html">Para especialistas</a></p>
+    <div class="coluna">
+      <span class="tit">Para clínicas</span>
+      <a href="#rotinas">O que roda</a>
+      <a href="#garantia">A garantia</a>
+      <a href="#preco">Preço</a>
+      <a href="#comecar">Medir minha agenda</a>
+    </div>
+    <div class="coluna">
+      <span class="tit">Outras frentes</span>
+      <a href="./calculadora.html">Calculadora de preço</a>
+      <a href="./enfermeiras.html">Para enfermeiras</a>
+      <a href="./especialistas.html">Para especialistas</a>
     </div>
   </div>
 </footer>

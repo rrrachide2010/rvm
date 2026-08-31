@@ -3,27 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pele &amp; Código · para enfermeiras entrando em estética</title>
-<meta name="description" content="A calculadora de precificação e o mapa do que a enfermeira pode fazer legalmente em estética. Entre na lista e receba quando abrir.">
+<title>Pele &amp; Código · quanto cobrar, e o que você pode fazer</title>
+<meta name="description" content="A calculadora que mostra se o seu preço paga suas contas, e o mapa do que a enfermeira pode fazer legalmente em estética. Gratuito, sem cadastro.">
 <meta name="robots" content="index,follow">
-<meta property="og:title" content="Pele &amp; Código · para enfermeiras entrando em estética">
-<meta property="og:description" content="Quanto cobrar, e o que você pode fazer legalmente. Duas perguntas, uma resposta clara.">
+<meta property="og:title" content="Seu preço paga suas contas?">
+<meta property="og:description" content="Descubra em dois minutos, de graça e sem cadastro.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500&display=swap">
+<link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./estilo.css">
 </head>
 <body>
+
+<div class="anuncio">A calculadora é gratuita e o cálculo acontece no seu navegador. <a href="./calculadora.html">Abrir agora →</a></div>
 
 <header class="topo">
   <div class="rail">
     <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
     <nav>
-      <a href="./clinicas.html" class="opcional">Para clínicas</a>
-      <a href="./enfermeiras.html" class="opcional ativo">Para enfermeiras</a>
+      <a href="./calculadora.html" class="opcional">Calculadora</a>
+      <a href="#vem" class="opcional">O que vem aí</a>
       <a href="./especialistas.html" class="opcional">Para especialistas</a>
-      <a href="#lista">Entrar na lista</a>
+      <a class="botao" href="./calculadora.html">Calcular meu preço</a>
     </nav>
   </div>
 </header>
@@ -32,32 +35,50 @@
 
 <section class="faixa heroi">
   <div class="rail">
-    <p class="eyebrow">Para enfermeiras entrando em estética</p>
-    <h1>Ninguém te ensinou <em>quanto cobrar</em>. Nem o que você pode fazer.</h1>
-    <p class="lede">Duas perguntas que travam quase todo mundo no começo — e nenhuma delas se resolve com mais um curso de procedimento. A primeira resposta já está pronta.</p>
-    <div class="acoes">
-      <a class="botao" href="./calculadora.html">Calcular meu preço</a>
-      <a class="botao botao-vazado" href="#lista">Avisar quando sair o resto</a>
+    <div class="heroi-grade">
+      <div>
+        <p class="olho">Para enfermeiras entrando em estética</p>
+        <h1 class="disp">O seu preço paga as suas contas?</h1>
+        <p class="lede" style="margin-top: 20px;">A maioria descobre tarde que não — que o pacote promocional dava prejuízo, e que a hora que a sala fica vazia estava sendo paga por quem apareceu. Dá para saber em dois minutos.</p>
+        <div class="acoes">
+          <a class="botao" href="./calculadora.html">Calcular meu preço agora</a>
+          <a class="botao botao-vazado" href="#vem">Ver o que mais vem</a>
+        </div>
+        <p class="nota-acao">Gratuita, sem cadastro. O cálculo roda no seu navegador — nenhum número sai do seu aparelho.</p>
+      </div>
+      <div>
+        <div class="selo">
+          <span class="numero">R$ 83</span>
+          <span class="risco"></span>
+          <span class="rotulo">é o custo real de uma sessão cujo insumo custa R$ 45, quando a agenda está 55% cheia. A diferença é a sala vazia.</span>
+        </div>
+      </div>
     </div>
-    <p class="nota-acao">A calculadora é gratuita e não pede cadastro. O cálculo acontece no seu navegador.</p>
   </div>
 </section>
 
-<section class="faixa faixa-clara" id="ferramentas">
+<div class="marquise">
+  <span>Sem cadastro</span> <i>·</i>
+  <span>Cálculo no seu navegador</span> <i>·</i>
+  <span>Nenhum dado enviado</span> <i>·</i>
+  <span>A conta aberta na página</span>
+</div>
+
+<section class="faixa faixa-clara" id="vem">
   <div class="rail">
-    <p class="eyebrow">O que estamos construindo</p>
-    <h2>Ferramentas, não mais um PDF</h2>
-    <p class="sub">Material salvo é material esquecido. Estas duas coisas você usa de novo toda vez que precisar decidir.</p>
+    <p class="olho">O que estamos construindo</p>
+    <h2 class="disp">Ferramenta, não mais um PDF</h2>
+    <p class="sub" style="margin-top: 16px;">Material salvo é material esquecido. Estas três coisas você usa de novo toda vez que precisar decidir alguma coisa.</p>
 
     <div class="grade">
       <div class="cartao">
         <span class="quando">No ar agora</span>
         <h3>Calculadora de precificação</h3>
-        <p>Você põe insumo, tempo de sala, custo fixo, imposto e quanto quer tirar por mês. Ela devolve seu preço mínimo, seu preço ideal e quantos atendimentos fecham a conta. A maioria descobre aqui que o pacote promocional dava prejuízo.</p>
-        <p style="margin-top:14px"><a href="./calculadora.html"><strong>Abrir a calculadora</strong></a> — gratuita, sem cadastro.</p>
+        <p>Preço mínimo, preço ideal e quantos atendimentos por mês fecham a conta — com o rateio da hora ociosa, que é o custo que quase ninguém coloca na planilha.</p>
+        <p style="margin-top: 12px;"><a href="./calculadora.html"><strong>Abrir a calculadora →</strong></a></p>
       </div>
       <div class="cartao">
-        <span class="quando">Em seguida</span>
+        <span class="quando">Em construção</span>
         <h3>Mapa do que é permitido</h3>
         <p>O que está em vigor, o que está suspenso e o que muda conforme a regional — com a fonte e a data em cada linha. A disputa entre os conselhos não para, então o mapa é atualizado, não publicado uma vez.</p>
       </div>
@@ -70,37 +91,35 @@
   </div>
 </section>
 
-<section class="faixa" id="quem">
+<section class="faixa faixa-escura">
   <div class="rail rail-estreito">
-    <p class="eyebrow">Quem está fazendo</p>
-    <h2>Estamos atravessando isso agora, junto com você</h2>
-    <p>Somos dois: ela está no último ano de enfermagem e quer atuar em estética; ele é desenvolvedor. Cada dúvida que aparece nesse caminho — qual pós escolher, o que o COREN responde, quanto custa abrir — vira pesquisa, e a pesquisa vira ferramenta.</p>
-    <p>Isso quer dizer uma coisa importante sobre o que você vai encontrar aqui: <strong>nada de protocolo clínico ou de ensinar procedimento</strong>. Isso exige título de especialista e prática, e ela ainda não tem nem uma coisa nem outra. O que temos a oferecer é o trabalho de organizar o que é confuso — legislação, dinheiro, documentação, abertura, divulgação.</p>
+    <p class="olho">Quem está fazendo</p>
+    <h2 class="disp">Estamos atravessando isso agora, junto com você</h2>
+    <p class="lede" style="margin-top: 16px;">Ela está no último ano de enfermagem e quer atuar em estética; ele é desenvolvedor. Cada dúvida que aparece no caminho vira pesquisa, e a pesquisa vira ferramenta.</p>
+    <p>Isso quer dizer uma coisa importante sobre o que você encontra aqui: <strong>nada de protocolo clínico ou de ensinar procedimento.</strong> Isso exige título de especialista e prática, e ela ainda não tem nem uma coisa nem outra. O que temos a oferecer é o trabalho de organizar o que é confuso — legislação, dinheiro, documentação, abertura e divulgação.</p>
     <p>Quando houver conteúdo clínico aqui, ele virá assinado por uma especialista com registro e casos reais. Não por nós.</p>
   </div>
 </section>
 
-<section class="faixa faixa-clara" id="lista">
+<section class="faixa faixa-oliva" id="lista">
   <div class="rail rail-estreito">
-    <p class="eyebrow">Lista de espera</p>
-    <h2>Te avisamos quando sair a próxima</h2>
-    <p class="sub">O mapa do que é permitido é o próximo. Uma mensagem quando estiver no ar, e depois só quando tiver algo que valha o seu tempo.</p>
+    <p class="olho">Lista de espera</p>
+    <h2 class="disp">Te avisamos quando o mapa do escopo sair</h2>
+    <p class="lede" style="margin-top: 16px;">Uma mensagem quando estiver no ar, e depois só quando tiver algo que valha o seu tempo. Sair da lista é um clique.</p>
 
-    <!-- FORMULARIO: aponte o action para o seu endpoint (Formspree, Resend,
-         Edge Function do Supabase). Enquanto nao houver, o campo fica desabilitado
-         para nao coletar contato que se perderia. -->
+    <!-- FORMULARIO: aponte o action para o seu endpoint (Formspree, Resend, Edge
+         Function do Supabase). Enquanto não houver, os campos ficam desabilitados
+         para não coletar contato que se perderia. -->
     <form class="formulario" method="post" action="#" aria-describedby="aviso-form">
-      <label>
-        Seu nome
-        <input type="text" name="nome" placeholder="Como quer ser chamada" autocomplete="name" disabled>
-      </label>
-      <label>
-        Seu e-mail
-        <input type="email" name="email" placeholder="voce@email.com" autocomplete="email" disabled>
-      </label>
+      <label>Seu nome<input type="text" name="nome" placeholder="Como quer ser chamada" autocomplete="name" disabled></label>
+      <label>Seu e-mail<input type="email" name="email" placeholder="voce@email.com" autocomplete="email" disabled></label>
       <button class="botao" type="submit" disabled>Entrar na lista</button>
-      <p class="nota-acao" id="aviso-form">O formulário ainda não está conectado — é a próxima coisa a ser ligada.</p>
+      <p class="nota-acao" id="aviso-form">O formulário ainda não está conectado — é a próxima coisa a ser ligada. Enquanto isso, a calculadora não pede nada de você.</p>
     </form>
+
+    <div class="acoes">
+      <a class="botao botao-vazado" href="./calculadora.html">Enquanto isso, calcular meu preço</a>
+    </div>
   </div>
 </section>
 
@@ -109,12 +128,20 @@
 <footer class="rodape">
   <div class="rail">
     <div>
-      <p><strong>Pele &amp; Código</strong> — ferramentas para quem está entrando na enfermagem estética.</p>
-      <p>Conteúdo informativo. Não substitui orientação do COREN do seu estado nem consulta jurídica.</p>
+      <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
+      <p>Ferramentas para quem está entrando na enfermagem estética.</p>
+      <p>Conteúdo informativo. Não substitui orientação do COREN do seu estado, consulta jurídica nem orientação contábil.</p>
     </div>
-    <div>
-      <p><a href="./clinicas.html">Para clínicas</a></p>
-      <p><a href="#lista">Entrar na lista</a></p>
+    <div class="coluna">
+      <span class="tit">Ferramentas</span>
+      <a href="./calculadora.html">Calculadora de preço</a>
+      <a href="#vem">Mapa do escopo</a>
+      <a href="#lista">Entrar na lista</a>
+    </div>
+    <div class="coluna">
+      <span class="tit">Outras frentes</span>
+      <a href="./">Para clínicas</a>
+      <a href="./especialistas.html">Para especialistas</a>
     </div>
   </div>
 </footer>

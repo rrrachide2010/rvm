@@ -97,33 +97,41 @@ src/tipos.ts       tipos compartilhados
 `site/` é o site da empresa: HTML e CSS a mão, sem build. Publica apontando a
 pasta para qualquer host estático (no Vercel, Root Directory = `site`).
 
-Uma empresa, três públicos que compram por razões opostas. A estrutura que faz
-isso funcionar é: **a raiz posiciona, as internas convertem.**
+**A raiz é a página de venda do serviço para clínicas** — não uma página
+institucional. Foi uma correção deliberada: a home anterior falava sobre nós no
+herói e pedia ao visitante que escolhesse um caminho antes de dar qualquer
+motivo para ficar. Uma home que faz escolher não vende nada.
 
 | Página | Público | Papel |
 | --- | --- | --- |
-| `index.html` | quem chega sem contexto | A empresa: tese, estágio real, quem somos, e três portas rotuladas por *quem você é* |
-| `clinicas.html` | dona de clínica | Landing do serviço de agenda. Destino do e-mail de auditoria |
-| `enfermeiras.html` | enfermeira entrando em estética | As ferramentas. Destino do link da bio |
+| `index.html` | dona de clínica | Vende o serviço de agenda. Gancho, garantia, preço aberto e um CTA repetido |
+| `enfermeiras.html` | enfermeira entrando | As ferramentas. Destino do link da bio |
 | `calculadora.html` | idem | A ferramenta que já existe |
-| `especialistas.html` | enfermeira com título e casos | A proposta de co-produção. É por aqui que a parceria clínica entra |
+| `especialistas.html` | enfermeira com título | Proposta de co-produção |
 
-A home é a única página que faz o visitante escolher um caminho — e só funciona
-porque os três públicos se reconhecem na hora ("você tem uma clínica" / "você é
-enfermeira" / "você já é especialista"). Cada porta continua sendo uma landing
-de propósito único; não misture ofertas dentro delas.
+As outras duas frentes aparecem numa faixa da home, com gancho próprio — não
+como um menu de portas iguais.
+
+### O sistema visual
+
+`tokens.css` (gerado) carrega as variáveis; `estilo.css` só as consome. **Não
+escreva hex em `estilo.css`** — mexa em `tokens.json` e rode `npm run tokens`.
+
+Isso torna a direção visual reversível: trocar a paleta inteira é editar o JSON
+e regerar, sem tocar em nenhuma página.
 
 Antes de publicar, três marcações no HTML:
 
-- **`<!-- MARCA -->`** — "Pele &amp; Código" é provisório. Está no `<title>`, no
+- **`MARCA`** — "Pele &amp; Código" é provisório; aparece no `title`, no
   cabeçalho e no rodapé de cada página.
-- **`<!-- CONTATO -->`** — o `wa.me/55...` e o e-mail estão com placeholder.
-- **`<!-- FORMULARIO -->`** — a lista de espera está desabilitada de propósito,
-  para não coletar contato sem endpoint que receba.
+- **`CONTATO`** — o `wa.me/55...` e o e-mail estão com placeholder.
+- **`FORMULARIO`** — a lista de espera está desabilitada de propósito, para não
+  coletar contato sem endpoint que receba.
 
-O `robots.txt` bloqueia indexação enquanto o contato for de exemplo: um dono de
-clínica achando a página no Google cairia num número que não existe. O arquivo
-traz escrito o que trocar antes de lançar.
+E um bloco `.reservado` na home guarda o espaço do primeiro case, escrito como
+espaço vazio assumido em vez de depoimento inventado.
+
+O `robots.txt` bloqueia indexação enquanto o contato for de exemplo.
 
 ### Calculadora de precificação
 

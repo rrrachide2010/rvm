@@ -4,105 +4,107 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pele &amp; Código · calculadora de precificação para enfermagem estética</title>
-<meta name="description" content="Descubra seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta. Cálculo feito no seu navegador — nada é enviado.">
+<meta name="description" content="Seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta. Gratuita, sem cadastro, calculada no seu navegador.">
 <meta name="robots" content="index,follow">
+<meta property="og:title" content="Quanto custa, de verdade, o seu atendimento?">
+<meta property="og:description" content="Descubra em dois minutos. Sem cadastro, sem enviar nada.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500&display=swap">
+<link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./estilo.css">
 <style>
-/* ---- calculadora: layout de duas colunas, painel de resultado grudento ---- */
-.calc { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; align-items: start; margin-top: 40px; }
-@media (max-width: 900px) { .calc { grid-template-columns: 1fr; gap: 32px; } }
+.calc { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: var(--spacing-48); align-items: start; margin-top: var(--spacing-32); }
+@media (max-width: 940px) { .calc { grid-template-columns: 1fr; gap: var(--spacing-32); } }
 
-fieldset { border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px 22px; margin: 0 0 20px; background: var(--surface); }
-legend {
-  font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .11em;
-  text-transform: uppercase; color: var(--rose); padding: 0 8px; margin-left: -8px;
-}
-.campos { display: grid; gap: 16px; }
-.campo { display: grid; gap: 5px; }
-.campo > span { font-weight: 700; font-size: 15px; }
-.campo em { font-style: normal; font-weight: 400; color: var(--muted); font-size: 13.5px; display: block; }
-.entrada { display: flex; align-items: center; gap: 8px; }
-.entrada .unidade { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); white-space: nowrap; }
+fieldset { border: 1px solid var(--color-dusty-rose); border-radius: var(--radius-2xl); padding: var(--spacing-24); margin: 0 0 var(--spacing-20); background: var(--surface-light-card); }
+legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-coral-texto); padding: 0 var(--spacing-8); }
+.campos { display: grid; gap: var(--spacing-20); }
+.campo { display: grid; gap: 6px; }
+.campo > span { font-weight: 700; font-size: 16px; }
+.campo em { font-style: normal; font-weight: 400; color: var(--color-olive-grove); font-size: 14px; display: block; }
+.entrada { display: flex; align-items: center; gap: var(--spacing-8); }
+.entrada .unidade { font-size: 14px; color: var(--color-olive-grove); white-space: nowrap; }
 .campo input {
-  font: inherit; font-size: 16px; font-variant-numeric: tabular-nums;
-  padding: 9px 12px; border: 1px solid var(--line-2); border-radius: 6px;
-  background: var(--ground); color: var(--ink); width: 100%; max-width: 160px;
+  font: inherit; font-size: 17px; font-variant-numeric: tabular-nums;
+  padding: 11px var(--spacing-16); border: 1px solid var(--color-dusty-rose);
+  border-radius: var(--radius-full); background: var(--surface-canvas);
+  color: var(--color-ghia-burgundy); width: 100%; max-width: 170px; min-height: 46px;
 }
-.campo input:focus { background: var(--surface); }
+.campo input:focus { background: var(--surface-light-card); }
 
-.painel { position: sticky; top: 88px; border: 1px solid var(--accent); border-radius: 10px; background: var(--surface); overflow: hidden; box-shadow: var(--shadow); }
-@media (max-width: 900px) { .painel { position: static; } }
-.painel-topo { background: var(--accent-soft); padding: 20px 24px; border-bottom: 1px solid var(--accent); }
-.painel-topo .rot { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); display: block; margin-bottom: 6px; }
-.painel-topo .grande { font-family: Newsreader, Georgia, serif; font-size: 44px; line-height: 1; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
-.painel-topo p { font-size: 14px; color: var(--accent-ink); margin: 10px 0 0; max-width: none; }
-.linhas { padding: 6px 24px 18px; }
-.linha { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.painel { position: sticky; top: 88px; border-radius: var(--radius-3xl); background: var(--color-ghia-burgundy); color: var(--color-bone-white); overflow: hidden; }
+@media (max-width: 940px) { .painel { position: static; } }
+.painel-topo { padding: var(--spacing-28) var(--spacing-32); border-bottom: 1px solid var(--color-coral-texto); }
+.painel-topo .rot { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-dusty-rose); margin-bottom: var(--spacing-8); }
+.painel-topo .grande { font-family: var(--font-display); font-size: 56px; line-height: 1; font-variant-numeric: tabular-nums; }
+.painel-topo p { font-size: 15px; color: var(--color-dusty-rose); margin: var(--spacing-12) 0 0; max-width: none; }
+.linhas { padding: var(--spacing-8) var(--spacing-32) var(--spacing-20); margin: 0; }
+.linha { display: flex; justify-content: space-between; align-items: baseline; gap: var(--spacing-16); padding: 13px 0; border-bottom: 1px solid rgba(223, 202, 200, .22); }
 .linha:last-child { border-bottom: none; }
-.linha dt { font-size: 14.5px; color: var(--ink-2); }
-.linha dt small { display: block; color: var(--muted); font-size: 12.5px; }
-.linha dd { margin: 0; font-family: "IBM Plex Mono", monospace; font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.linha dd.alerta { color: var(--rose); }
-.linha dd.bom { color: var(--accent); }
+.linha dt { font-size: 15px; }
+.linha dt small { display: block; color: var(--color-dusty-rose); font-size: 13px; }
+.linha dd { margin: 0; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.linha dd.alerta { color: var(--color-limoncello-yellow); }
+.linha dd.bom { color: var(--color-limoncello-yellow); }
 
-.veredito { padding: 16px 24px; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.55; }
-.veredito.ruim { background: var(--rose-soft); color: var(--rose); }
-.veredito.ok { background: var(--accent-soft); color: var(--accent-ink); }
-.veredito strong { display: block; margin-bottom: 3px; }
+.veredito { padding: var(--spacing-20) var(--spacing-32); font-size: 15.5px; line-height: 1.5; }
+.veredito.ruim { background: var(--color-coral-cta-legivel); color: var(--color-bone-white); }
+.veredito.ok { background: var(--color-limoncello-yellow); color: var(--color-ghia-burgundy); }
+.veredito strong { display: block; margin-bottom: 4px; }
 
-.privado { font-size: 13.5px; color: var(--muted); margin-top: 14px; display: flex; gap: 8px; align-items: baseline; }
-/* No celular o painel fica abaixo dos campos: sem esta barra, a pessoa
-   edita sem ver o numero mudar — que e o valor inteiro da ferramenta. */
+.privado { font-size: 15px; color: var(--color-olive-grove); margin-top: var(--spacing-16); }
+
+.explica dt { font-weight: 700; margin-top: var(--spacing-20); font-size: 17px; }
+.explica dd { margin: 6px 0 0; color: var(--color-olive-grove); font-size: 16px; max-width: 66ch; }
+
+/* No celular o painel fica abaixo dos campos: sem esta barra, a pessoa edita
+   sem ver o número mudar — que é o valor inteiro da ferramenta. */
 .barra { display: none; }
-@media (max-width: 900px) {
+@media (max-width: 940px) {
   .barra {
     display: flex; position: fixed; inset: auto 0 0 0; z-index: 20;
-    align-items: center; justify-content: space-between; gap: 16px;
-    padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
-    background: var(--accent); color: #fff; text-decoration: none;
-    box-shadow: 0 -6px 20px -12px rgba(20,32,31,.5);
+    align-items: center; justify-content: space-between; gap: var(--spacing-16);
+    padding: 12px var(--spacing-20) calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--color-ghia-burgundy); color: var(--color-bone-white); text-decoration: none;
   }
-  .barra .rot { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; opacity: .85; display: block; }
-  .barra .val { font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1; font-variant-numeric: tabular-nums; }
-  .barra .ir { font-size: 14px; font-weight: 700; white-space: nowrap; }
-  body { padding-bottom: 76px; }
+  .barra .rot { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-dusty-rose); }
+  .barra .val { font-family: var(--font-display); font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .barra .ir { font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--color-limoncello-yellow); }
+  body { padding-bottom: 80px; }
 }
-.explica dt { font-weight: 700; margin-top: 16px; font-size: 15.5px; }
-.explica dd { margin: 4px 0 0; color: var(--ink-2); font-size: 15px; max-width: 66ch; }
 </style>
 </head>
 <body>
+
+<div class="anuncio">Gratuita e sem cadastro. Nenhum número sai do seu aparelho.</div>
 
 <header class="topo">
   <div class="rail">
     <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
     <nav>
-      <a href="./clinicas.html" class="opcional">Para clínicas</a>
-      <a href="./enfermeiras.html" class="opcional ativo">Para enfermeiras</a>
-      <a href="./especialistas.html" class="opcional">Para especialistas</a>
-      <a href="#entender">Como é calculado</a>
+      <a href="#entender" class="opcional">Como é calculado</a>
+      <a href="./enfermeiras.html" class="opcional">Para enfermeiras</a>
+      <a class="botao" href="#resultado">Ver meu resultado</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-<section class="faixa heroi" style="padding-bottom:24px">
+<section class="faixa" style="padding-bottom: var(--spacing-24);">
   <div class="rail">
-    <p class="eyebrow">Ferramenta gratuita</p>
-    <h1>Quanto <em>custa</em> o seu atendimento?</h1>
-    <p class="lede">Preencha o que você já sabe. A conta devolve seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta — incluindo a hora que você passa sem cliente, que é o custo que quase ninguém coloca na planilha.</p>
-    <p class="privado"><span aria-hidden="true">🔒</span> <span>Tudo é calculado no seu navegador. Nenhum número sai do seu aparelho, e não há cadastro.</span></p>
+    <p class="olho">Ferramenta gratuita</p>
+    <h1 class="disp">Quanto custa, de verdade, o seu atendimento?</h1>
+    <p class="lede" style="margin-top: 18px; max-width: 62ch;">Preencha o que você já sabe. A conta devolve seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta — incluindo a hora que você passa sem cliente, que é o custo que quase ninguém coloca na planilha.</p>
+    <p class="privado">🔒 Tudo é calculado no seu navegador. Nenhum número sai do seu aparelho, e não há cadastro.</p>
   </div>
 </section>
 
-<section class="faixa" style="padding-top:12px">
+<section class="faixa" style="padding-top: 0;">
   <div class="rail">
     <form class="calc" id="calc" novalidate>
-
       <div>
         <fieldset>
           <legend>O atendimento</legend>
@@ -116,7 +118,7 @@ legend {
               <span class="entrada"><input type="number" id="duracao" value="60" min="5" step="5" inputmode="numeric"><span class="unidade">minutos</span></span>
             </label>
             <label class="campo">
-              <span>Preço que você cobra hoje <em>Deixe em branco se ainda não cobra nada.</em></span>
+              <span>Preço que você cobra hoje <em>Deixe zerado se ainda não cobra nada.</em></span>
               <span class="entrada"><span class="unidade">R$</span><input type="number" id="atual" value="150" min="0" step="1" inputmode="decimal"></span>
             </label>
           </div>
@@ -152,7 +154,7 @@ legend {
               <span class="entrada"><span class="unidade">R$</span><input type="number" id="retirada" value="4000" min="0" step="100" inputmode="decimal"></span>
             </label>
             <label class="campo">
-              <span>Carga tributária sobre o faturamento <em>Simples Nacional costuma começar perto de 6%. Confirme com seu contador.</em></span>
+              <span>Carga tributária sobre o faturamento <em>O Simples costuma começar perto de 6%. Confirme com seu contador.</em></span>
               <span class="entrada"><input type="number" id="imposto" value="6" min="0" max="60" step="0.5" inputmode="decimal"><span class="unidade">%</span></span>
             </label>
           </div>
@@ -163,7 +165,7 @@ legend {
         <div class="painel-topo">
           <span class="rot">Preço ideal por sessão</span>
           <span class="grande" id="r-ideal">—</span>
-          <p id="r-ideal-nota">Cobre custos, impostos e a sua retirada.</p>
+          <p>Cobre custos, impostos e a sua retirada.</p>
         </div>
         <dl class="linhas">
           <div class="linha"><dt>Preço mínimo <small>abaixo disso você paga para trabalhar</small></dt><dd id="r-minimo">—</dd></div>
@@ -174,34 +176,41 @@ legend {
         </dl>
         <div class="veredito" id="r-veredito"></div>
       </aside>
-
     </form>
   </div>
 </section>
 
 <section class="faixa faixa-clara" id="entender">
   <div class="rail rail-estreito">
-    <p class="eyebrow">Como a conta é feita</p>
-    <h2>Sem caixa-preta</h2>
-    <p class="sub">Você merece saber de onde sai cada número, até para discutir com seu contador.</p>
+    <p class="olho">Como a conta é feita</p>
+    <h2 class="disp">Sem caixa-preta</h2>
+    <p class="sub" style="margin-top: 14px;">Você merece saber de onde sai cada número, até para discutir com seu contador.</p>
     <dl class="explica">
       <dt>Custo real da sessão</dt>
       <dd>Insumos mais a fatia do custo fixo que aquela sessão carrega. E a fatia depende da ocupação: se metade dos horários fica vazia, cada cliente que aparece paga o aluguel dos horários que ninguém ocupou. É por isso que agenda furada encarece o atendimento de quem comparece.</dd>
-
       <dt>Preço mínimo</dt>
       <dd>O preço em que a receita, já descontado o imposto, empata exatamente com o custo real. Nele você não perde dinheiro e também não ganha nada — sua remuneração é zero. É um piso, nunca um preço.</dd>
-
       <dt>Preço ideal</dt>
       <dd>O preço em que a conta fecha <em>com</em> a sua retirada. Some custo real e sua remuneração rateada por sessão, e divida pelo que sobra depois do imposto. É o número que responde de verdade "quanto eu cobro".</dd>
-
       <dt>Ponto de equilíbrio</dt>
       <dd>Quantos atendimentos por mês você precisa fazer, no preço que cobra hoje, só para cobrir os custos fixos. Se esse número for maior que a sua capacidade, nenhum esforço de agenda resolve — o preço é que está errado.</dd>
-
       <dt>O que a conta não inclui</dt>
       <dd>Investimento inicial em equipamento (só entra se você lançar a parcela no custo fixo), reserva para férias e imprevistos, e o custo de aquisição de cliente. Trate o resultado como piso da conversa, não como teto.</dd>
     </dl>
-    <div class="note" style="border-left:3px solid var(--warn); background:var(--warn-soft); padding:14px 18px; border-radius:0 6px 6px 0; margin-top:26px; max-width:66ch">
-      <p style="margin:0; font-size:15px; color:var(--ink-2)">Esta ferramenta é informativa e não substitui orientação contábil. A alíquota real depende do seu enquadramento, do anexo do Simples e do Fator R — confirme com seu contador antes de decidir preço.</p>
+    <div class="reservado" style="border-style: solid; border-width: 1px;">
+      Esta ferramenta é informativa e não substitui orientação contábil. A alíquota real depende do seu enquadramento, do anexo do Simples e do Fator R — confirme com seu contador antes de decidir preço.
+    </div>
+  </div>
+</section>
+
+<section class="faixa faixa-oliva">
+  <div class="rail rail-estreito">
+    <p class="olho">Descobriu que a agenda vazia é o problema?</p>
+    <h2 class="disp">Ela também tem conserto</h2>
+    <p class="lede" style="margin-top: 16px;">Se o seu preço só fecha com a sala cheia, o próximo passo não é reajustar — é parar de perder horário. É exatamente isso que a gente instala em clínicas de estética, com garantia de queda na taxa de falta.</p>
+    <div class="acoes">
+      <a class="botao" href="./">Ver como a agenda para de furar</a>
+      <a class="botao botao-vazado" href="./enfermeiras.html">Ver as outras ferramentas</a>
     </div>
   </div>
 </section>
@@ -216,12 +225,14 @@ legend {
 <footer class="rodape">
   <div class="rail">
     <div>
-      <p><strong>Pele &amp; Código</strong> — ferramentas para quem está entrando na enfermagem estética.</p>
+      <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
       <p>Cálculo feito no navegador. Nada é enviado nem armazenado fora do seu aparelho.</p>
     </div>
-    <div>
-      <p><a href="./enfermeiras.html">Para enfermeiras</a></p>
-      <p><a href="./clinicas.html">Para clínicas</a></p>
+    <div class="coluna">
+      <span class="tit">Outras frentes</span>
+      <a href="./enfermeiras.html">Para enfermeiras</a>
+      <a href="./">Para clínicas</a>
+      <a href="./especialistas.html">Para especialistas</a>
     </div>
   </div>
 </footer>
@@ -231,7 +242,7 @@ legend {
   "use strict";
 
   const CAMPOS = ["insumos","duracao","atual","dias","horas","ocupacao","fixo","retirada","imposto"];
-  const CHAVE = "retorno.calculadora.v1";
+  const CHAVE = "pelecodigo.calculadora.v1";
 
   const el = (id) => document.getElementById(id);
   const dinheiro = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
@@ -258,19 +269,15 @@ legend {
     const sessoes = Math.max(1, capacidade * ocupacao);
 
     // A hora ociosa nao desaparece: ela e rateada entre quem comparece.
-    const fixoPorSessao = fixo / sessoes;
-    const custoReal = insumos + fixoPorSessao;
+    const custoReal = insumos + fixo / sessoes;
 
     // Receita liquida por sessao = preco * (1 - imposto). Igualando ao custo:
     const liquido = 1 - imposto;
     const precoMinimo = custoReal / liquido;
     const precoIdeal = (custoReal + retirada / sessoes) / liquido;
 
-    // Ponto de equilibrio no preco praticado hoje: quantas sessoes cobrem o fixo.
     const margemUnitaria = atual * liquido - insumos;
     const equilibrio = margemUnitaria > 0 ? fixo / margemUnitaria : null;
-
-    // Quanto sobra de fato no fim do mes, no preco de hoje.
     const sobra = sessoes * margemUnitaria - fixo;
 
     el("r-ideal").textContent = dinheiro.format(precoIdeal);
@@ -292,21 +299,19 @@ legend {
     sob.textContent = dinheiro.format(sobra);
     sob.className = sobra < 0 ? "alerta" : sobra >= retirada ? "bom" : "";
 
-    // O veredito e a parte que a pessoa le primeiro: precisa ser direto.
     const v = el("r-veredito");
     if (atual <= 0) {
       v.className = "veredito ok";
       v.innerHTML = "<strong>Você ainda não cobra nada.</strong> Comece pelo preço ideal acima — e note que ele já embute a agenda vazia que você informou.";
     } else if (atual < precoMinimo) {
-      const falta = Math.round(((precoMinimo - atual) / atual) * 100);
+      const falta = Math.max(1, Math.round(((precoMinimo - atual) / atual) * 100));
       v.className = "veredito ruim";
       v.innerHTML = "<strong>Seu preço está abaixo do mínimo.</strong> Faltam " + falta + "% só para empatar. Hoje cada atendimento consome dinheiro do seu bolso.";
     } else if (atual < precoIdeal) {
       const falta = Math.max(1, Math.round(((precoIdeal - atual) / atual) * 100));
       // O que falta e o deficit contra a retirada, nao a retirada inteira:
       // a sobra atual ja cobre parte dela.
-      const deficit = retirada - sobra;
-      const extras = margemUnitaria > 0 ? Math.ceil(deficit / margemUnitaria) : null;
+      const extras = margemUnitaria > 0 ? Math.ceil((retirada - sobra) / margemUnitaria) : null;
       v.className = "veredito ruim";
       v.innerHTML = "<strong>Você cobre os custos, mas não a sua retirada.</strong> Um reajuste de " + falta + "% fecharia a conta"
         + (extras !== null && extras > 0
