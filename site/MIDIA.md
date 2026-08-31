@@ -38,11 +38,11 @@ flash, estética de banco de imagens, colagem, moldura.
 
 | Cód | Onde | Proporção | Prompt (some a base de estilo acima) |
 | --- | --- | --- | --- |
-| **F1** | Home, herói — arco central (mais alto) | 3:4 retrato | Recepção de uma clínica de estética pequena e bem cuidada, balcão de madeira clara, uma planta de folhas largas ao lado, cadeira de espera com estofado bege, parede off-white, luz da manhã entrando pela esquerda |
+| **F1** | Home, herói — arco central (mais alto) | **4:5** | Recepção de uma clínica de estética pequena e bem cuidada, balcão de madeira clara, uma planta de folhas largas ao lado, cadeira de espera com estofado bege, parede off-white, luz da manhã entrando pela esquerda |
 | **F2** | Home, "o que roda" | 4:3 paisagem | Celular apoiado sobre uma mesa de madeira clara ao lado de uma xícara, tela ligada mostrando uma conversa de mensagens sem texto legível, foco raso no aparelho |
-| **F3** | Home, herói — arco da esquerda | 3:4 retrato | Agenda de papel aberta sobre bancada clara, caneta ao lado, páginas com marcações genéricas ilegíveis, sombra suave de janela |
+| **F3** | Home, herói — arco da esquerda | **4:5** | Agenda de papel aberta sobre bancada clara, caneta ao lado, páginas com marcações genéricas ilegíveis, sombra suave de janela |
 | **F4** | Home, "a operação" — foto larga única | 16:9 | Bancada de atendimento organizada, frascos âmbar e brancos alinhados, toalha dobrada, tudo em neutros quentes, sem rótulos legíveis |
-| **F5** | Home, herói — arco da direita (some no celular) | 3:4 retrato | Maca de atendimento preparada com lençol branco e toalha dobrada, luminária de haste desligada ao lado, sala vazia e calma |
+| **F5** | Home, herói — arco da direita (some no celular) | **4:5** | Maca de atendimento preparada com lençol branco e toalha dobrada, luminária de haste desligada ao lado, sala vazia e calma |
 | **F6** | Home, quem somos | 3:4 retrato | **Foto real de vocês dois — não gerar.** Sugestão: os dois lado a lado perto de uma janela, roupa neutra, fundo liso, sorriso natural |
 | **F7** | Enfermeiras, herói — foto larga sob o texto | 4:3 paisagem | Mesa de trabalho com caderno aberto, calculadora simples, xícara de café e um vaso pequeno, madeira clara, luz de janela pela direita |
 | **F8** | Enfermeiras, quem faz | 4:3 paisagem | Pilha de livros e um caderno com marcadores coloridos sobre mesa escura, luz lateral quente, atmosfera de estudo à noite |
@@ -113,7 +113,11 @@ Para gerar cenas do zero em vídeo, mantenha a base de estilo e acrescente:
 O herói da home é centrado: olho, título, filete, texto, botões e, abaixo, três
 molduras em arco — **F3 à esquerda, F1 no centro (elevada 32px), F5 à direita**.
 As três precisam parecer da mesma sessão de fotos: mesma temperatura de luz,
-mesma altura de câmera, mesma paleta. Se só houver orçamento para uma imagem,
+mesma altura de câmera, mesma paleta.
+
+**A proporção do trio é 4:5, não 3:4** — `.arcos .foto` sobrescreve
+`.foto.retrato`, e foi medido no navegador. Gerar em 3:4 e deixar a moldura
+recortar custa cerca de 6% das laterais, então deixe margem na composição. Se só houver orçamento para uma imagem,
 gere **F1** e deixe as outras duas como moldura — o vazio é honesto, imagem
 desencontrada não é.
 
