@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 130" width="100" height="130" role="img" aria-label="Intervalo">
+  <!-- Dois arcos e o vao entre eles: o espaco entre um atendimento e o proximo.
+       Alturas diferentes de proposito — simetricos, viravam o icone de pausa.
+       A assimetria repete o trio do heroi, onde a moldura do meio sobe.
+
+       Derivado do token `radius-arco` de tokens.json.
+       O fill so vale quando o arquivo e usado como imagem (favicon). No
+       cabecalho e no rodape ele entra como mask-image, e a cor vem do CSS. -->
+  <path d="M0 130 V76 A18 18 0 0 1 36 76 V130 Z" fill="#5c4a3b"/>
+  <path d="M64 130 V52 A18 18 0 0 1 100 52 V130 Z" fill="#5c4a3b"/>
+</svg>

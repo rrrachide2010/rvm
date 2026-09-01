@@ -57,7 +57,7 @@ h3 { font-size: var(--texto-heading-sm-tamanho); line-height: 1.25; margin-botto
   font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
   color: var(--color-eucalipto); margin: 0 0 var(--spacing-16);
 }
-.faixa-escura .olho { color: var(--color-areia); }
+.faixa-escura .olho { color: var(--color-greige); }
 
 p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .lede { font-size: var(--texto-body-lg-tamanho); line-height: 1.6; max-width: 50ch; }
@@ -90,7 +90,7 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .faixa-escura .botao-vazado:hover { background: var(--color-porcelana); color: var(--color-espresso); }
 
 .nota-acao { font-size: var(--texto-small-tamanho); color: var(--color-espresso); margin: var(--spacing-16) 0 0; max-width: 48ch; }
-.faixa-escura .nota-acao { color: var(--color-areia); }
+.faixa-escura .nota-acao { color: var(--color-greige); }
 
 /* ---------- cabeçalho ---------- */
 
@@ -105,9 +105,20 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .topo .rail { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-24); min-height: 78px; }
 .marca {
   font-family: var(--font-display); font-size: 25px; color: var(--color-espresso);
-  text-decoration: none; white-space: nowrap; letter-spacing: .01em;
+  text-decoration: none; white-space: nowrap; letter-spacing: .04em;
+  display: inline-flex; align-items: center; gap: var(--spacing-12);
 }
-.marca span { color: var(--color-eucalipto); }
+
+/* O simbolo entra como mascara, nao como imagem: assim um arquivo so serve
+   ao cabecalho (espresso), ao rodape (porcelana) e ao favicon, e a cor vem
+   sempre do contexto em vez de exigir uma copia por tom. */
+.marca .sinal {
+  width: .72em; height: .94em; flex: none;
+  background: currentColor;
+  -webkit-mask: url("./marca.svg") no-repeat center / contain;
+  mask: url("./marca.svg") no-repeat center / contain;
+}
+
 .topo nav { display: flex; gap: var(--spacing-32); align-items: center; font-size: 15px; }
 .topo nav a { color: var(--color-espresso); text-decoration: none; letter-spacing: .03em; }
 .topo nav a:hover { color: var(--color-eucalipto); }
@@ -171,7 +182,7 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
   font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
   color: var(--color-eucalipto); margin-bottom: var(--spacing-4);
 }
-.faixa-escura .cartao .quando { color: var(--color-areia); }
+.faixa-escura .cartao .quando { color: var(--color-greige); }
 
 /* ---------- menu de preços ---------- */
 
@@ -185,7 +196,7 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 
 .numeros { display: flex; flex-wrap: wrap; gap: var(--spacing-48) var(--spacing-64); margin-top: var(--spacing-40); }
 .numeros .rot { display: block; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-eucalipto); margin-bottom: var(--spacing-8); }
-.faixa-escura .numeros .rot { color: var(--color-areia); }
+.faixa-escura .numeros .rot { color: var(--color-greige); }
 .numeros .val { font-family: var(--font-display); font-size: 46px; line-height: 1; color: var(--color-espresso); font-variant-numeric: tabular-nums; }
 .faixa-escura .numeros .val { color: var(--color-porcelana); }
 .numeros .obs { font-size: 14px; margin-top: var(--spacing-8); max-width: 24ch; }
@@ -252,13 +263,15 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 
 .rodape { background: var(--color-espresso); color: var(--color-greige); padding-block: var(--spacing-64) var(--spacing-80); font-size: 15px; }
 .rodape .rail { display: flex; flex-wrap: wrap; gap: var(--spacing-40) var(--spacing-64); justify-content: space-between; }
-.rodape .marca { color: var(--color-porcelana); margin-bottom: var(--spacing-16); display: inline-block; }
-.rodape .marca span { color: var(--color-areia); }
+/* inline-flex, nao inline-block: `.rodape .marca` (0,2,0) vence `.marca`
+   (0,1,0), e um inline-block aqui desalinharia o simbolo do texto. */
+.rodape .marca { color: var(--color-porcelana); margin-bottom: var(--spacing-16); display: inline-flex; }
+
 .rodape p { margin: 0 0 var(--spacing-8); max-width: 42ch; font-size: 14px; }
 .rodape a { color: var(--color-greige); text-decoration: none; }
 .rodape a:hover { color: var(--color-porcelana); }
 .rodape .coluna { display: flex; flex-direction: column; gap: var(--spacing-8); }
-.rodape .tit { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-areia); margin-bottom: var(--spacing-4); }
+.rodape .tit { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-greige); margin-bottom: var(--spacing-4); }
 
 /* ---------- movimento ----------
    Uma revelação só, ancorada na rolagem. Sem biblioteca e sem JS: onde o
@@ -434,4 +447,18 @@ body > * { position: relative; z-index: 2; }
   /* inline-flex com altura minima: o alvo chega aos 44px sem que a barra
      inteira engorde, porque o texto continua centralizado na mesma linha. */
   .anuncio a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* Os rotulos miudos sobre a faixa escura usam greige, nao areia: areia da
+   4.37:1 sobre o espresso e o proprio token proibe uso como texto. O guarda
+   em src/tokens.ts confere isso a cada build. Areia continua valendo em
+   filete e borda, onde nao ha exigencia de contraste de texto.
+
+   A assinatura do rodape: "Intervalo" sozinho nao diz o que a empresa faz, e
+   nao vai dizer pelos primeiros anos. Fica fixa em todas as paginas. */
+.rodape .assinatura-marca {
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  /* Greige, nao areia: o token areia diz "NAO use como texto" na propria
+     descricao, porque da 4.37:1 sobre o espresso. */
+  color: var(--color-greige); margin: calc(var(--spacing-16) * -1) 0 var(--spacing-16);
 }

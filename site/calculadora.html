@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pele &amp; Código · calculadora de precificação para enfermagem estética</title>
+<title>Intervalo · calculadora de precificação para enfermagem estética</title>
 <meta name="description" content="Seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta. Gratuita, sem cadastro, calculada no seu navegador.">
 <meta name="robots" content="index,follow">
 <meta property="og:title" content="Quanto custa, de verdade, o seu atendimento?">
@@ -13,7 +13,7 @@
      paginas, no sitemap.xml e no robots.txt antes de liberar a indexacao. -->
 <link rel="canonical" href="https://SEU-DOMINIO.com.br/calculadora">
 <meta property="og:url" content="https://SEU-DOMINIO.com.br/calculadora">
-<meta property="og:site_name" content="Pele &amp; Código">
+<meta property="og:site_name" content="Intervalo">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="https://SEU-DOMINIO.com.br/compartilhamento.png">
 <meta property="og:image:width" content="1200">
@@ -24,6 +24,7 @@
      a primeira tela usa; o latin-ext entra sob demanda. -->
 <link rel="preload" href="./fontes/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./fontes/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="./marca.svg" type="image/svg+xml">
 <link rel="stylesheet" href="./fontes.css">
 <link rel="stylesheet" href="./tokens.css">
 <link rel="stylesheet" href="./estilo.css">
@@ -95,7 +96,7 @@ legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; lett
 
 <header class="topo">
   <div class="rail">
-    <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
+    <a class="marca" href="./"><span class="sinal" aria-hidden="true"></span>Intervalo</a>
     <nav>
       <a href="#entender" class="opcional">Como é calculado</a>
       <a href="./enfermeiras.html" class="opcional">Para enfermeiras</a>
@@ -238,7 +239,8 @@ legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; lett
 <footer class="rodape">
   <div class="rail">
     <div>
-      <a class="marca" href="./">Pele <span>&amp;</span> Código</a>
+      <a class="marca" href="./"><span class="sinal" aria-hidden="true"></span>Intervalo</a>
+      <p class="assinatura-marca">Operação para quem trabalha com estética</p>
       <p>Cálculo feito no navegador. Nada é enviado nem armazenado fora do seu aparelho.</p>
       <p class="identidade">
         <!-- EMPRESA: troque pela razao social e pelo CNPJ reais assim que a
@@ -268,7 +270,7 @@ import { calcular } from "./precificacao.js";
   "use strict";
 
   const CAMPOS = ["insumos","duracao","atual","dias","horas","ocupacao","fixo","retirada","imposto"];
-  const CHAVE = "pelecodigo.calculadora.v1";
+  const CHAVE = "intervalo.calculadora.v1";
 
   const el = (id) => document.getElementById(id);
   const dinheiro = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });

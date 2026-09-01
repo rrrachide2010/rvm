@@ -13,6 +13,7 @@ type Grupo = Record<string, Token>;
 
 const ENTRADA = resolve(process.cwd(), "site/tokens.json");
 const SAIDA = resolve(process.cwd(), "site/tokens.css");
+const ESTILO = resolve(process.cwd(), "site/estilo.css");
 
 /** Pares que a referencia prescreve — cada um vira um teste de contraste. */
 const PARES: Array<{ nome: string; frente: string; fundo: string; tamanho: "normal" | "grande" }> = [
@@ -140,6 +141,35 @@ async function main(): Promise<void> {
       `  ${marca} ${razao.toFixed(2).padStart(5)}:1  ${p.nome}${p.tamanho === "grande" ? " (texto grande)" : ""}`,
     );
   }
+  // Os pares acima sao os que o sistema PRESCREVE. Isso nao impede alguem de
+  // escrever, no CSS, uma combinacao que ninguem prescreveu — e foi o que
+  // aconteceu duas vezes com a areia sobre o espresso, que a propria descricao
+  // do token proibia. Entao alem dos pares, conferimos o uso real.
+  const proibidosComoTexto = new Set<string>();
+  for (const [nome, token] of Object.entries((doc["color"] ?? {}) as Grupo)) {
+    if (/N[ÃA]O use como texto/i.test(token.$description ?? "")) proibidosComoTexto.add(nome);
+  }
+
+  let usosIndevidos = 0;
+  if (proibidosComoTexto.size > 0) {
+    const css = await readFile(ESTILO, "utf8");
+    const linhas = css.split(/\r?\n/);
+    for (const [i, linha] of linhas.entries()) {
+      // `color:` apenas — background, border e mask podem usar o tom a vontade.
+      const decl = linha.match(/(?:^|[;{\s])color:\s*var\(--color-([a-z-]+)\)/i);
+      if (!decl) continue;
+      const token = decl[1]!;
+      if (!proibidosComoTexto.has(token)) continue;
+      usosIndevidos++;
+      console.log(
+        `\n  FALHA  site/estilo.css:${i + 1} usa --color-${token} como cor de texto,\n` +
+          `         e o token diz para não fazer isso.`,
+      );
+    }
+  }
+
+  if (usosIndevidos > 0 && ci) process.exitCode = 1;
+
   if (reprovados > 0) {
     console.log(
       `\n${reprovados} par(es) abaixo do mínimo. Não é motivo para abandonar a paleta —\n` +

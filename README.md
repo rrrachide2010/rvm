@@ -121,6 +121,24 @@ motivo para ficar. Uma home que faz escolher não vende nada.
 As outras duas frentes aparecem numa faixa da home, com gancho próprio — não
 como um menu de portas iguais.
 
+### O nome
+
+**Intervalo.** Em clínica, intervalo é o tempo certo entre procedimentos; em
+operação, é o horário que ficou vazio. As duas leituras apontam para a mesma
+coisa, e é o que as três frentes têm em comum — administrar o tempo entre um
+atendimento e o próximo. O símbolo (`site/marca.svg`) são dois arcos e o vão
+entre eles, derivado do token `radius-arco`; as alturas são diferentes de
+propósito, porque simétricos viravam o ícone de pausa.
+
+O nome aparece no `title`, no `og:site_name`, no cabeçalho e no rodapé de cada
+página, mais a chave do `localStorage` da calculadora. Nada mais depende dele.
+
+> **Ainda não verificado.** Nenhuma busca foi feita no INPI (classes 44, 42 e
+> 35), no `registro.br` nem no Instagram — este ambiente não alcança esses
+> serviços. Faça as três antes de imprimir qualquer coisa ou comprar domínio.
+> Se "Intervalo" estiver ocupado, o segundo da fila é **Zelo**, e trocar é
+> editar os mesmos cinco lugares.
+
 ### Antes de liberar a indexação
 
 O `robots.txt` bloqueia buscadores de propósito, e continua assim até que
@@ -169,8 +187,13 @@ Tipografia: **Marcellus** (serifada romana) nos títulos e **Jost** (geométrica
 no corpo. A forma assinatura é o **arco** nas fotos.
 
 `tokens.css` (gerado) carrega as variáveis; `estilo.css` só as consome. **Não
-escreva hex em `estilo.css`** — mexa em `tokens.json` e rode `npm run tokens`,
-que também audita o contraste de cada par prescrito.
+escreva hex em `estilo.css`** — mexa em `tokens.json` e rode `npm run tokens`.
+
+A auditoria faz **duas** coisas. Confere os pares que o sistema prescreve, e
+varre `estilo.css` atrás de token usado como cor de texto quando a descrição do
+próprio token proíbe. A segunda existe porque par prescrito não pega o que
+ninguém prescreveu: cinco usos de areia sobre espresso, todos em 4,37:1,
+estavam no CSS sem ninguém ver. `--ci` falha o build nos dois casos.
 
 ### Fotos e animação
 
