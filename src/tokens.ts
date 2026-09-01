@@ -51,6 +51,21 @@ function cssVar(grupo: string, nome: string): string {
   return `--${grupo}-${nome}`.toLowerCase();
 }
 
+/**
+ * Resolve o alias do DTCG — `{color.espresso}` — para `var(--color-espresso)`.
+ *
+ * Emitir a referencia, e nao o hex copiado, e o que torna `tokens.json` fonte
+ * unica de verdade. O grupo `surface` repetia quatro hexes que ja existiam em
+ * `color`, entao trocar a paleta exigia editar dois lugares e nada conferia se
+ * batiam: numa troca de paleta a faixa escura continuou marrom enquanto os
+ * botoes ja eram verdes.
+ */
+function resolverAlias(valor: unknown): string {
+  const bruto = String(valor);
+  const alias = bruto.match(/^\{([a-z]+)\.([a-z0-9-]+)\}$/i);
+  return alias ? `var(${cssVar(alias[1]!, alias[2]!)})` : bruto;
+}
+
 function bloco(titulo: string, linhas: string[]): string {
   return linhas.length ? `\n  /* ${titulo} */\n${linhas.join("\n")}\n` : "";
 }
@@ -91,7 +106,7 @@ async function main(): Promise<void> {
     if (!g) return;
     for (const [nome, token] of Object.entries(g)) {
       if (token.$type === "typography") continue;
-      alvo.push(`  ${cssVar(grupo, nome)}: ${String(token.$value)};`);
+      alvo.push(`  ${cssVar(grupo, nome)}: ${resolverAlias(token.$value)};`);
     }
   };
 

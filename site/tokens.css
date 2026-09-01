@@ -98,10 +98,10 @@
   --radius-arco: 50% 50% 12px 12px / 34% 34% 12px 12px;
 
   /* Superfícies */
-  --surface-canvas: #efe9e7;
-  --surface-elevada: #f6f0f2;
-  --surface-secundaria: #e1d7d3;
-  --surface-escura: #5c4a3b;
+  --surface-canvas: var(--color-canvas);
+  --surface-elevada: var(--color-porcelana);
+  --surface-secundaria: var(--color-greige);
+  --surface-escura: var(--color-espresso);
 
   /* Leiaute */
   --layout-page-max-width: 1240px;
