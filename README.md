@@ -80,13 +80,61 @@ src/robots.ts      lê o robots.txt do alvo e decide se a busca é permitida
 src/score.ts       transforma sinais em achados e pontuação  ← ajuste os pesos aqui
 src/relatorio.ts   HTML do relatório e do índice
 src/store.ts       persistência em data/clinicas.json
+src/whatsapp.ts    custo por mensagem da Meta e o que sobra da mensalidade
 src/tipos.ts       tipos compartilhados
-test/              testes das duas peças que não podem errar em silêncio
+test/              testes das três peças que não podem errar em silêncio
 scripts/og.mjs     gera a imagem de compartilhamento
 ```
 
 `npm run check` roda o typecheck e `npm test` roda os testes. A CI roda os dois,
 mais a auditoria de contraste dos tokens.
+
+## O custo de mensagem cabe na mensalidade — com uma condição
+
+A mensalidade de R$ 350 vende sete rotinas que rodam por mensagem, e cada
+mensagem tem preço de tabela da Meta. O custo não estava modelado em lugar
+nenhum. Agora está, em `src/whatsapp.ts`, e a conclusão inverte o que eu
+supunha: **o volume de atendimento não é o problema; o volume de marketing é.**
+
+Com as proporções padrão (confirmação e lembrete por atendimento, 15% de
+remarcação, 40% de retorno, 50% de pedido de avaliação, 100 reativações/mês,
+20% caindo na janela gratuita):
+
+| Atendimentos/mês | Custo Meta | Fatia da mensalidade |
+| ---: | ---: | ---: |
+| 100 | R$ 44 | 13% |
+| 300 | R$ 65 | 19% |
+| 800 | R$ 118 | 34% |
+| 1.200 | R$ 160 | 46% |
+
+O ponto em que R$ 350 deixa de cobrir o custo fica em **3.000 atendimentos por
+mês** — fora do alcance de clínica de estética. A mensalidade plana sobrevive
+ao tamanho da clínica.
+
+O que ela não sobrevive é a campanha. Marketing custa quase 8× uma utilidade e
+**não** entra na janela gratuita. Numa clínica de 300 atendimentos:
+
+| Reativações/mês | Custo Meta | Fatia da mensalidade |
+| ---: | ---: | ---: |
+| 0 | R$ 32 | 9% |
+| 300 | R$ 133 | 38% |
+| 600 | R$ 234 | 67% |
+| 950 | R$ 350 | 100% — a mensalidade zera |
+
+Daí duas decisões que o preço da página precisa refletir:
+
+1. **A reativação em massa não pode ser ilimitada.** Ou entra com um teto de
+   disparos incluídos, ou é cobrada à parte. É a única rotina capaz de comer a
+   mensalidade inteira, e é justamente a que a clínica vai querer usar mais.
+2. **A janela gratuita vale dinheiro.** Escrever mensagem que a cliente
+   responde não é só simpatia: 40% de resposta em vez de 0% derruba o custo de
+   utilidade em 22%. Isso é argumento de venda e critério de redação.
+
+> Os preços por mensagem em `TARIFAS_BR` **não foram conferidos na tabela
+> oficial da Meta** — este ambiente não alcança a página. Confira antes de
+> qualquer coisa virar preço de venda, e lembre que a tabela muda por país e
+> por data. O valor deste módulo é o modelo, não os números. Também não estão
+> aqui a taxa do provedor (BSP) nem a hospedagem, que entram por cima.
 
 ## Limites e cuidados
 
