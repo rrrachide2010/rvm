@@ -1,0 +1,21 @@
+# O site ainda usa contato de placeholder (WhatsApp e e-mail de exemplo) e as
+# molduras de foto estao vazias. Enquanto for assim, nao queremos que
+# buscadores indexem: um dono de clinica achando a pagina no Google cairia
+# num numero que nao existe.
+#
+# PARA LIBERAR A INDEXACAO, tres coisas mudam juntas — se so uma mudar, ou o
+# site sobe invisivel ou sobe quebrado:
+#
+#   1. aqui: troque o bloco abaixo por
+#        User-agent: *
+#        Allow: /
+#        Sitemap: https://SEU-DOMINIO.com.br/sitemap.xml
+#   2. nas quatro paginas: o <meta name="robots"> ja diz "index,follow",
+#      entao nao precisa mexer — mas confira que continua assim;
+#   3. em todo lugar: troque SEU-DOMINIO.com.br pelo dominio real
+#      (paginas, sitemap.xml e a linha Sitemap acima).
+#
+# E antes disso tudo: contato real no lugar do placeholder.
+
+User-agent: *
+Disallow: /

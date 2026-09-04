@@ -1,0 +1,46 @@
+name: CI
+
+# push so na main: em branch com PR aberto o gatilho pull_request ja cobre,
+# e manter os dois faz cada commit rodar a CI duas vezes.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verificar:
+    name: Typecheck, testes e smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # A CLI depende do type stripping nativo do Node, disponivel a partir do 22.18.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run check
+
+      # A matematica da calculadora e o leitor de robots.txt: as duas pecas
+      # onde um erro silencioso custa caro — uma da numero errado para a
+      # enfermeira decidir preco, a outra faz o coletor buscar pagina que o
+      # dono do site pediu para nao buscarmos.
+      - name: Testes
+        run: npm test
+
+      # Contraste dos pares prescritos pelo design system. Falha o build
+      # quando um par obrigatorio reprova na WCAG AA.
+      - name: Tokens e contraste
+        run: node src/tokens.ts --ci
+
+      # Garante que os .ts realmente executam nesta versao do Node —
+      # o tsc sozinho nao provaria isso.
+      - name: Smoke test da CLI
+        run: |
+          npm run listar
+          node src/cli.ts > /dev/null

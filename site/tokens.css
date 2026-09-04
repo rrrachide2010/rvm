@@ -1,0 +1,111 @@
+/* GERADO POR `npm run tokens` A PARTIR DE site/tokens.json — NAO EDITE A MAO.
+ *
+ * Notas sobre a fonte destes valores, que valem para quem for implementar:
+ *
+ * 1. As duas famílias originais (Vivey 22 Positive e FHA Condensed French NC)
+ *    são licenciadas e não estão publicadas. As variáveis --font-* já trazem os
+ *    substitutos que usamos: Lora no lugar da Vivey e Oswald no lugar da FHA.
+ *    Lora foi escolhida entre os substitutos sugeridos por ser a única legível
+ *    em corpo de 14px — Playfair e DM Serif são faces de display.
+ *
+ * 2. --color-smoke-gray (#e5e7eb) é um cinza frio dentro de uma paleta
+ *    mediterrânea quente. Sobre o creme ele aparece como um fio acinzentado
+ *    que destoa. Para fios de borda sobre creme, prefira --color-dusty-rose.
+ *
+ * 3. Contraste: o par prescrito de texto bone sobre coral não alcança o mínimo
+ *    de 4.5:1 da WCAG AA em corpo normal. `npm run tokens` imprime a tabela
+ *    completa. Use o coral em botão com texto grande ou aumente o corpo.
+ */
+
+:root {
+  /* Cores */
+  --color-espresso: #5c4a3b;
+  --color-tinta: #33291f;
+  --color-canvas: #efe9e7;
+  --color-porcelana: #f6f0f2;
+  --color-greige: #e1d7d3;
+  --color-eucalipto: #5c6b58;
+  --color-areia: #c9b8a8;
+
+  /* Famílias (substitutos das originais) */
+  --font-texto: Jost, "Helvetica Neue", Arial, sans-serif;
+  --font-display: Marcellus, Georgia, "Times New Roman", serif;
+
+  /* Escala tipográfica */
+  --texto-caption-familia: var(--font-texto);
+  --texto-caption-tamanho: 11px;
+  --texto-caption-peso: 500;
+  --texto-caption-entrelinha: 1.4;
+  --texto-small-familia: var(--font-texto);
+  --texto-small-tamanho: 13px;
+  --texto-small-peso: 400;
+  --texto-small-entrelinha: 1.5;
+  --texto-body-familia: var(--font-texto);
+  --texto-body-tamanho: 16px;
+  --texto-body-peso: 400;
+  --texto-body-entrelinha: 1.65;
+  --texto-body-lg-familia: var(--font-texto);
+  --texto-body-lg-tamanho: 19px;
+  --texto-body-lg-peso: 400;
+  --texto-body-lg-entrelinha: 1.6;
+  --texto-subheading-familia: var(--font-texto);
+  --texto-subheading-tamanho: 18px;
+  --texto-subheading-peso: 500;
+  --texto-subheading-entrelinha: 1.4;
+  --texto-heading-sm-familia: var(--font-display);
+  --texto-heading-sm-tamanho: 22px;
+  --texto-heading-sm-peso: 400;
+  --texto-heading-sm-entrelinha: 1.25;
+  --texto-heading-familia: var(--font-display);
+  --texto-heading-tamanho: 30px;
+  --texto-heading-peso: 400;
+  --texto-heading-entrelinha: 1.2;
+  --texto-heading-lg-familia: var(--font-display);
+  --texto-heading-lg-tamanho: 38px;
+  --texto-heading-lg-peso: 400;
+  --texto-heading-lg-entrelinha: 1.15;
+  --texto-heading-xl-familia: var(--font-display);
+  --texto-heading-xl-tamanho: 48px;
+  --texto-heading-xl-peso: 400;
+  --texto-heading-xl-entrelinha: 1.1;
+  --texto-display-familia: var(--font-display);
+  --texto-display-tamanho: 64px;
+  --texto-display-peso: 400;
+  --texto-display-entrelinha: 1.05;
+
+  /* Espaçamento */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-120: 120px;
+  --spacing-unit: 4px;
+
+  /* Raios */
+  --radius-sm: 6px;
+  --radius-card: 12px;
+  --radius-grande: 20px;
+  --radius-full: 9999px;
+  --radius-arco: 50% 50% 12px 12px / 34% 34% 12px 12px;
+
+  /* Superfícies */
+  --surface-canvas: var(--color-canvas);
+  --surface-elevada: var(--color-porcelana);
+  --surface-secundaria: var(--color-greige);
+  --surface-escura: var(--color-espresso);
+
+  /* Leiaute */
+  --layout-page-max-width: 1240px;
+  --layout-section-gap: 96px;
+  --layout-card-padding: 32px;
+  --layout-element-gap: 20px;
+}

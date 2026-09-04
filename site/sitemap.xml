@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  DOMINIO: troque SEU-DOMINIO.com.br pelo dominio real antes de liberar a
+  indexacao. As datas em <lastmod> devem ser atualizadas quando a pagina
+  mudar de conteudo, nao a cada deploy.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://SEU-DOMINIO.com.br/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://SEU-DOMINIO.com.br/enfermeiras</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://SEU-DOMINIO.com.br/calculadora</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://SEU-DOMINIO.com.br/especialistas</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://SEU-DOMINIO.com.br/privacidade</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.3</priority>
+  </url>
+</urlset>

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intervalo · calculadora de precificação para enfermagem estética</title>
+<meta name="description" content="Seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta. Gratuita, sem cadastro, calculada no seu navegador.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Quanto custa, de verdade, o seu atendimento?">
+<meta property="og:description" content="Descubra em dois minutos. Sem cadastro, sem enviar nada.">
+<meta property="og:type" content="website">
+<!-- DOMINIO: troque SEU-DOMINIO.com.br pelo dominio real em todas as
+     paginas, no sitemap.xml e no robots.txt antes de liberar a indexacao. -->
+<link rel="canonical" href="https://SEU-DOMINIO.com.br/calculadora">
+<meta property="og:url" content="https://SEU-DOMINIO.com.br/calculadora">
+<meta property="og:site_name" content="Intervalo">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://SEU-DOMINIO.com.br/compartilhamento.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- As fontes sao servidas por este mesmo dominio: nada de terceiro no
+     caminho critico. O preload cobre so o subconjunto latin, que e o que
+     a primeira tela usa; o latin-ext entra sob demanda. -->
+<link rel="preload" href="./fontes/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fontes/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="./marca.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./fontes.css">
+<link rel="stylesheet" href="./tokens.css">
+<link rel="stylesheet" href="./estilo.css">
+<style>
+.calc { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: var(--spacing-48); align-items: start; margin-top: var(--spacing-32); }
+@media (max-width: 940px) { .calc { grid-template-columns: 1fr; gap: var(--spacing-32); } }
+
+fieldset { border: 1px solid var(--color-areia); border-radius: var(--radius-card); padding: var(--spacing-24); margin: 0 0 var(--spacing-20); background: var(--surface-elevada); }
+legend { font-family: var(--font-texto); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-eucalipto); padding: 0 var(--spacing-8); }
+.campos { display: grid; gap: var(--spacing-20); }
+.campo { display: grid; gap: 6px; }
+.campo > span { font-weight: 700; font-size: 16px; }
+.campo em { font-style: normal; font-weight: 400; color: var(--color-eucalipto); font-size: 14px; display: block; }
+.entrada { display: flex; align-items: center; gap: var(--spacing-8); }
+.entrada .unidade { font-size: 14px; color: var(--color-eucalipto); white-space: nowrap; }
+.campo input {
+  font: inherit; font-size: 17px; font-variant-numeric: tabular-nums;
+  padding: 11px var(--spacing-16); border: 1px solid var(--color-areia);
+  border-radius: var(--radius-full); background: var(--surface-canvas);
+  color: var(--color-espresso); width: 100%; max-width: 170px; min-height: 46px;
+}
+.campo input:focus { background: var(--surface-elevada); }
+
+.painel { position: sticky; top: 88px; border-radius: var(--radius-grande); background: var(--color-espresso); color: var(--color-porcelana); overflow: hidden; }
+@media (max-width: 940px) { .painel { position: static; } }
+.painel-topo { padding: var(--spacing-24) var(--spacing-32); border-bottom: 1px solid var(--color-eucalipto); }
+.painel-topo .rot { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-areia); margin-bottom: var(--spacing-8); }
+.painel-topo .grande { font-family: var(--font-display); font-size: 56px; line-height: 1; font-variant-numeric: tabular-nums; }
+.painel-topo p { font-size: 15px; color: var(--color-areia); margin: var(--spacing-12) 0 0; max-width: none; }
+.linhas { padding: var(--spacing-8) var(--spacing-32) var(--spacing-20); margin: 0; }
+.linha { display: flex; justify-content: space-between; align-items: baseline; gap: var(--spacing-16); padding: 13px 0; border-bottom: 1px solid rgba(201, 184, 168, .3); }
+.linha:last-child { border-bottom: none; }
+.linha dt { font-size: 15px; }
+.linha dt small { display: block; color: var(--color-areia); font-size: 13px; }
+.linha dd { margin: 0; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.linha dd.alerta { color: var(--color-areia); }
+.linha dd.bom { color: var(--color-areia); }
+
+.veredito { padding: var(--spacing-20) var(--spacing-32); font-size: 15.5px; line-height: 1.5; }
+.veredito.ruim { background: var(--color-eucalipto); color: var(--color-porcelana); }
+.veredito.ok { background: var(--color-greige); color: var(--color-espresso); }
+.veredito strong { display: block; margin-bottom: 4px; }
+
+.privado { font-size: 15px; color: var(--color-eucalipto); margin-top: var(--spacing-16); }
+
+.explica dt { font-weight: 700; margin-top: var(--spacing-20); font-size: 17px; }
+.explica dd { margin: 6px 0 0; color: var(--color-eucalipto); font-size: 16px; max-width: 66ch; }
+
+/* No celular o painel fica abaixo dos campos: sem esta barra, a pessoa edita
+   sem ver o número mudar — que é o valor inteiro da ferramenta. */
+.barra { display: none; }
+@media (max-width: 940px) {
+  .barra {
+    display: flex; position: fixed; inset: auto 0 0 0; z-index: 20;
+    align-items: center; justify-content: space-between; gap: var(--spacing-16);
+    padding: 12px var(--spacing-20) calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--color-espresso); color: var(--color-porcelana); text-decoration: none;
+  }
+  .barra .rot { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-areia); }
+  .barra .val { font-family: var(--font-display); font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .barra .ir { font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--color-areia); }
+  body { padding-bottom: 80px; }
+}
+</style>
+</head>
+<body>
+
+<div class="anuncio">Gratuita e sem cadastro. Nenhum número sai do seu aparelho.</div>
+
+<header class="topo">
+  <div class="rail">
+    <a class="marca" href="./"><span class="sinal" aria-hidden="true"></span>Intervalo</a>
+    <nav>
+      <a href="#entender" class="opcional">Como é calculado</a>
+      <a href="./enfermeiras.html" class="opcional">Para enfermeiras</a>
+      <a class="botao" href="#resultado">Ver meu resultado</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="faixa" style="padding-bottom: var(--spacing-24);">
+  <div class="rail">
+    <p class="olho">Ferramenta gratuita</p>
+    <h1 class="disp">Quanto custa, de verdade, o seu atendimento?</h1>
+    <p class="lede" style="margin-top: 18px; max-width: 62ch;">Preencha o que você já sabe. A conta devolve seu preço mínimo, seu preço ideal e quantos atendimentos por mês fecham a conta — incluindo a hora que você passa sem cliente, que é o custo que quase ninguém coloca na planilha.</p>
+    <p class="privado">🔒 Tudo é calculado no seu navegador. Nenhum número sai do seu aparelho, e não há cadastro.</p>
+  </div>
+</section>
+
+<section class="faixa" style="padding-top: 0;">
+  <div class="rail">
+    <form class="calc" id="calc" novalidate>
+      <div>
+        <fieldset>
+          <legend>O atendimento</legend>
+          <div class="campos">
+            <label class="campo">
+              <span>Insumos por sessão <em>Tudo que acaba: descartáveis, ativos, ampolas, agulhas.</em></span>
+              <span class="entrada"><span class="unidade">R$</span><input type="number" id="insumos" value="45" min="0" step="1" inputmode="decimal"></span>
+            </label>
+            <label class="campo">
+              <span>Duração da sessão <em>Inclua a limpeza e a preparação entre uma cliente e outra.</em></span>
+              <span class="entrada"><input type="number" id="duracao" value="60" min="5" step="5" inputmode="numeric"><span class="unidade">minutos</span></span>
+            </label>
+            <label class="campo">
+              <span>Preço que você cobra hoje <em>Deixe zerado se ainda não cobra nada.</em></span>
+              <span class="entrada"><span class="unidade">R$</span><input type="number" id="atual" value="150" min="0" step="1" inputmode="decimal"></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sua agenda</legend>
+          <div class="campos">
+            <label class="campo">
+              <span>Dias de atendimento por mês</span>
+              <span class="entrada"><input type="number" id="dias" value="20" min="1" max="31" step="1" inputmode="numeric"><span class="unidade">dias</span></span>
+            </label>
+            <label class="campo">
+              <span>Horas disponíveis por dia <em>O tempo que a sala fica aberta, não o que você atende.</em></span>
+              <span class="entrada"><input type="number" id="horas" value="6" min="1" max="24" step="0.5" inputmode="decimal"><span class="unidade">horas</span></span>
+            </label>
+            <label class="campo">
+              <span>Ocupação real da agenda <em>Sinceramente: quantos por cento dos horários ficam cheios?</em></span>
+              <span class="entrada"><input type="number" id="ocupacao" value="55" min="1" max="100" step="5" inputmode="numeric"><span class="unidade">%</span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Custos e metas do mês</legend>
+          <div class="campos">
+            <label class="campo">
+              <span>Custo fixo mensal <em>Aluguel, energia, internet, contador, software, seguro, marketing, parcela de equipamento.</em></span>
+              <span class="entrada"><span class="unidade">R$</span><input type="number" id="fixo" value="2500" min="0" step="50" inputmode="decimal"></span>
+            </label>
+            <label class="campo">
+              <span>Quanto você quer tirar por mês <em>Sua remuneração — o que sobra depois de tudo pago.</em></span>
+              <span class="entrada"><span class="unidade">R$</span><input type="number" id="retirada" value="4000" min="0" step="100" inputmode="decimal"></span>
+            </label>
+            <label class="campo">
+              <span>Carga tributária sobre o faturamento <em>O Simples costuma começar perto de 6%. Confirme com seu contador.</em></span>
+              <span class="entrada"><input type="number" id="imposto" value="6" min="0" max="60" step="0.5" inputmode="decimal"><span class="unidade">%</span></span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <aside class="painel" id="resultado" aria-live="polite">
+        <div class="painel-topo">
+          <span class="rot">Preço ideal por sessão</span>
+          <span class="grande" id="r-ideal">—</span>
+          <p>Cobre custos, impostos e a sua retirada.</p>
+        </div>
+        <dl class="linhas">
+          <div class="linha"><dt>Preço mínimo <small>abaixo disso você paga para trabalhar</small></dt><dd id="r-minimo">—</dd></div>
+          <div class="linha"><dt>Custo real da sessão <small>insumos + rateio do custo fixo</small></dt><dd id="r-custo">—</dd></div>
+          <div class="linha"><dt>Atendimentos por mês <small>com a ocupação informada</small></dt><dd id="r-sessoes">—</dd></div>
+          <div class="linha"><dt>Ponto de equilíbrio <small>sessões/mês no preço de hoje</small></dt><dd id="r-equilibrio">—</dd></div>
+          <div class="linha"><dt>Sobra hoje, por mês <small>depois de custos, impostos e retirada</small></dt><dd id="r-sobra">—</dd></div>
+        </dl>
+        <div class="veredito" id="r-veredito"></div>
+      </aside>
+    </form>
+  </div>
+</section>
+
+<section class="faixa faixa-elevada" id="entender">
+  <div class="rail rail-estreito">
+    <p class="olho">Como a conta é feita</p>
+    <h2 class="disp">Sem caixa-preta</h2>
+    <p class="sub" style="margin-top: 14px;">Você merece saber de onde sai cada número, até para discutir com seu contador.</p>
+    <dl class="explica">
+      <dt>Custo real da sessão</dt>
+      <dd>Insumos mais a fatia do custo fixo que aquela sessão carrega. E a fatia depende da ocupação: se metade dos horários fica vazia, cada cliente que aparece paga o aluguel dos horários que ninguém ocupou. É por isso que agenda furada encarece o atendimento de quem comparece.</dd>
+      <dt>Preço mínimo</dt>
+      <dd>O preço em que a receita, já descontado o imposto, empata exatamente com o custo real. Nele você não perde dinheiro e também não ganha nada — sua remuneração é zero. É um piso, nunca um preço.</dd>
+      <dt>Preço ideal</dt>
+      <dd>O preço em que a conta fecha <em>com</em> a sua retirada. Some custo real e sua remuneração rateada por sessão, e divida pelo que sobra depois do imposto. É o número que responde de verdade "quanto eu cobro".</dd>
+      <dt>Ponto de equilíbrio</dt>
+      <dd>Quantos atendimentos por mês você precisa fazer, no preço que cobra hoje, só para cobrir os custos fixos. Se esse número for maior que a sua capacidade, nenhum esforço de agenda resolve — o preço é que está errado.</dd>
+      <dt>O que a conta não inclui</dt>
+      <dd>Investimento inicial em equipamento (só entra se você lançar a parcela no custo fixo), reserva para férias e imprevistos, e o custo de aquisição de cliente. Trate o resultado como piso da conversa, não como teto.</dd>
+    </dl>
+    <div class="reservado" style="border-style: solid; border-width: 1px;">
+      Esta ferramenta é informativa e não substitui orientação contábil. A alíquota real depende do seu enquadramento, do anexo do Simples e do Fator R — confirme com seu contador antes de decidir preço.
+    </div>
+  </div>
+</section>
+
+<section class="faixa faixa-escura">
+  <div class="rail rail-estreito">
+    <p class="olho">Descobriu que a agenda vazia é o problema?</p>
+    <h2 class="disp">Ela também tem conserto</h2>
+    <p class="lede" style="margin-top: 16px;">Se o seu preço só fecha com a sala cheia, o próximo passo não é reajustar — é parar de perder horário. É exatamente isso que a gente instala em clínicas de estética, com garantia de queda na taxa de falta.</p>
+    <div class="acoes">
+      <a class="botao" href="./">Ver como a agenda para de furar</a>
+      <a class="botao botao-vazado" href="./enfermeiras.html">Ver as outras ferramentas</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<a class="barra" href="#resultado">
+  <span><span class="rot">Preço ideal por sessão</span><span class="val" id="b-ideal">—</span></span>
+  <span class="ir" aria-hidden="true">ver detalhes ↓</span>
+</a>
+
+<footer class="rodape">
+  <div class="rail">
+    <div>
+      <a class="marca" href="./"><span class="sinal" aria-hidden="true"></span>Intervalo</a>
+      <p class="assinatura-marca">Operação para quem trabalha com estética</p>
+      <p>Cálculo feito no navegador. Nada é enviado nem armazenado fora do seu aparelho.</p>
+      <p class="identidade">
+        <!-- EMPRESA: troque pela razao social e pelo CNPJ reais assim que a
+             empresa estiver aberta. Enquanto for placeholder, o site nao pode
+             ser indexado — quem vende tratamento de dado de paciente precisa
+             dizer quem e. -->
+        RAZÃO SOCIAL LTDA · CNPJ 00.000.000/0001-00 · Cidade/UF
+      </p>
+    </div>
+    <div class="coluna">
+      <span class="tit">Outras frentes</span>
+      <a href="./enfermeiras.html">Para enfermeiras</a>
+      <a href="./">Para clínicas</a>
+      <a href="./especialistas.html">Para especialistas</a>
+    </div>
+    <div class="coluna">
+      <span class="tit">Legal</span>
+      <a href="./privacidade.html">Privacidade e dados</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import { calcular } from "./precificacao.js";
+
+(() => {
+  "use strict";
+
+  const CAMPOS = ["insumos","duracao","atual","dias","horas","ocupacao","fixo","retirada","imposto"];
+  const CHAVE = "intervalo.calculadora.v1";
+
+  const el = (id) => document.getElementById(id);
+  const dinheiro = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+  const inteiro = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 0 });
+
+  // A matematica vive em precificacao.js, coberta por teste na CI.
+  // Aqui fica so o que e da pagina: ler os campos, escrever na tela, lembrar.
+  function atualizar() {
+    const bruto = {};
+    for (const id of CAMPOS) bruto[id] = el(id).value;
+    const r = calcular(bruto);
+
+    el("r-ideal").textContent = dinheiro.format(r.precoIdeal);
+    el("b-ideal").textContent = dinheiro.format(r.precoIdeal);
+    el("r-minimo").textContent = dinheiro.format(r.precoMinimo);
+    el("r-custo").textContent = dinheiro.format(r.custoReal);
+    el("r-sessoes").textContent = inteiro.format(Math.round(r.sessoes));
+
+    const eq = el("r-equilibrio");
+    if (r.equilibrio === null) {
+      eq.textContent = "impossível";
+      eq.className = "alerta";
+    } else {
+      eq.textContent = inteiro.format(Math.ceil(r.equilibrio)) + " sessões";
+      eq.className = r.equilibrio > r.sessoes ? "alerta" : "";
+    }
+
+    const retirada = Number.parseFloat(el("retirada").value) || 0;
+    const sob = el("r-sobra");
+    sob.textContent = dinheiro.format(r.sobra);
+    sob.className = r.sobra < 0 ? "alerta" : r.sobra >= retirada ? "bom" : "";
+
+    const v = el("r-veredito");
+    const t = r.veredito;
+    if (t.tipo === "sem-preco") {
+      v.className = "veredito ok";
+      v.innerHTML = "<strong>Você ainda não cobra nada.</strong> Comece pelo preço ideal acima — e note que ele já embute a agenda vazia que você informou.";
+    } else if (t.tipo === "abaixo-do-minimo") {
+      v.className = "veredito ruim";
+      v.innerHTML = "<strong>Seu preço está abaixo do mínimo.</strong> Faltam " + t.reajuste + "% só para empatar. Hoje cada atendimento consome dinheiro do seu bolso.";
+    } else if (t.tipo === "sem-retirada") {
+      v.className = "veredito ruim";
+      v.innerHTML = "<strong>Você cobre os custos, mas não a sua retirada.</strong> Um reajuste de " + t.reajuste + "% fecharia a conta"
+        + (t.extras !== null
+            ? " — ou " + inteiro.format(t.extras) + (t.extras === 1 ? " atendimento a mais por mês" : " atendimentos a mais por mês") + ", no preço atual."
+            : ".");
+    } else {
+      v.className = "veredito ok";
+      v.innerHTML = "<strong>Seu preço fecha a conta.</strong> Ele cobre custos, impostos e a retirada que você definiu. O próximo ganho vem de encher a agenda, não de reajustar.";
+    }
+
+    salvar();
+  }
+
+  function salvar() {
+    try {
+      const dados = {};
+      for (const id of CAMPOS) dados[id] = el(id).value;
+      localStorage.setItem(CHAVE, JSON.stringify(dados));
+    } catch { /* modo privado ou storage bloqueado: seguir sem lembrar */ }
+  }
+
+  function restaurar() {
+    try {
+      const bruto = localStorage.getItem(CHAVE);
+      if (!bruto) return;
+      const dados = JSON.parse(bruto);
+      for (const id of CAMPOS) {
+        if (typeof dados[id] === "string" && dados[id] !== "") el(id).value = dados[id];
+      }
+    } catch { /* dado corrompido: seguir com os valores padrao */ }
+  }
+
+  for (const id of CAMPOS) el(id).addEventListener("input", atualizar);
+  el("calc").addEventListener("submit", (e) => e.preventDefault());
+  restaurar();
+  atualizar();
+})();
+</script>
+
+</body>
+</html>

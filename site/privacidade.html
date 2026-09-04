@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intervalo · privacidade e tratamento de dados</title>
+<meta name="description" content="Que dados este site coleta (quase nenhum), o que fazemos com os dados de paciente das clínicas que nos contratam, e como exercer seus direitos.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Privacidade e tratamento de dados">
+<meta property="og:description" content="O que coletamos, o que não coletamos, e o que fazemos com os dados das clínicas.">
+<meta property="og:type" content="website">
+<!-- DOMINIO: troque SEU-DOMINIO.com.br pelo dominio real em todas as
+     paginas, no sitemap.xml e no robots.txt antes de liberar a indexacao. -->
+<link rel="canonical" href="https://SEU-DOMINIO.com.br/privacidade">
+<meta property="og:url" content="https://SEU-DOMINIO.com.br/privacidade">
+<meta property="og:site_name" content="Intervalo">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://SEU-DOMINIO.com.br/compartilhamento.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<!-- As fontes sao servidas por este mesmo dominio: nada de terceiro no
+     caminho critico. O preload cobre so o subconjunto latin, que e o que
+     a primeira tela usa; o latin-ext entra sob demanda. -->
+<link rel="preload" href="./fontes/marcellus-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./fontes/jost-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="./marca.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./fontes.css">
+<link rel="stylesheet" href="./tokens.css">
+<link rel="stylesheet" href="./estilo.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="rail">
+    <a class="marca" href="./"><span class="sinal" aria-hidden="true"></span>Intervalo</a>
+    <nav>
+      <a href="./" class="opcional">Para clínicas</a>
+      <a href="./enfermeiras.html" class="opcional">Para enfermeiras</a>
+      <a class="botao" href="./">Voltar ao site</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="faixa heroi centro">
+  <div class="rail rail-estreito">
+    <p class="olho">Privacidade</p>
+    <h1>O que a gente faz com dado — o seu e o das suas clientes</h1>
+    <hr class="filete">
+    <p class="lede">Escrito para ser lido, não para cobrir a gente. Se algo aqui estiver vago, é erro nosso e vale reclamar.</p>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="rail rail-estreito">
+    <div class="cabecalho">
+      <p class="olho">Parte 1</p>
+      <h2>Quem visita este site</h2>
+      <hr class="filete">
+    </div>
+
+    <div class="texto-corrido">
+      <h3>Este site não tem formulário, nem cadastro, nem rastreador</h3>
+      <p>Não há campo de e-mail, não há pixel de rede social e não há ferramenta de analytics. Você consegue ler o site inteiro sem que nós saibamos que você existe. O contato acontece porque <em>você</em> decide abrir o WhatsApp ou o e-mail — e aí passamos a ter o que você mesmo escrever.</p>
+
+      <h3>As fontes e o visual vêm deste mesmo domínio</h3>
+      <p>Nada é carregado de servidor de terceiro. Isso é uma decisão, não um detalhe: fontes hospedadas fora entregariam o seu endereço de IP para outra empresa só para desenhar um texto.</p>
+
+      <h3>A calculadora não envia nada</h3>
+      <p>Os números que você digita na <a href="./calculadora.html">calculadora de preço</a> são processados dentro do seu navegador e guardados só no seu aparelho, para que você não precise digitar tudo de novo na próxima visita. Eles não chegam até nós — não existe servidor recebendo isso. Para apagar, limpe os dados do site no seu navegador.</p>
+
+      <h3>Hospedagem</h3>
+      <p>O site é hospedado pela Vercel, que registra acessos como qualquer servidor web faz (endereço de IP, horário, página pedida), para operar e proteger o serviço. Nós não consultamos esses registros para identificar visitante.</p>
+
+      <h3>Se você nos escrever</h3>
+      <p>Guardamos a conversa e o seu contato pelo tempo necessário para responder e, se virarmos parceiros, pelo tempo da relação comercial e dos prazos legais que vierem dela. Não vendemos, não alugamos e não trocamos esses dados com ninguém. Para sair, basta pedir na mesma conversa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faixa faixa-escura">
+  <div class="rail rail-estreito">
+    <div class="cabecalho">
+      <p class="olho">Parte 2</p>
+      <h2>As clientes das clínicas que nos contratam</h2>
+      <hr class="filete">
+    </div>
+
+    <div class="texto-corrido">
+      <p class="lede">Esta é a parte que importa se você é dona de clínica. É a que a gente leva mais a sério, porque é onde um erro nosso vira problema seu.</p>
+
+      <h3>A clínica é a controladora. Nós somos operadores.</h3>
+      <p>Quem decide por que e como os dados das pacientes são tratados é a clínica. Nós executamos essas instruções e nada além delas. Isso não é uma frase de página: vai no contrato, com as obrigações que a LGPD dá a cada um dos dois papéis.</p>
+
+      <h3>Recebemos o mínimo para as rotinas funcionarem</h3>
+      <p>Nome, contato e horário do agendamento. Nada de prontuário, nada de foto, nada de anamnese, nada de histórico clínico. Se uma integração começasse a nos entregar isso, ela estaria mal configurada e é a gente que tem que barrar.</p>
+
+      <h3>Mesmo assim, tratamos tudo como dado sensível</h3>
+      <p>Formalmente, nome e horário não são dado de saúde. Na prática, numa clínica de estética, o horário de uma pessoa numa agenda permite inferir que procedimento ela faz — e isso é informação sobre a saúde dela. Então aplicamos o cuidado do artigo 11 da LGPD ao conjunto todo, em vez de discutir classificação.</p>
+
+      <h3>O que a automação nunca faz</h3>
+      <p>Não responde dúvida clínica, não opina sobre procedimento e não continua conversa sobre assunto sensível — nesses casos ela passa para uma pessoa da equipe da clínica. As mensagens saem do número da clínica, com texto aprovado por ela, e sempre com saída fácil para quem não quiser mais receber.</p>
+
+      <h3>Prazo e devolução</h3>
+      <p>Enquanto o contrato existir, mantemos os dados necessários para as rotinas rodarem. Encerrado o contrato, a clínica escolhe: devolvemos o que temos em formato aberto, ou eliminamos. O padrão, se ela não escolher, é eliminar.</p>
+
+      <h3>Se acontecer um incidente</h3>
+      <p>Avisamos a clínica primeiro, em até 24 horas de termos conhecimento, com o que sabemos até ali — mesmo que ainda seja pouco. A comunicação à ANPD e às titulares é decisão da clínica, como controladora, e nós damos todo o apoio técnico para ela decidir com informação em vez de suposição.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="rail rail-estreito">
+    <div class="cabecalho">
+      <p class="olho">Parte 3</p>
+      <h2>Seus direitos, e como usar</h2>
+      <hr class="filete">
+    </div>
+
+    <div class="texto-corrido">
+      <p>A LGPD garante a você confirmar se tratamos algum dado seu, acessar, corrigir, pedir anonimização ou eliminação, saber com quem compartilhamos e revogar consentimento. Vale para quem nos escreve.</p>
+      <p>Se você é <strong>cliente de uma clínica</strong> e quer exercer esses direitos, o pedido vai para a clínica — é ela quem decide, e nós cumprimos o que ela determinar. Se preferir falar com a gente, encaminhamos para ela e acompanhamos até responderem.</p>
+      <!-- CONTATO: o canal de privacidade precisa de um endereco real, e nao
+           pode ser o mesmo caixa de vendas. Trocar junto com os demais. -->
+      <p>Canal para exercer direitos e falar sobre este documento: <strong>privacidade@exemplo.com.br</strong>. Respondemos em até 15 dias.</p>
+
+      <h3>Mudanças</h3>
+      <p>Se este documento mudar de forma relevante, a data abaixo muda junto e as clínicas com contrato ativo são avisadas por escrito — não só pela alteração silenciosa da página.</p>
+
+      <p class="nota-acao">Versão de 31 de agosto de 2026.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <div class="rail">
+    <div>
+      <a class="marca" href="./"><span class="sinal" aria-hidden="true"></span>Intervalo</a>
+      <p class="assinatura-marca">Operação para quem trabalha com estética</p>
+      <p>Cuidado clínico e software na mesma casa.</p>
+      <p class="identidade">
+        <!-- EMPRESA: troque pela razao social e pelo CNPJ reais assim que a
+             empresa estiver aberta. Enquanto for placeholder, o site nao pode
+             ser indexado — quem vende tratamento de dado de paciente precisa
+             dizer quem e. -->
+        RAZÃO SOCIAL LTDA · CNPJ 00.000.000/0001-00 · Cidade/UF
+      </p>
+    </div>
+    <div class="coluna">
+      <span class="tit">Frentes</span>
+      <a href="./">Para clínicas</a><a href="./enfermeiras.html">Para enfermeiras</a><a href="./especialistas.html">Para especialistas</a>
+    </div>
+    <div class="coluna">
+      <span class="tit">Legal</span>
+      <a href="./privacidade.html">Privacidade e dados</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,464 @@
+/* Sistema visual. Cores e escala vêm de tokens.css, gerado de tokens.json por
+   `npm run tokens` — não escreva hex aqui.
+
+   Direção: med spa / clínica dermatológica. Neutros quentes, serifada romana
+   nos títulos, geométrica no corpo, e o ARCO como forma assinatura das fotos. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--surface-canvas);
+  color: var(--color-tinta);
+  font-family: var(--font-texto);
+  font-size: var(--texto-body-tamanho);
+  line-height: var(--texto-body-entrelinha);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--color-greige); color: var(--color-espresso); }
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--color-eucalipto); text-underline-offset: 3px; }
+a:hover { color: var(--color-espresso); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--color-eucalipto); outline-offset: 3px; border-radius: 3px;
+}
+
+/* ---------- estrutura ---------- */
+
+.rail { width: 100%; max-width: var(--layout-page-max-width); margin-inline: auto; padding-inline: var(--spacing-40); }
+.rail-estreito > * { max-width: 780px; }
+@media (max-width: 700px) { .rail { padding-inline: var(--spacing-20); } }
+
+.faixa { padding-block: var(--spacing-96); }
+.faixa-elevada { background: var(--surface-elevada); }
+.faixa-secundaria { background: var(--surface-secundaria); }
+.faixa-escura { background: var(--surface-escura); color: var(--color-greige); }
+.faixa-escura h1, .faixa-escura h2, .faixa-escura h3, .faixa-escura strong { color: var(--color-porcelana); }
+@media (max-width: 700px) { .faixa { padding-block: var(--spacing-64); } }
+
+/* ---------- tipografia ---------- */
+
+h1, h2, h3, .disp {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-espresso);
+  letter-spacing: -.005em;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 { font-size: clamp(38px, 5vw, 64px); line-height: 1.05; max-width: 17ch; }
+h2 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; max-width: 22ch; }
+h3 { font-size: var(--texto-heading-sm-tamanho); line-height: 1.25; margin-bottom: var(--spacing-8); }
+
+.olho {
+  font-family: var(--font-texto); font-weight: 500;
+  font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--color-eucalipto); margin: 0 0 var(--spacing-16);
+}
+.faixa-escura .olho { color: var(--color-greige); }
+
+p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
+.lede { font-size: var(--texto-body-lg-tamanho); line-height: 1.6; max-width: 50ch; }
+.sub { color: var(--color-espresso); max-width: 58ch; }
+.faixa-escura .sub, .faixa-escura p { color: var(--color-greige); }
+
+.filete { width: 56px; height: 1px; background: var(--color-areia); margin: var(--spacing-24) 0; border: 0; }
+
+/* ---------- ações ---------- */
+
+.acoes { display: flex; flex-wrap: wrap; gap: var(--spacing-12); align-items: center; margin-top: var(--spacing-32); }
+
+.botao {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--spacing-8);
+  padding: 16px var(--spacing-32); min-height: 52px;
+  border-radius: var(--radius-full);
+  background: var(--color-espresso); color: var(--color-porcelana);
+  border: 1px solid var(--color-espresso);
+  font-family: var(--font-texto); font-size: 15px; font-weight: 500;
+  letter-spacing: .04em; text-decoration: none; cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.botao:hover { background: var(--color-eucalipto); border-color: var(--color-eucalipto); color: var(--color-porcelana); }
+
+.botao-vazado { background: transparent; color: var(--color-espresso); border-color: var(--color-areia); }
+.botao-vazado:hover { background: var(--color-espresso); border-color: var(--color-espresso); color: var(--color-porcelana); }
+.faixa-escura .botao { background: var(--color-porcelana); color: var(--color-espresso); border-color: var(--color-porcelana); }
+.faixa-escura .botao:hover { background: var(--color-greige); border-color: var(--color-greige); }
+.faixa-escura .botao-vazado { background: transparent; color: var(--color-porcelana); border-color: var(--color-areia); }
+.faixa-escura .botao-vazado:hover { background: var(--color-porcelana); color: var(--color-espresso); }
+
+.nota-acao { font-size: var(--texto-small-tamanho); color: var(--color-espresso); margin: var(--spacing-16) 0 0; max-width: 48ch; }
+.faixa-escura .nota-acao { color: var(--color-greige); }
+
+/* ---------- cabeçalho ---------- */
+
+.anuncio {
+  background: var(--color-espresso); color: var(--color-greige);
+  text-align: center; padding: 11px var(--spacing-20);
+  font-size: var(--texto-small-tamanho); letter-spacing: .04em;
+}
+.anuncio a { color: var(--color-porcelana); }
+
+.topo { background: var(--surface-canvas); border-bottom: 1px solid var(--color-greige); position: sticky; top: 0; z-index: 20; }
+.topo .rail { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-24); min-height: 78px; }
+.marca {
+  font-family: var(--font-display); font-size: 25px; color: var(--color-espresso);
+  text-decoration: none; white-space: nowrap; letter-spacing: .04em;
+  display: inline-flex; align-items: center; gap: var(--spacing-12);
+}
+
+/* O simbolo entra como mascara, nao como imagem: assim um arquivo so serve
+   ao cabecalho (espresso), ao rodape (porcelana) e ao favicon, e a cor vem
+   sempre do contexto em vez de exigir uma copia por tom. */
+.marca .sinal {
+  width: .72em; height: .94em; flex: none;
+  background: currentColor;
+  -webkit-mask: url("./marca.svg") no-repeat center / contain;
+  mask: url("./marca.svg") no-repeat center / contain;
+}
+
+.topo nav { display: flex; gap: var(--spacing-32); align-items: center; font-size: 15px; }
+.topo nav a { color: var(--color-espresso); text-decoration: none; letter-spacing: .03em; }
+.topo nav a:hover { color: var(--color-eucalipto); }
+.topo nav a.ativo { border-bottom: 1px solid var(--color-eucalipto); }
+/* `.topo nav a` (0,3,0) vence `.botao` (0,1,0) na cor: sem esta linha o
+   rótulo do CTA fica espresso sobre espresso, invisível. */
+.topo nav a.botao { color: var(--color-porcelana); min-height: 44px; padding: 11px var(--spacing-24); font-size: 14px; }
+.topo nav a.botao:hover { color: var(--color-porcelana); }
+@media (max-width: 900px) { .topo nav a.opcional { display: none; } }
+
+/* ---------- herói ---------- */
+
+.heroi { padding-block: var(--spacing-80) var(--spacing-96); }
+.duas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--spacing-64); align-items: center; }
+.duas-texto { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+@media (max-width: 980px) { .duas, .duas-texto { grid-template-columns: 1fr; gap: var(--spacing-48); } }
+
+/* ---------- FOTOS: molduras prontas para a imagem gerada ----------
+   Cada slot tem um número (F1, F2...) que corresponde ao prompt em MIDIA.md.
+   Enquanto não há imagem, a moldura mostra o que vai ali — de propósito,
+   para ninguém publicar com buraco sem perceber. */
+
+.foto {
+  position: relative; overflow: hidden;
+  background: var(--color-greige);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: var(--spacing-32);
+}
+.foto.arco { border-radius: var(--radius-arco); }
+.foto.suave { border-radius: var(--radius-grande); }
+.foto.retrato { aspect-ratio: 3 / 4; }
+.foto.paisagem { aspect-ratio: 4 / 3; }
+.foto.larga { aspect-ratio: 16 / 9; }
+.foto.quadrada { aspect-ratio: 1 / 1; }
+.foto img { width: 100%; height: 100%; object-fit: cover; }
+
+.foto:not(:has(img)) { border: 1px dashed var(--color-areia); }
+.foto .vazio { color: var(--color-espresso); font-size: var(--texto-small-tamanho); line-height: 1.5; max-width: 30ch; }
+.foto .vazio b { display: block; font-family: var(--font-display); font-size: 17px; margin-bottom: 6px; }
+.foto .cod {
+  position: absolute; top: var(--spacing-16); left: var(--spacing-16);
+  background: var(--color-espresso); color: var(--color-porcelana);
+  font-size: 11px; font-weight: 500; letter-spacing: .1em;
+  padding: 4px 10px; border-radius: var(--radius-full);
+}
+
+/* ---------- grades e cartões ---------- */
+
+.grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--spacing-24); margin-top: var(--spacing-48); }
+.grade-2 { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+
+.cartao {
+  background: var(--surface-elevada); border-radius: var(--radius-card);
+  padding: var(--layout-card-padding); display: flex; flex-direction: column; gap: var(--spacing-8);
+  border: 1px solid var(--color-greige);
+}
+.faixa-elevada .cartao { background: var(--surface-canvas); }
+.faixa-escura .cartao { background: transparent; border-color: var(--color-eucalipto); }
+.cartao p { font-size: 15px; margin: 0; max-width: none; }
+.cartao .quando {
+  font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--color-eucalipto); margin-bottom: var(--spacing-4);
+}
+.faixa-escura .cartao .quando { color: var(--color-greige); }
+
+/* ---------- menu de preços ---------- */
+
+.menu { margin-top: var(--spacing-48); border-top: 1px solid var(--color-areia); }
+.menu-linha { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--spacing-24); align-items: baseline; padding: var(--spacing-24) 0; border-bottom: 1px solid var(--color-areia); }
+.menu-linha h3 { margin: 0 0 4px; }
+.menu-linha p { margin: 0; font-size: 15px; color: var(--color-espresso); }
+.menu-linha .valor { font-family: var(--font-display); font-size: 30px; white-space: nowrap; color: var(--color-espresso); }
+
+/* ---------- números ---------- */
+
+.numeros { display: flex; flex-wrap: wrap; gap: var(--spacing-48) var(--spacing-64); margin-top: var(--spacing-40); }
+.numeros .rot { display: block; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-eucalipto); margin-bottom: var(--spacing-8); }
+.faixa-escura .numeros .rot { color: var(--color-greige); }
+.numeros .val { font-family: var(--font-display); font-size: 46px; line-height: 1; color: var(--color-espresso); font-variant-numeric: tabular-nums; }
+.faixa-escura .numeros .val { color: var(--color-porcelana); }
+.numeros .obs { font-size: 14px; margin-top: var(--spacing-8); max-width: 24ch; }
+
+/* ---------- passos ---------- */
+
+.passos { list-style: none; margin: var(--spacing-48) 0 0; padding: 0; display: grid; gap: 0; }
+.passos li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: var(--spacing-24); padding-bottom: var(--spacing-32); position: relative; }
+.passos li:last-child { padding-bottom: 0; }
+.passos li::before { content: ""; position: absolute; left: 25px; top: 52px; bottom: 0; width: 1px; background: var(--color-areia); }
+.passos li:last-child::before { display: none; }
+.passos .n {
+  width: 52px; height: 52px; border-radius: var(--radius-full);
+  border: 1px solid var(--color-areia); background: var(--surface-canvas); color: var(--color-espresso);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 21px; z-index: 1;
+}
+.faixa-escura .passos .n { background: transparent; color: var(--color-porcelana); }
+.passos p { margin: 0; font-size: 15.5px; }
+
+/* ---------- depoimento ---------- */
+
+.depoimento { max-width: 760px; margin-inline: auto; text-align: center; }
+.depoimento blockquote {
+  font-family: var(--font-display); font-size: clamp(24px, 3vw, 34px); line-height: 1.35;
+  color: var(--color-espresso); margin: 0 0 var(--spacing-24); text-wrap: balance;
+}
+.depoimento .autoria { font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-eucalipto); }
+
+/* ---------- perguntas ---------- */
+
+.pergunta { border-bottom: 1px solid var(--color-areia); }
+.pergunta summary {
+  cursor: pointer; list-style: none; padding: var(--spacing-24) 0;
+  font-family: var(--font-display); font-size: 20px; color: var(--color-espresso);
+  display: flex; justify-content: space-between; gap: var(--spacing-16); align-items: baseline;
+}
+.pergunta summary::-webkit-details-marker { display: none; }
+.pergunta summary::after { content: "+"; color: var(--color-eucalipto); font-size: 22px; }
+.pergunta[open] summary::after { content: "–"; }
+.pergunta div { padding: 0 0 var(--spacing-24); }
+.pergunta p { font-size: 15.5px; margin: 0; }
+
+/* ---------- reservado (prova real entra depois) ---------- */
+
+.reservado {
+  border: 1px dashed var(--color-areia); border-radius: var(--radius-card);
+  padding: var(--spacing-32); margin-top: var(--spacing-40); max-width: 70ch;
+  font-size: 15px; color: var(--color-espresso); background: var(--surface-elevada);
+}
+.reservado b { font-family: var(--font-display); font-size: 18px; display: block; margin-bottom: var(--spacing-8); }
+
+/* ---------- formulário ---------- */
+
+.formulario { display: grid; gap: var(--spacing-12); max-width: 440px; margin-top: var(--spacing-32); }
+.formulario label { display: grid; gap: 6px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-eucalipto); }
+.formulario input {
+  font: inherit; font-size: 16px; padding: 14px var(--spacing-20);
+  border: 1px solid var(--color-areia); border-radius: var(--radius-full);
+  background: var(--surface-elevada); color: var(--color-tinta);
+}
+
+/* ---------- rodapé ---------- */
+
+.rodape { background: var(--color-espresso); color: var(--color-greige); padding-block: var(--spacing-64) var(--spacing-80); font-size: 15px; }
+.rodape .rail { display: flex; flex-wrap: wrap; gap: var(--spacing-40) var(--spacing-64); justify-content: space-between; }
+/* inline-flex, nao inline-block: `.rodape .marca` (0,2,0) vence `.marca`
+   (0,1,0), e um inline-block aqui desalinharia o simbolo do texto. */
+.rodape .marca { color: var(--color-porcelana); margin-bottom: var(--spacing-16); display: inline-flex; }
+
+.rodape p { margin: 0 0 var(--spacing-8); max-width: 42ch; font-size: 14px; }
+.rodape a { color: var(--color-greige); text-decoration: none; }
+.rodape a:hover { color: var(--color-porcelana); }
+.rodape .coluna { display: flex; flex-direction: column; gap: var(--spacing-8); }
+.rodape .tit { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-greige); margin-bottom: var(--spacing-4); }
+
+/* ---------- movimento ----------
+   Uma revelação só, ancorada na rolagem. Sem biblioteca e sem JS: onde o
+   navegador não suportar animation-timeline, o conteúdo simplesmente aparece. */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .revela {
+      animation: subir linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 26%;
+    }
+    /* Zoom lento na foto do herói: o gesto de spa, contido. */
+    .foto.viva img { animation: aproximar linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  }
+}
+@keyframes subir { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes aproximar { from { transform: scale(1); } to { transform: scale(1.07); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ═══════════════ COMPOSIÇÃO CENTRADA ═══════════════ */
+
+.centro { text-align: center; }
+.centro h1, .centro h2, .centro .lede, .centro .sub, .centro p { margin-inline: auto; }
+.centro .filete { margin-inline: auto; }
+.centro .acoes { justify-content: center; }
+.centro .olho { margin-inline: auto; }
+.centro h1 { max-width: 19ch; }
+.centro h2 { max-width: 22ch; }
+
+/* Cabeçalho de seção centrado, conteúdo abaixo com seu próprio alinhamento. */
+.cabecalho { text-align: center; max-width: 720px; margin-inline: auto; margin-bottom: var(--spacing-16); }
+.cabecalho .filete { margin-inline: auto; }
+.cabecalho .sub { margin-inline: auto; }
+
+/* ═══════════════ FUNDO VIVO ═══════════════
+   Duas coisas, e só duas: grão de filme parado sobre a página inteira, e
+   manchas de luz que atravessam o fundo muito devagar. A referência
+   fotográfica é "luz natural difusa vindo de uma janela" — o movimento
+   imita isso, não um gradiente animado. */
+
+/* Grão: turbulência SVG, fixa, quase imperceptível. Custo zero de runtime. */
+body::after {
+  content: "";
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .04; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+body > * { position: relative; z-index: 2; }
+
+/* Manchas de luz. Ficam atrás do conteúdo da faixa e nunca encostam no texto. */
+.viva-fundo { position: relative; overflow: hidden; isolation: isolate; }
+.viva-fundo > .rail { position: relative; z-index: 1; }
+.brilho { position: absolute; inset: -20% -10%; z-index: 0; pointer-events: none; filter: blur(90px); }
+.brilho span { position: absolute; display: block; border-radius: 50%; opacity: .55; }
+.brilho span:nth-child(1) { width: 46vw; height: 46vw; left: -6%;  top: -14%; background: var(--color-greige); animation: derivaA 54s ease-in-out infinite alternate; }
+.brilho span:nth-child(2) { width: 38vw; height: 38vw; right: -4%; top: 18%;  background: var(--color-areia);  animation: derivaB 68s ease-in-out infinite alternate; }
+.brilho span:nth-child(3) { width: 30vw; height: 30vw; left: 38%;  bottom: -18%; background: var(--color-porcelana); opacity: .7; animation: derivaC 46s ease-in-out infinite alternate; }
+
+/* No escuro a mancha aparece muito mais: menos opacidade e mais desfoque,
+   senão vira um anel visível em vez de luz. */
+.faixa-escura .brilho { filter: blur(130px); }
+.faixa-escura .brilho span:nth-child(1) { background: #6d5949; opacity: .5; }
+.faixa-escura .brilho span:nth-child(2) { background: var(--color-eucalipto); opacity: .22; }
+.faixa-escura .brilho span:nth-child(3) { background: #4a3b2f; opacity: .5; }
+
+@keyframes derivaA { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(6vw, 4vh, 0) scale(1.14); } }
+@keyframes derivaB { from { transform: translate3d(0,0,0) scale(1.08); } to { transform: translate3d(-5vw, -5vh, 0) scale(1); } }
+@keyframes derivaC { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(-7vw, -3vh, 0) scale(1.2); } }
+
+@media (prefers-reduced-motion: reduce) { .brilho span { animation: none !important; } }
+
+/* ═══════════════ TRIO DE ARCOS ═══════════════
+   A composição assinatura do herói: três molduras, a do meio mais alta. */
+
+.arcos {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-24); align-items: end;
+  margin-top: var(--spacing-64); max-width: 980px; margin-inline: auto;
+}
+.arcos .foto { margin: 0; aspect-ratio: 4 / 5; }
+.arcos .foto:nth-child(2) { margin-bottom: var(--spacing-40); }
+@media (max-width: 820px) {
+  .arcos { grid-template-columns: 1fr; max-width: 420px; }
+  .arcos .foto:nth-child(2) { margin-bottom: 0; }
+  .arcos .foto:nth-child(3) { display: none; }
+}
+
+/* Um floreio contido: os arcos sobem em sequência ao entrarem na tela. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .arcos .foto { animation: subir linear both; animation-timeline: view(); animation-range: entry 0% cover 22%; }
+    .arcos .foto:nth-child(2) { animation-range: entry 4% cover 28%; }
+    .arcos .foto:nth-child(3) { animation-range: entry 8% cover 32%; }
+  }
+}
+
+/* ═══════════════ REFINOS ═══════════════ */
+
+.heroi.centro h1 { letter-spacing: -.015em; }
+.heroi.centro .lede { font-size: clamp(18px, 2vw, 21px); }
+
+/* Ornamento no lugar do filete reto, quando a seção é centrada. */
+.centro .filete, .cabecalho .filete {
+  width: 168px; height: 10px; background: none; border: 0;
+  margin-block: var(--spacing-32); position: relative;
+}
+.centro .filete::before, .cabecalho .filete::before {
+  content: ""; position: absolute; inset: 0; top: 50%; height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0, var(--color-areia) 18%, var(--color-areia) 42%,
+    transparent 42%, transparent 58%,
+    var(--color-areia) 58%, var(--color-areia) 82%, transparent 100%);
+}
+.centro .filete::after, .cabecalho .filete::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  background: var(--color-eucalipto); transform: rotate(45deg);
+}
+.faixa-escura .filete::after { background: var(--color-areia); }
+
+/* Foto única sob um herói centrado: larga, mas sem encostar nas bordas. */
+.larga-central { max-width: 900px; margin: var(--spacing-64) auto 0; }
+@media (max-width: 700px) { .larga-central { aspect-ratio: 3 / 4; } }
+
+/* Respiro depois de um cabeçalho centrado, seja o que vier. */
+.cabecalho + .foto, .cabecalho + .menu, .cabecalho + div { margin-top: var(--spacing-48); }
+.cabecalho + .grade { margin-top: var(--spacing-24); }
+
+/* A faixa elevada usa uma foto larga única. */
+.faixa-elevada .foto.larga { max-width: 1000px; margin-inline: auto; }
+
+/* Numa moldura em arco o canto superior esquerdo é recortado: o marcador
+   do slot desce para o pé, senão some pela metade. */
+.foto.arco .cod { top: auto; bottom: var(--spacing-16); }
+
+/* ═══════════════ TEXTO CORRIDO ═══════════════
+   Paginas de leitura (privacidade), onde a medida importa mais que o ritmo
+   de secoes curtas. */
+
+.texto-corrido { max-width: 68ch; margin-inline: auto; }
+.texto-corrido h3 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 22px; line-height: 1.25; letter-spacing: -.01em;
+  margin: var(--spacing-40) 0 var(--spacing-12);
+}
+.texto-corrido > *:first-child { margin-top: 0; }
+.texto-corrido p { margin: 0 0 var(--spacing-16); }
+.texto-corrido a { color: inherit; text-underline-offset: 3px; }
+.faixa-escura .texto-corrido h3 { color: var(--color-porcelana); }
+
+/* Identificacao da empresa no rodape: obrigatoria e discreta, nao escondida. */
+.rodape .identidade {
+  /* Greige, nao areia: areia sobre espresso da 4.37:1, que so passa em texto
+     grande — e esta linha e miuda de proposito. */
+  font-size: 12.5px; color: var(--color-greige); opacity: .85;
+  margin-top: var(--spacing-12); max-width: 46ch;
+}
+
+/* ═══════════════ ALVOS DE TOQUE ═══════════════
+   Links de rodape e da barra de anuncio ficavam com menos de 40px de altura
+   no celular. O padding vertical resolve sem mexer no ritmo visual, porque a
+   coluna ja usa `gap` — o alvo cresce, o espacamento aparente nao. */
+
+@media (max-width: 760px) {
+  .rodape .coluna { gap: 0; }
+  .rodape .coluna a { min-height: 44px; display: flex; align-items: center; }
+  .anuncio { padding-block: var(--spacing-8); }
+  /* inline-flex com altura minima: o alvo chega aos 44px sem que a barra
+     inteira engorde, porque o texto continua centralizado na mesma linha. */
+  .anuncio a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* Os rotulos miudos sobre a faixa escura usam greige, nao areia: areia da
+   4.37:1 sobre o espresso e o proprio token proibe uso como texto. O guarda
+   em src/tokens.ts confere isso a cada build. Areia continua valendo em
+   filete e borda, onde nao ha exigencia de contraste de texto.
+
+   A assinatura do rodape: "Intervalo" sozinho nao diz o que a empresa faz, e
+   nao vai dizer pelos primeiros anos. Fica fixa em todas as paginas. */
+.rodape .assinatura-marca {
+  font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+  /* Greige, nao areia: o token areia diz "NAO use como texto" na propria
+     descricao, porque da 4.37:1 sobre o espresso. */
+  color: var(--color-greige); margin: calc(var(--spacing-16) * -1) 0 var(--spacing-16);
+}
