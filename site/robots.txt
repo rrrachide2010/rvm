@@ -9,11 +9,12 @@
 #   1. aqui: troque o bloco abaixo por
 #        User-agent: *
 #        Allow: /
-#        Sitemap: https://SEU-DOMINIO.com.br/sitemap.xml
+#        Sitemap: https://retorno-site.vercel.app/sitemap.xml
 #   2. nas quatro paginas: o <meta name="robots"> ja diz "index,follow",
 #      entao nao precisa mexer — mas confira que continua assim;
-#   3. em todo lugar: troque SEU-DOMINIO.com.br pelo dominio real
-#      (paginas, sitemap.xml e a linha Sitemap acima).
+#   3. em todo lugar: se ja houver dominio proprio, troque
+#      retorno-site.vercel.app por ele (paginas, sitemap.xml e a linha
+#      Sitemap acima). Sem dominio proprio, a URL do Vercel serve.
 #
 # E antes disso tudo: contato real no lugar do placeholder.
 

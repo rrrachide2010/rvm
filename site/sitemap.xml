@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  DOMINIO: troque SEU-DOMINIO.com.br pelo dominio real antes de liberar a
-  indexacao. As datas em <lastmod> devem ser atualizadas quando a pagina
-  mudar de conteudo, nao a cada deploy.
+  DOMINIO: hoje aponta para a URL do Vercel, que e o endereco real do site.
+  Ao comprar dominio proprio, troque retorno-site.vercel.app aqui, nas cinco
+  paginas e no robots.txt — na mesma virada. As datas em <lastmod> devem ser
+  atualizadas quando a pagina mudar de conteudo, nao a cada deploy.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://SEU-DOMINIO.com.br/</loc>
+    <loc>https://retorno-site.vercel.app/</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://SEU-DOMINIO.com.br/enfermeiras</loc>
+    <loc>https://retorno-site.vercel.app/enfermeiras</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://SEU-DOMINIO.com.br/calculadora</loc>
+    <loc>https://retorno-site.vercel.app/calculadora</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://SEU-DOMINIO.com.br/especialistas</loc>
+    <loc>https://retorno-site.vercel.app/especialistas</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://SEU-DOMINIO.com.br/privacidade</loc>
+    <loc>https://retorno-site.vercel.app/privacidade</loc>
     <lastmod>2026-08-31</lastmod>
     <priority>0.3</priority>
   </url>

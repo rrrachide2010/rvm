@@ -31,12 +31,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .rail-estreito > * { max-width: 780px; }
 @media (max-width: 700px) { .rail { padding-inline: var(--spacing-20); } }
 
-.faixa { padding-block: var(--spacing-96); }
+.faixa { padding-block: var(--spacing-80); }
 .faixa-elevada { background: var(--surface-elevada); }
 .faixa-secundaria { background: var(--surface-secundaria); }
 .faixa-escura { background: var(--surface-escura); color: var(--color-greige); }
 .faixa-escura h1, .faixa-escura h2, .faixa-escura h3, .faixa-escura strong { color: var(--color-porcelana); }
-@media (max-width: 700px) { .faixa { padding-block: var(--spacing-64); } }
+@media (max-width: 700px) { .faixa { padding-block: var(--spacing-56); } }
 
 /* ---------- tipografia ---------- */
 
@@ -107,6 +107,9 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
   font-family: var(--font-display); font-size: 25px; color: var(--color-espresso);
   text-decoration: none; white-space: nowrap; letter-spacing: .04em;
   display: inline-flex; align-items: center; gap: var(--spacing-12);
+  /* 25px de corpo dao 41px de altura, tres a menos que o minimo de alvo de
+     toque — e a marca e o link mais tocado da pagina, porque e o "voltar". */
+  min-height: 44px;
 }
 
 /* O simbolo entra como mascara, nao como imagem: assim um arquivo so serve
@@ -129,9 +132,18 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .topo nav a.botao:hover { color: var(--color-porcelana); }
 @media (max-width: 900px) { .topo nav a.opcional { display: none; } }
 
+/* Rotulo curto no lugar do longo em tela estreita. Encurtar o texto, e nao
+   aplicar `nowrap`, porque nowrap nao encolhe: faria o botao transbordar a
+   regua em vez de caber nela. */
+.so-estreito { display: none; }
+@media (max-width: 700px) {
+  .so-largo { display: none; }
+  .so-estreito { display: inline; }
+}
+
 /* ---------- herói ---------- */
 
-.heroi { padding-block: var(--spacing-80) var(--spacing-96); }
+.heroi { padding-block: var(--spacing-64) var(--spacing-80); }
 .duas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--spacing-64); align-items: center; }
 .duas-texto { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
 @media (max-width: 980px) { .duas, .duas-texto { grid-template-columns: 1fr; gap: var(--spacing-48); } }
@@ -184,9 +196,29 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 }
 .faixa-escura .cartao .quando { color: var(--color-greige); }
 
+/* Sete cartoes numa grade de tres colunas deixavam o setimo sozinho, com um
+   buraco de duas colunas ao lado. Ele ocupa a linha inteira e vira fecho: e o
+   unico que fala do resultado, entao conclui a lista em vez de sobrar dela. */
+.cartao-largo { grid-column: 1 / -1; }
+@media (min-width: 900px) {
+  /* Grade, nao flex com largura fixa: com largura fixa o titulo curto deixava
+     um vao no meio do cartao. `max-content` faz a coluna medir o titulo, e a
+     ultima coluna absorve o resto. */
+  .cartao-largo {
+    display: grid; grid-template-columns: 170px max-content minmax(0, 1fr);
+    align-items: baseline; gap: var(--spacing-32);
+  }
+  .cartao-largo h3, .cartao-largo .quando { margin-bottom: 0; }
+}
+
 /* ---------- menu de preços ---------- */
 
-.menu { margin-top: var(--spacing-48); border-top: 1px solid var(--color-areia); }
+/* Estreito de proposito: a 1160px o nome ficava numa ponta e o valor na outra,
+   e o olho atravessava um vao para ligar "Mensalidade" a "R$ 350". */
+.menu {
+  margin-top: var(--spacing-48); border-top: 1px solid var(--color-areia);
+  max-width: 860px; margin-inline: auto;
+}
 .menu-linha { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--spacing-24); align-items: baseline; padding: var(--spacing-24) 0; border-bottom: 1px solid var(--color-areia); }
 .menu-linha h3 { margin: 0 0 4px; }
 .menu-linha p { margin: 0; font-size: 15px; color: var(--color-espresso); }
@@ -194,12 +226,35 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 
 /* ---------- números ---------- */
 
-.numeros { display: flex; flex-wrap: wrap; gap: var(--spacing-48) var(--spacing-64); margin-top: var(--spacing-40); }
+/* Grade em vez de flex: os quatro ocupam a regua inteira em colunas iguais.
+   Com `flex` eles se encostavam a esquerda e sobrava um terco vazio a direita,
+   o que fazia a faixa parecer um bloco pela metade. */
+.numeros {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-32); margin-top: var(--spacing-40);
+}
+.numeros > * + * { padding-left: var(--spacing-32); border-left: 1px solid var(--color-areia); }
+/* A faixa de numeros e uma tira de ficha tecnica, nao uma secao: com o mesmo
+   respiro das outras ela ficava com mais ar do que conteudo. Navegador sem
+   `:has()` cai no padrao e so fica mais espacado — nada quebra. */
+.faixa:has(> .rail > .numeros) { padding-block: var(--spacing-56); }
 .numeros .rot { display: block; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-eucalipto); margin-bottom: var(--spacing-8); }
 .faixa-escura .numeros .rot { color: var(--color-greige); }
 .numeros .val { font-family: var(--font-display); font-size: 46px; line-height: 1; color: var(--color-espresso); font-variant-numeric: tabular-nums; }
 .faixa-escura .numeros .val { color: var(--color-porcelana); }
 .numeros .obs { font-size: 14px; margin-top: var(--spacing-8); max-width: 24ch; }
+
+/* DEPOIS de `.numeros .val`, de proposito: as duas regras tem a mesma
+   especificidade, entao quem vence e a ultima do arquivo. Colocado antes, o
+   `font-size: 46px` logo abaixo anulava o do @media e "nenhuma" continuava
+   estourando a regua no celular. */
+@media (max-width: 860px) {
+  /* `minmax(0, 1fr)` e nao `1fr`: com `1fr` a coluna nao encolhe abaixo do
+     min-content da palavra mais larga. */
+  .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-40) var(--spacing-24); }
+  .numeros > * + * { padding-left: 0; border-left: 0; }
+  .numeros .val { font-size: clamp(30px, 9vw, 46px); }
+}
 
 /* ---------- passos ---------- */
 
@@ -242,9 +297,13 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 
 /* ---------- reservado (prova real entra depois) ---------- */
 
+/* Centrado, e com a mesma largura do menu de precos logo acima: a caixa vinha
+   encostada a esquerda sob um cabecalho centralizado, e o ombro desigual fazia
+   a secao inteira parecer torta. */
 .reservado {
   border: 1px dashed var(--color-areia); border-radius: var(--radius-card);
-  padding: var(--spacing-32); margin-top: var(--spacing-40); max-width: 70ch;
+  padding: var(--spacing-32); margin-top: var(--spacing-40);
+  max-width: 860px; margin-inline: auto;
   font-size: 15px; color: var(--color-espresso); background: var(--surface-elevada);
 }
 .reservado b { font-family: var(--font-display); font-size: 18px; display: block; margin-bottom: var(--spacing-8); }
@@ -302,6 +361,14 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .centro h1, .centro h2, .centro .lede, .centro .sub, .centro p { margin-inline: auto; }
 .centro .filete { margin-inline: auto; }
 .centro .acoes { justify-content: center; }
+
+/* REGRA DE ALINHAMENTO, escrita para nao voltar a ser coincidencia:
+   centralizacao total (`.centro`) so nos tres momentos — heroi, garantia e
+   comecar. Nas demais secoes o cabecalho ja e centralizado, entao o que vem
+   depois dele tambem e: menu, caixa reservada e o botao de fecho. Antes o
+   cabecalho ficava no meio e o conteudo encostado a esquerda, e o ombro
+   desigual fazia a secao parecer torta. */
+.cabecalho ~ .acoes { justify-content: center; }
 .centro .olho { margin-inline: auto; }
 .centro h1 { max-width: 19ch; }
 .centro h2 { max-width: 22ch; }
@@ -354,7 +421,7 @@ body > * { position: relative; z-index: 2; }
 .arcos {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-24); align-items: end;
-  margin-top: var(--spacing-64); max-width: 980px; margin-inline: auto;
+  margin-top: var(--spacing-48); max-width: 980px; margin-inline: auto;
 }
 .arcos .foto { margin: 0; aspect-ratio: 4 / 5; }
 .arcos .foto:nth-child(2) { margin-bottom: var(--spacing-40); }

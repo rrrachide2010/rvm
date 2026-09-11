@@ -197,7 +197,7 @@ ponto exato do código:
 | --- | --- |
 | `CONTATO` | `wa.me/5500000000000` e `contato@exemplo.com.br`, em `index.html`, `especialistas.html` e `privacidade.html` |
 | `EMPRESA` | razão social e CNPJ no rodapé das cinco páginas |
-| `DOMINIO` | `SEU-DOMINIO.com.br` no `canonical`, no `og:url`, no `og:image`, no `sitemap.xml` e na linha `Sitemap:` do `robots.txt` |
+| `DOMINIO` | `retorno-site.vercel.app` no `canonical`, no `og:url`, no `og:image`, no `sitemap.xml` e na linha `Sitemap:` do `robots.txt` — já é um endereço que existe, então o link compartilhado funciona; só precisa de outra virada se houver domínio próprio |
 | — | as molduras de foto vazias: ou entram as imagens, ou os marcadores `F1`–`F10` saem da página |
 
 Só depois disso troque o bloco final do `robots.txt` por `Allow: /`. O
