@@ -34,8 +34,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .faixa { padding-block: var(--spacing-80); }
 .faixa-elevada { background: var(--surface-elevada); }
 .faixa-secundaria { background: var(--surface-secundaria); }
-.faixa-escura { background: var(--surface-escura); color: var(--color-greige); }
-.faixa-escura h1, .faixa-escura h2, .faixa-escura h3, .faixa-escura strong { color: var(--color-porcelana); }
+/* A faixa que antes era escura agora e um tom de fundo e dois filetes. O
+   ritmo da pagina passa a vir de mudanca sutil de superficie e de espaco,
+   nao de bloco escuro — que era o que pesava o site inteiro. */
+.faixa-destaque {
+  background: var(--surface-secundaria);
+  border-block: 1px solid var(--color-areia);
+}
 @media (max-width: 700px) { .faixa { padding-block: var(--spacing-56); } }
 
 /* ---------- tipografia ---------- */
@@ -57,12 +62,10 @@ h3 { font-size: var(--texto-heading-sm-tamanho); line-height: 1.25; margin-botto
   font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
   color: var(--color-eucalipto); margin: 0 0 var(--spacing-16);
 }
-.faixa-escura .olho { color: var(--color-greige); }
 
 p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .lede { font-size: var(--texto-body-lg-tamanho); line-height: 1.6; max-width: 50ch; }
 .sub { color: var(--color-espresso); max-width: 58ch; }
-.faixa-escura .sub, .faixa-escura p { color: var(--color-greige); }
 
 .filete { width: 56px; height: 1px; background: var(--color-areia); margin: var(--spacing-24) 0; border: 0; }
 
@@ -84,24 +87,22 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 
 .botao-vazado { background: transparent; color: var(--color-espresso); border-color: var(--color-areia); }
 .botao-vazado:hover { background: var(--color-espresso); border-color: var(--color-espresso); color: var(--color-porcelana); }
-.faixa-escura .botao { background: var(--color-porcelana); color: var(--color-espresso); border-color: var(--color-porcelana); }
-.faixa-escura .botao:hover { background: var(--color-greige); border-color: var(--color-greige); }
-.faixa-escura .botao-vazado { background: transparent; color: var(--color-porcelana); border-color: var(--color-areia); }
-.faixa-escura .botao-vazado:hover { background: var(--color-porcelana); color: var(--color-espresso); }
 
 .nota-acao { font-size: var(--texto-small-tamanho); color: var(--color-espresso); margin: var(--spacing-16) 0 0; max-width: 48ch; }
-.faixa-escura .nota-acao { color: var(--color-greige); }
 
 /* ---------- cabeçalho ---------- */
 
+/* Tarja clara com filete embaixo. Escura, ela era a primeira coisa da pagina e
+   dava o tom errado — 70px de bloco pesado antes de a marca aparecer. */
 .anuncio {
-  background: var(--color-espresso); color: var(--color-greige);
-  text-align: center; padding: 11px var(--spacing-20);
+  background: var(--surface-secundaria); color: var(--color-tinta);
+  border-bottom: 1px solid var(--color-areia);
+  text-align: center; padding: 10px var(--spacing-20);
   font-size: var(--texto-small-tamanho); letter-spacing: .04em;
 }
-.anuncio a { color: var(--color-porcelana); }
+.anuncio a { color: var(--color-eucalipto); }
 
-.topo { background: var(--surface-canvas); border-bottom: 1px solid var(--color-greige); position: sticky; top: 0; z-index: 20; }
+.topo { background: var(--surface-canvas); border-bottom: 1px solid var(--color-areia); position: sticky; top: 0; z-index: 20; }
 .topo .rail { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-24); min-height: 78px; }
 .marca {
   font-family: var(--font-display); font-size: 25px; color: var(--color-espresso);
@@ -185,16 +186,14 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 .cartao {
   background: var(--surface-elevada); border-radius: var(--radius-card);
   padding: var(--layout-card-padding); display: flex; flex-direction: column; gap: var(--spacing-8);
-  border: 1px solid var(--color-greige);
+  border: 1px solid var(--color-areia);
 }
 .faixa-elevada .cartao { background: var(--surface-canvas); }
-.faixa-escura .cartao { background: transparent; border-color: var(--color-eucalipto); }
 .cartao p { font-size: 15px; margin: 0; max-width: none; }
 .cartao .quando {
   font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
   color: var(--color-eucalipto); margin-bottom: var(--spacing-4);
 }
-.faixa-escura .cartao .quando { color: var(--color-greige); }
 
 /* Sete cartoes numa grade de tres colunas deixavam o setimo sozinho, com um
    buraco de duas colunas ao lado. Ele ocupa a linha inteira e vira fecho: e o
@@ -239,9 +238,7 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
    `:has()` cai no padrao e so fica mais espacado — nada quebra. */
 .faixa:has(> .rail > .numeros) { padding-block: var(--spacing-56); }
 .numeros .rot { display: block; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-eucalipto); margin-bottom: var(--spacing-8); }
-.faixa-escura .numeros .rot { color: var(--color-greige); }
 .numeros .val { font-family: var(--font-display); font-size: 46px; line-height: 1; color: var(--color-espresso); font-variant-numeric: tabular-nums; }
-.faixa-escura .numeros .val { color: var(--color-porcelana); }
 .numeros .obs { font-size: 14px; margin-top: var(--spacing-8); max-width: 24ch; }
 
 /* DEPOIS de `.numeros .val`, de proposito: as duas regras tem a mesma
@@ -269,7 +266,6 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-size: 21px; z-index: 1;
 }
-.faixa-escura .passos .n { background: transparent; color: var(--color-porcelana); }
 .passos p { margin: 0; font-size: 15.5px; }
 
 /* ---------- depoimento ---------- */
@@ -320,17 +316,23 @@ p { max-width: 62ch; margin: 0 0 var(--spacing-16); }
 
 /* ---------- rodapé ---------- */
 
-.rodape { background: var(--color-espresso); color: var(--color-greige); padding-block: var(--spacing-64) var(--spacing-80); font-size: 15px; }
+/* Rodape claro, separado por filete. Um bloco escuro no fim desfazia, em uma
+   tela, o que a pagina inteira construiu de leveza. */
+.rodape {
+  background: var(--surface-canvas); color: var(--color-tinta);
+  border-top: 1px solid var(--color-areia);
+  padding-block: var(--spacing-64) var(--spacing-80); font-size: 15px;
+}
 .rodape .rail { display: flex; flex-wrap: wrap; gap: var(--spacing-40) var(--spacing-64); justify-content: space-between; }
 /* inline-flex, nao inline-block: `.rodape .marca` (0,2,0) vence `.marca`
    (0,1,0), e um inline-block aqui desalinharia o simbolo do texto. */
-.rodape .marca { color: var(--color-porcelana); margin-bottom: var(--spacing-16); display: inline-flex; }
+.rodape .marca { color: var(--color-espresso); margin-bottom: var(--spacing-16); display: inline-flex; }
 
 .rodape p { margin: 0 0 var(--spacing-8); max-width: 42ch; font-size: 14px; }
-.rodape a { color: var(--color-greige); text-decoration: none; }
-.rodape a:hover { color: var(--color-porcelana); }
+.rodape a { color: var(--color-tinta); text-decoration: none; }
+.rodape a:hover { color: var(--color-eucalipto); }
 .rodape .coluna { display: flex; flex-direction: column; gap: var(--spacing-8); }
-.rodape .tit { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-greige); margin-bottom: var(--spacing-4); }
+.rodape .tit { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--color-eucalipto); margin-bottom: var(--spacing-4); }
 
 /* ---------- movimento ----------
    Uma revelação só, ancorada na rolagem. Sem biblioteca e sem JS: onde o
@@ -398,16 +400,12 @@ body > * { position: relative; z-index: 2; }
 .viva-fundo > .rail { position: relative; z-index: 1; }
 .brilho { position: absolute; inset: -20% -10%; z-index: 0; pointer-events: none; filter: blur(90px); }
 .brilho span { position: absolute; display: block; border-radius: 50%; opacity: .55; }
-.brilho span:nth-child(1) { width: 46vw; height: 46vw; left: -6%;  top: -14%; background: var(--color-greige); animation: derivaA 54s ease-in-out infinite alternate; }
+.brilho span:nth-child(1) { width: 46vw; height: 46vw; left: -6%;  top: -14%; background: var(--color-eucalipto); opacity: .07; animation: derivaA 54s ease-in-out infinite alternate; }
 .brilho span:nth-child(2) { width: 38vw; height: 38vw; right: -4%; top: 18%;  background: var(--color-areia);  animation: derivaB 68s ease-in-out infinite alternate; }
-.brilho span:nth-child(3) { width: 30vw; height: 30vw; left: 38%;  bottom: -18%; background: var(--color-porcelana); opacity: .7; animation: derivaC 46s ease-in-out infinite alternate; }
+.brilho span:nth-child(3) { width: 30vw; height: 30vw; left: 38%;  bottom: -18%; background: var(--color-areia); opacity: .5; animation: derivaC 46s ease-in-out infinite alternate; }
 
 /* No escuro a mancha aparece muito mais: menos opacidade e mais desfoque,
    senão vira um anel visível em vez de luz. */
-.faixa-escura .brilho { filter: blur(130px); }
-.faixa-escura .brilho span:nth-child(1) { background: #6d5949; opacity: .5; }
-.faixa-escura .brilho span:nth-child(2) { background: var(--color-eucalipto); opacity: .22; }
-.faixa-escura .brilho span:nth-child(3) { background: #4a3b2f; opacity: .5; }
 
 @keyframes derivaA { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(6vw, 4vh, 0) scale(1.14); } }
 @keyframes derivaB { from { transform: translate3d(0,0,0) scale(1.08); } to { transform: translate3d(-5vw, -5vh, 0) scale(1); } }
@@ -462,7 +460,6 @@ body > * { position: relative; z-index: 2; }
   width: 6px; height: 6px; margin: -3px 0 0 -3px;
   background: var(--color-eucalipto); transform: rotate(45deg);
 }
-.faixa-escura .filete::after { background: var(--color-areia); }
 
 /* Foto única sob um herói centrado: larga, mas sem encostar nas bordas. */
 .larga-central { max-width: 900px; margin: var(--spacing-64) auto 0; }
@@ -492,13 +489,13 @@ body > * { position: relative; z-index: 2; }
 .texto-corrido > *:first-child { margin-top: 0; }
 .texto-corrido p { margin: 0 0 var(--spacing-16); }
 .texto-corrido a { color: inherit; text-underline-offset: 3px; }
-.faixa-escura .texto-corrido h3 { color: var(--color-porcelana); }
 
 /* Identificacao da empresa no rodape: obrigatoria e discreta, nao escondida. */
 .rodape .identidade {
-  /* Greige, nao areia: areia sobre espresso da 4.37:1, que so passa em texto
-     grande — e esta linha e miuda de proposito. */
-  font-size: 12.5px; color: var(--color-greige); opacity: .85;
+  /* Tinta com opacidade, nao um tom claro: o rodape e claro agora, e greige
+     sobre canvas da 1.06:1 — sumia. Discreta se faz por peso, nao por cor
+     apagada, senao a linha obrigatoria vira linha ilegivel. */
+  font-size: 12.5px; color: var(--color-tinta); opacity: .7;
   margin-top: var(--spacing-12); max-width: 46ch;
 }
 
@@ -525,7 +522,5 @@ body > * { position: relative; z-index: 2; }
    nao vai dizer pelos primeiros anos. Fica fixa em todas as paginas. */
 .rodape .assinatura-marca {
   font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
-  /* Greige, nao areia: o token areia diz "NAO use como texto" na propria
-     descricao, porque da 4.37:1 sobre o espresso. */
-  color: var(--color-greige); margin: calc(var(--spacing-16) * -1) 0 var(--spacing-16);
+  color: var(--color-eucalipto); margin: calc(var(--spacing-16) * -1) 0 var(--spacing-16);
 }

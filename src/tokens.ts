@@ -15,17 +15,25 @@ const ENTRADA = resolve(process.cwd(), "site/tokens.json");
 const SAIDA = resolve(process.cwd(), "site/tokens.css");
 const ESTILO = resolve(process.cwd(), "site/estilo.css");
 
-/** Pares que a referencia prescreve — cada um vira um teste de contraste. */
+/**
+ * Pares que a referencia prescreve — cada um vira um teste de contraste.
+ *
+ * Os pares nomeiam TOKENS, nao hexes. Antes traziam o hex copiado, e o efeito
+ * era pior do que nao ter auditoria: numa troca de paleta o arquivo continuava
+ * conferindo as cores antigas e imprimindo "ok" para uma combinacao que nao
+ * estava mais em lugar nenhum. Uma auditoria que mente e mais perigosa do que
+ * nenhuma, porque ninguem vai conferir a mao o que o comando ja aprovou.
+ */
 const PARES: Array<{ nome: string; frente: string; fundo: string; tamanho: "normal" | "grande" }> = [
-  { nome: "corpo sobre canvas", frente: "#33291f", fundo: "#efe9e7", tamanho: "normal" },
-  { nome: "corpo sobre porcelana", frente: "#33291f", fundo: "#f6f0f2", tamanho: "normal" },
-  { nome: "título espresso sobre canvas", frente: "#5c4a3b", fundo: "#efe9e7", tamanho: "normal" },
-  { nome: "título espresso sobre greige", frente: "#5c4a3b", fundo: "#e1d7d3", tamanho: "normal" },
-  { nome: "botão espresso + porcelana", frente: "#f6f0f2", fundo: "#5c4a3b", tamanho: "normal" },
-  { nome: "botão eucalipto + porcelana", frente: "#f6f0f2", fundo: "#5c6b58", tamanho: "normal" },
-  { nome: "rótulo eucalipto sobre canvas", frente: "#5c6b58", fundo: "#efe9e7", tamanho: "normal" },
-  { nome: "texto suave sobre espresso", frente: "#e1d7d3", fundo: "#5c4a3b", tamanho: "normal" },
-  { nome: "areia sobre espresso (só filete)", frente: "#c9b8a8", fundo: "#5c4a3b", tamanho: "grande" },
+  { nome: "corpo sobre canvas", frente: "tinta", fundo: "canvas", tamanho: "normal" },
+  { nome: "corpo sobre porcelana", frente: "tinta", fundo: "porcelana", tamanho: "normal" },
+  { nome: "corpo sobre greige", frente: "tinta", fundo: "greige", tamanho: "normal" },
+  { nome: "título espresso sobre canvas", frente: "espresso", fundo: "canvas", tamanho: "normal" },
+  { nome: "título espresso sobre greige", frente: "espresso", fundo: "greige", tamanho: "normal" },
+  { nome: "botão espresso + porcelana", frente: "porcelana", fundo: "espresso", tamanho: "normal" },
+  { nome: "rótulo acento sobre canvas", frente: "eucalipto", fundo: "canvas", tamanho: "normal" },
+  { nome: "rótulo acento sobre porcelana", frente: "eucalipto", fundo: "porcelana", tamanho: "normal" },
+  { nome: "rótulo acento sobre greige", frente: "eucalipto", fundo: "greige", tamanho: "normal" },
 ];
 
 function canal(v: number): number {
@@ -146,8 +154,15 @@ async function main(): Promise<void> {
   let reprovados = 0;
   console.log(`\n${SAIDA.split("/").slice(-2).join("/")} gerado.\n`);
   console.log("Contraste dos pares prescritos (WCAG AA: 4.5 normal, 3.0 grande)\n");
+  // Resolve o nome do token para o hex que ESTA no JSON agora.
+  const hexDe = (nome: string): string => {
+    const token = (doc["color"] as Grupo | undefined)?.[nome];
+    if (!token) throw new Error(`par de contraste cita o token "${nome}", que nao existe em tokens.json`);
+    return String(token.$value);
+  };
+
   for (const p of PARES) {
-    const razao = contraste(p.frente, p.fundo);
+    const razao = contraste(hexDe(p.frente), hexDe(p.fundo));
     const minimo = p.tamanho === "grande" ? 3 : 4.5;
     const passa = razao >= minimo;
     if (!passa) reprovados++;

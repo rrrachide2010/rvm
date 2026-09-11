@@ -84,6 +84,7 @@ src/whatsapp.ts    custo por mensagem da Meta e o que sobra da mensalidade
 src/tipos.ts       tipos compartilhados
 test/              testes das três peças que não podem errar em silêncio
 scripts/og.mjs     gera a imagem de compartilhamento
+scripts/contraste.mjs  mede o contraste do texto renderizado nas cinco páginas
 ```
 
 `npm run check` roda o typecheck e `npm test` roda os testes. A CI roda os dois,
