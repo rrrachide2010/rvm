@@ -19,13 +19,13 @@
 
 :root {
   /* Cores */
-  --color-espresso: #5c4a3b;
-  --color-tinta: #33291f;
-  --color-canvas: #efe9e7;
-  --color-porcelana: #f6f0f2;
-  --color-greige: #e1d7d3;
-  --color-eucalipto: #5c6b58;
-  --color-areia: #c9b8a8;
+  --color-espresso: #4a3c3d;
+  --color-tinta: #2e2724;
+  --color-canvas: #fbf9f9;
+  --color-porcelana: #ffffff;
+  --color-greige: #f4efee;
+  --color-eucalipto: #8d5a5e;
+  --color-areia: #e8dedb;
 
   /* Famílias (substitutos das originais) */
   --font-texto: Jost, "Helvetica Neue", Arial, sans-serif;
