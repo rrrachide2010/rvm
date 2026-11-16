@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 /**
  * Servidor estático mínimo para os testes: serve `out/` como o Vercel
  * serviria (pasta/ → pasta/index.html, 404 com o 404.html do build).
@@ -7,15 +8,16 @@ import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
 
-const RAIZ = new URL("../out/", import.meta.url).pathname;
+const RAIZ = fileURLToPath(new URL("../out/", import.meta.url));
 const TIPOS = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".woff2": "font/woff2", ".webp": "image/webp", ".png": "image/png", ".jpg": "image/jpeg", ".json": "application/json", ".txt": "text/plain", ".xml": "application/xml" };
 
 export async function servir() {
   const servidor = createServer(async (req, res) => {
     const url = new URL(req.url, "http://x");
     if (url.pathname.startsWith("/api/")) return res.writeHead(204).end();
-    let caminho = normalize(decodeURIComponent(url.pathname));
-    if (caminho.endsWith("/")) caminho += "index.html";
+    let bruto = decodeURIComponent(url.pathname);
+    if (bruto.endsWith("/")) bruto += "index.html";
+    const caminho = normalize(bruto);
     const arquivo = join(RAIZ, caminho);
     try {
       if (!arquivo.startsWith(RAIZ) || !(await stat(arquivo)).isFile()) throw new Error();

@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 /**
  * Gera as versões WebP das fotos que o site realmente usa.
  *
@@ -15,7 +16,7 @@ import { join, extname, basename } from "node:path";
 import sharp from "sharp";
 import { TODAS_AS_LARGURAS } from "../src/lib/larguras.ts";
 
-const RAIZ = new URL("..", import.meta.url).pathname;
+const RAIZ = fileURLToPath(new URL("..", import.meta.url));
 const ASSETS = join(RAIZ, "public/assets");
 const SAIDA = join(RAIZ, "public/img");
 

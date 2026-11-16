@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 /**
  * Monta `publicacao/`: o build estático + o `vercel.json`, pronto para ser
  * copiado por cima da pasta do projeto que já está no Vercel.
@@ -12,7 +13,7 @@
 import { cp, rm, writeFile, stat, readdir } from "node:fs/promises";
 import { join } from "node:path";
 
-const RAIZ = new URL("..", import.meta.url).pathname;
+const RAIZ = fileURLToPath(new URL("..", import.meta.url));
 const OUT = join(RAIZ, "out");
 const DESTINO = join(RAIZ, "publicacao");
 
