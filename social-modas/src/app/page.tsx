@@ -4,7 +4,7 @@ import { EditorialHero } from "@/components/editorial/EditorialHero";
 import { BrandStory } from "@/components/editorial/BrandStory";
 import { SplitEditorialSection } from "@/components/editorial/SplitEditorialSection";
 import { EditorialCTA } from "@/components/editorial/EditorialCTA";
-import { CollectionGrid } from "@/components/collections/CollectionGrid";
+import { ColecoesHome } from "@/components/collections/ColecoesHome";
 import { OccasionSelector } from "@/components/collections/OccasionSelector";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ItemCarrossel, ProductCarousel } from "@/components/products/ProductCarousel";
@@ -64,7 +64,7 @@ export default function Inicio() {
             </Link>
           </div>
           <div className="mt-14">
-            <CollectionGrid />
+            <ColecoesHome />
           </div>
         </div>
       </section>

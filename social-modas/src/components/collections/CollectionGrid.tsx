@@ -18,10 +18,20 @@ const POSICAO: Record<string, string> = {
   camisas: "lg:col-span-3 min-h-[22rem]",
 };
 
-function Cartao({ colecao, ordem }: { colecao: Colecao; ordem: number }) {
+type PropsCartao = {
+  colecao: Colecao;
+  ordem: number;
+  /** Classes de grade; o padrão é a posição desta grade. */
+  posicao?: string;
+  /** Cantos de widget (24px), para a grade da home. */
+  arredondado?: boolean;
+};
+
+export function CartaoColecao({ colecao, ordem, posicao: posicaoExterna, arredondado }: PropsCartao) {
   const total = opcoesDa(colecao);
   const href = `/colecoes/${colecao.slug}/`;
-  const posicao = POSICAO[colecao.slug] ?? "lg:col-span-4 min-h-[22rem]";
+  const grade = posicaoExterna ?? POSICAO[colecao.slug] ?? "lg:col-span-4 min-h-[22rem]";
+  const posicao = `${grade} ${arredondado ? "rounded-[var(--radius-cartao)] border border-fio" : "rounded-peca"}`;
 
   if (!colecao.foto) {
     // Cartão tipográfico: a coleção feminina, sem fotos por decisão da marca.
@@ -30,7 +40,7 @@ function Cartao({ colecao, ordem }: { colecao: Colecao; ordem: number }) {
         href={href}
         data-revelar
         style={{ "--ordem": ordem } as React.CSSProperties}
-        className={`sobre-bordeaux group relative flex flex-col justify-between overflow-hidden rounded-peca bg-marsala p-8 text-creme sm:p-10 ${posicao}`}
+        className={`sobre-bordeaux group relative flex flex-col justify-between overflow-hidden bg-marsala p-8 text-creme sm:p-10 ${posicao}`}
       >
         <SimboloMarca className="absolute -right-10 -bottom-12 w-72 text-white/[0.05] transition-transform duration-[900ms] ease-suave group-hover:scale-105" />
         <p className="rotulo !text-ouro">Coleção</p>
@@ -51,7 +61,7 @@ function Cartao({ colecao, ordem }: { colecao: Colecao; ordem: number }) {
       href={href}
       data-revelar
       style={{ "--ordem": ordem } as React.CSSProperties}
-      className={`group relative flex flex-col justify-end overflow-hidden rounded-peca bg-superficie p-7 sm:p-8 ${posicao}`}
+      className={`group relative flex flex-col justify-end overflow-hidden bg-superficie p-7 sm:p-8 ${posicao}`}
     >
       <Foto
         src={colecao.foto}
@@ -78,7 +88,7 @@ export function CollectionGrid() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:auto-rows-[minmax(18rem,auto)] lg:grid-cols-12 lg:gap-5">
       {COLECOES.map((c, i) => (
-        <Cartao key={c.slug} colecao={c} ordem={i} />
+        <CartaoColecao key={c.slug} colecao={c} ordem={i} />
       ))}
     </div>
   );
