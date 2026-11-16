@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel · Social Modas</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .admin-wrap { max-width: 1080px; margin-inline: auto; padding: 100px var(--gut) 80px; }
+  .admin-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 8px; }
+  .admin-grid { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: start; margin-top: 32px; }
+  .painel { background: linear-gradient(165deg, var(--surface-2), var(--ink-2));
+    border: 1px solid var(--line-strong); border-radius: 3px; padding: 24px; }
+  .painel h2 { font-family: var(--display); font-size: 18px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .04em; margin: 0 0 18px; }
+  .painel .field { margin-bottom: 14px; }
+  .painel .field label { text-align: left; }
+  .painel input, .painel select, .painel textarea { text-align: left; }
+  .linha { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .lista { display: grid; gap: 10px; }
+  .p-row { display: grid; grid-template-columns: 54px 1fr auto; gap: 14px; align-items: center;
+    border: 1px solid var(--line); border-radius: 2px; padding: 10px 14px; background: rgba(23,16,19,.6); }
+  .p-row img { width: 54px; height: 68px; object-fit: cover; border: 1px solid var(--line); }
+  .p-row .sem { width: 54px; height: 68px; background: linear-gradient(150deg, var(--marsala-deep), var(--surface)); }
+  .p-row h3 { font-family: var(--display); font-size: 15px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .03em; margin: 0 0 3px; }
+  .p-meta { font-size: 12px; color: var(--faint); }
+  .p-preco { font-family: var(--display); font-size: 15px; color: var(--gold); font-variant-numeric: lining-nums; }
+  .p-acoes { display: flex; gap: 8px; }
+  .p-acoes button { padding: 7px 12px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 2px; cursor: pointer; }
+  .p-acoes button:hover { border-color: var(--gold); color: var(--gold); }
+
+  .aviso { border: 1px dashed var(--line-strong); background: rgba(87,11,24,.36);
+    border-radius: 2px; padding: 16px 18px; color: var(--gold); font-size: 13px; line-height: 1.7; }
+  .aviso code { font-family: ui-monospace, monospace; background: rgba(0,0,0,.35); padding: 1px 6px; border-radius: 2px; }
+  .status { font-size: 12.5px; min-height: 20px; color: var(--gold); }
+  @media (max-width: 900px) { .admin-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site-header is-stuck" id="header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Social Modas, início">
+      <img class="brand-logo" src="assets/logo-mono.png" alt="" width="52" height="52" decoding="async">
+      <span class="brand-txt"><span class="brand-word">Social Modas</span></span>
+    </a>
+    <nav class="nav" id="mainNav" aria-label="Navegação principal">
+      <a href="index.html">Site</a>
+      <a href="venda.html">Loja</a>
+    </nav>
+  </div>
+</header>
+
+<main class="admin-wrap">
+  <div class="admin-head">
+    <div>
+      <span class="sec-num" style="justify-content:flex-start;">Painel</span>
+      <h1 class="h2" style="text-align:left;">Produtos</h1>
+    </div>
+    <span class="status" id="status"></span>
+  </div>
+
+  <div id="avisoBox"></div>
+
+  <div class="admin-grid">
+    <!-- ---------- FORMULÁRIO ---------- -->
+    <section class="painel">
+      <h2 id="formTitulo">Novo produto</h2>
+      <form id="prodForm" novalidate>
+        <div class="field">
+          <label for="f-id">Código (id) <span class="req">*</span></label>
+          <input type="text" id="f-id" placeholder="terno-xadrez-azul" required>
+          <p class="hint">Sem espaços nem acentos. É o endereço da peça.</p>
+        </div>
+        <div class="field">
+          <label for="f-nome">Nome <span class="req">*</span></label>
+          <input type="text" id="f-nome" placeholder="Terno xadrez azul" required>
+        </div>
+        <div class="linha">
+          <div class="field">
+            <label for="f-cat">Categoria</label>
+            <select id="f-cat">
+              <option>Terno</option><option>Blazer</option><option>Camisa</option>
+              <option>Vestido</option><option>Calçado</option><option>Acessório</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-gen">Gênero</label>
+            <select id="f-gen"><option>Masculino</option><option>Feminino</option><option>Unissex</option></select>
+          </div>
+        </div>
+        <div class="linha">
+          <div class="field">
+            <label for="f-preco">Preço (R$)</label>
+            <input type="number" id="f-preco" step="0.01" min="0" placeholder="deixe vazio = sob consulta">
+          </div>
+          <div class="field">
+            <label for="f-estoque">Estoque</label>
+            <input type="number" id="f-estoque" min="0" value="0">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-tam">Tamanhos</label>
+          <input type="text" id="f-tam" placeholder="46, 48, 50, 52">
+          <p class="hint">Separados por vírgula.</p>
+        </div>
+        <div class="field">
+          <label for="f-foto">Foto (caminho ou URL)</label>
+          <input type="text" id="f-foto" placeholder="assets/prod-terno-xadrez.jpg">
+        </div>
+        <div class="field">
+          <label for="f-ml">Link do Mercado Livre</label>
+          <input type="url" id="f-ml" placeholder="https://...">
+        </div>
+        <div class="field">
+          <label for="f-desc">Descrição</label>
+          <textarea id="f-desc" rows="3"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-gold btn-wide" id="salvarBtn">Salvar produto</button>
+          <button type="button" class="btn btn-quiet btn-wide" id="limparBtn">Limpar formulário</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ---------- LISTA ---------- -->
+    <section>
+      <div class="admin-head" style="margin-bottom:18px;">
+        <h2 style="font-family:var(--display);font-size:18px;text-transform:uppercase;letter-spacing:.04em;margin:0;">
+          No catálogo <span id="contagem" style="color:var(--faint);font-size:13px;"></span>
+        </h2>
+      </div>
+      <div class="lista" id="lista"></div>
+    </section>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  var esc = function (s) { return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+
+  var status = $('#status');
+  function aviso(msg, cor) { status.textContent = msg; status.style.color = cor || 'var(--gold)'; }
+
+  /* O token fica só no navegador de quem administra. */
+  var TOKEN = localStorage.getItem('sm_admin_token') || '';
+  function pedirToken() {
+    var t = prompt('Cole aqui o token de administrador (ADMIN_TOKEN configurado na Vercel):', TOKEN || '');
+    if (t !== null) { TOKEN = t.trim(); localStorage.setItem('sm_admin_token', TOKEN); }
+    return TOKEN;
+  }
+
+  function headers() {
+    return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + TOKEN };
+  }
+
+  var produtos = [];
+
+  function carregar() {
+    aviso('Carregando…');
+    fetch('/api/produtos', { cache: 'no-cache' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        produtos = j.produtos || [];
+        desenhar();
+        if (j.fonte === 'json') {
+          $('#avisoBox').innerHTML =
+            '<p class="aviso"><strong>Banco de dados ainda não conectado.</strong> ' +
+            'O catálogo está sendo lido do arquivo <code>produtos.json</code> e o painel funciona só para consulta. ' +
+            'Para salvar produtos aqui, defina <code>DATABASE_URL</code> e <code>ADMIN_TOKEN</code> nas variáveis ' +
+            'de ambiente da Vercel e rode o <code>db/schema.sql</code> no banco.</p>';
+        } else {
+          $('#avisoBox').innerHTML = '';
+        }
+        aviso('');
+      })
+      .catch(function (e) { aviso('Falha ao carregar: ' + e.message, '#FF9A8A'); });
+  }
+
+  function desenhar() {
+    $('#contagem').textContent = '(' + produtos.length + ')';
+    $('#lista').innerHTML = produtos.map(function (p) {
+      var foto = p.foto ? '<img src="' + esc(p.foto) + '" alt="">' : '<div class="sem"></div>';
+      var preco = typeof p.preco === 'number' ? brl.format(p.preco) : 'Sob consulta';
+      return '<article class="p-row">' + foto +
+        '<div><h3>' + esc(p.nome) + '</h3>' +
+          '<div class="p-meta">' + esc(p.categoria || '') + ' · ' + esc(p.genero || '') +
+          (p.tamanhos && p.tamanhos.length ? ' · ' + esc(p.tamanhos.join(', ')) : '') + '</div>' +
+          '<div class="p-preco">' + preco + '</div></div>' +
+        '<div class="p-acoes">' +
+          '<button type="button" data-edit="' + esc(p.id) + '">editar</button>' +
+          '<button type="button" data-del="' + esc(p.id) + '">excluir</button>' +
+        '</div></article>';
+    }).join('') || '<p class="cart-vazio">Nenhum produto cadastrado.</p>';
+  }
+
+  function preencher(p) {
+    $('#f-id').value = p.id || ''; $('#f-nome').value = p.nome || '';
+    $('#f-cat').value = p.categoria || 'Terno'; $('#f-gen').value = p.genero || 'Masculino';
+    $('#f-preco').value = (typeof p.preco === 'number' ? p.preco : '');
+    $('#f-estoque').value = p.estoque || 0;
+    $('#f-tam').value = (p.tamanhos || []).join(', ');
+    $('#f-foto').value = p.foto || ''; $('#f-ml').value = p.link_ml || '';
+    $('#f-desc').value = p.descricao || '';
+    $('#formTitulo').textContent = 'Editando: ' + (p.nome || '');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('#limparBtn').addEventListener('click', function () {
+    $('#prodForm').reset();
+    $('#formTitulo').textContent = 'Novo produto';
+  });
+
+  document.addEventListener('click', function (ev) {
+    var e = ev.target.closest('[data-edit]'), d = ev.target.closest('[data-del]');
+    if (e) {
+      var p = produtos.filter(function (x) { return String(x.id) === e.getAttribute('data-edit'); })[0];
+      if (p) preencher(p);
+    }
+    if (d) {
+      var id = d.getAttribute('data-del');
+      if (!confirm('Excluir "' + id + '" do catálogo?')) return;
+      if (!TOKEN && !pedirToken()) return;
+      fetch('/api/produtos?id=' + encodeURIComponent(id), { method: 'DELETE', headers: headers() })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (r) {
+          if (!r.ok) throw new Error(r.j.erro || 'erro');
+          aviso('Excluído.'); carregar();
+        })
+        .catch(function (err) { aviso('Não excluiu: ' + err.message, '#FF9A8A'); });
+    }
+  });
+
+  $('#prodForm').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    if (!$('#f-id').value.trim() || !$('#f-nome').value.trim()) {
+      return aviso('Código e nome são obrigatórios.', '#FF9A8A');
+    }
+    if (!TOKEN && !pedirToken()) return;
+
+    var corpo = {
+      id: $('#f-id').value.trim(),
+      nome: $('#f-nome').value.trim(),
+      categoria: $('#f-cat').value,
+      genero: $('#f-gen').value,
+      descricao: $('#f-desc').value.trim() || null,
+      preco: $('#f-preco').value === '' ? null : Number($('#f-preco').value),
+      estoque: Number($('#f-estoque').value) || 0,
+      tamanhos: $('#f-tam').value.split(',').map(function (s) { return s.trim(); }).filter(Boolean),
+      foto: $('#f-foto').value.trim() || null,
+      link_ml: $('#f-ml').value.trim() || null,
+      publicado: true
+    };
+
+    aviso('Salvando…');
+    fetch('/api/produtos', { method: 'POST', headers: headers(), body: JSON.stringify(corpo) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.j.erro || 'erro');
+        aviso('Salvo.');
+        $('#prodForm').reset(); $('#formTitulo').textContent = 'Novo produto';
+        carregar();
+      })
+      .catch(function (err) { aviso('Não salvou: ' + err.message, '#FF9A8A'); });
+  });
+
+  carregar();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+node_modules/
+.next/
+out/
+publicacao/
+# gerado por scripts/imagens.mjs a cada build
+public/img/
+next-env.d.ts
+*.tsbuildinfo

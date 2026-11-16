@@ -1,0 +1,54 @@
+name: Social Modas
+
+# Só roda quando o site da Social Modas muda: o resto do repositório tem a
+# própria CI e não precisa esperar por esta.
+on:
+  push:
+    branches: [main]
+    paths: ["social-modas/**", ".github/workflows/social-modas.yml"]
+  pull_request:
+    paths: ["social-modas/**", ".github/workflows/social-modas.yml"]
+
+jobs:
+  verificar:
+    name: Lint, tipos, build, fluxos e contraste
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: social-modas
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: social-modas/package-lock.json
+
+      - run: npm ci
+
+      - name: Navegador dos testes
+        run: npx playwright install --with-deps chromium
+
+      - name: Lint e tipos
+        run: |
+          npm run lint
+          npm run typecheck
+
+      # Gera as imagens WebP e o export estático. Falha se o código citar uma
+      # foto que não existe em public/assets.
+      - name: Build
+        run: npm run build
+
+      # Reserva no WhatsApp certo, busca de lojas, looks, menu móvel e o site
+      # inteiro sem JavaScript.
+      - name: Fluxos comerciais
+        run: npm test
+
+      # Todo texto renderizado contra o fundo real, WCAG AA, desktop e celular.
+      - name: Contraste
+        run: npm run contraste
+
+      - name: Pacote de publicação
+        run: npm run publicacao

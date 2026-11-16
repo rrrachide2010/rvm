@@ -1,0 +1,82 @@
+{
+  "_leia_me": "Acervo MASCULINO. Preços e links ALINHADOS à loja do Mercado Livre 'camisaria e ternos' (2026-07-27). Saída de compra = Mercado Livre (link_ml de cada peça) — pagamento (PIX/cartão/parcelas) acontece no ML. Poliamida R$239,90, Bambu R$179,90, Terno R$899,90, Blazer R$899,90. Campos: id, nome, categoria, tecido, genero, descricao, preco (número ou null), tamanhos, foto, galeria[], link_ml, estoque (null=disp, 0=esgotado), breve (true='Em breve'), destaque, cores[{nome,hex,foto (capa/thumb), fotos[] (carrossel: frente/3-4/detalhe da MESMA cor, todas do photobook exceto Preto que é IA)}]. Fotos do photobook (Drive) recortadas 780x1040.",
+  "produtos": [
+    {
+      "id": "sm-camisa-poliamida",
+      "nome": "Camisa Social · Poliamida",
+      "categoria": "Camisa",
+      "tecido": "Poliamida",
+      "genero": "Masculino",
+      "descricao": "Poliamida de alta gramatura: caimento firme, não amassa e não desbota. A social que aguenta o dia inteiro sem perder a forma. Escolha a cor.",
+      "preco": 239.9,
+      "tamanhos": ["1", "2", "3", "4", "5", "6"],
+      "foto": "assets/pb-marinho.jpg",
+      "galeria": [],
+      "link_ml": "https://produto.mercadolivre.com.br/MLB-7238760488-camisa-poliamida-manga-longa-slim-_JM",
+      "estoque": null,
+      "destaque": "",
+      "cores": [
+        { "nome": "Marinho", "hex": "#2A3550", "foto": "assets/pb-marinho.jpg", "fotos": ["assets/pb-marinho.jpg", "assets/pb-marinho-2.jpg", "assets/pb-marinho-3.jpg"] },
+        { "nome": "Branco", "hex": "#F4F1EC", "foto": "assets/pb-branco.jpg", "fotos": ["assets/pb-branco.jpg", "assets/pb-branco-2.jpg", "assets/pb-branco-3.jpg"] },
+        { "nome": "Preto", "hex": "#1A1A1A", "foto": "assets/pb-preto.jpg", "fotos": ["assets/pb-preto.jpg", "assets/camisa-preto.jpg"] }
+      ]
+    },
+    {
+      "id": "sm-camisa-bambu",
+      "nome": "Camisa Social · Fibra de Bambu",
+      "categoria": "Camisa",
+      "tecido": "Fibra Natural de Bambu",
+      "genero": "Masculino",
+      "descricao": "Fibra natural de bambu: toque de seda, respirável e antiodor. Leve e fresca, do escritório ao evento — sem amassar no fim do dia. Escolha a cor.",
+      "preco": 179.9,
+      "tamanhos": ["1", "2", "3", "4", "5", "6"],
+      "foto": "assets/pb-azulclaro.jpg",
+      "galeria": [],
+      "link_ml": "https://produto.mercadolivre.com.br/MLB-7118118688-camisa-fibra-de-bambu-slim-elastano-manga-longa-marsala-_JM",
+      "estoque": null,
+      "destaque": "",
+      "ml_nota": "5,0",
+      "ml_vendidos": "+25",
+      "cores": [
+        { "nome": "Azul Claro", "hex": "#CBD8E6", "foto": "assets/pb-azulclaro.jpg", "fotos": ["assets/pb-azulclaro.jpg", "assets/pb-azulclaro-2.jpg", "assets/pb-azulclaro-3.jpg"] },
+        { "nome": "Cinza Claro", "hex": "#B4B0AC", "foto": "assets/pb-cinzaclaro.jpg", "fotos": ["assets/pb-cinzaclaro.jpg", "assets/pb-cinzaclaro-2.jpg", "assets/pb-cinzaclaro-3.jpg"] },
+        { "nome": "Lilás", "hex": "#9B86C4", "foto": "assets/pb-lilas.jpg", "fotos": ["assets/pb-lilas.jpg", "assets/pb-lilas-2.jpg"] },
+        { "nome": "Vinho", "hex": "#6E2433", "foto": "assets/pb-vinho.jpg", "fotos": ["assets/pb-vinho.jpg", "assets/pb-vinho-2.jpg", "assets/pb-vinho-3.jpg"] },
+        { "nome": "Cinza Chumbo", "hex": "#5E5E62", "foto": "assets/pb-chumbo.jpg", "fotos": ["assets/pb-chumbo.jpg", "assets/pb-chumbo-2.jpg", "assets/pb-chumbo-3.jpg"] },
+        { "nome": "Rosa", "hex": "#DDB2BC", "foto": "assets/pb-rosa.jpg", "fotos": ["assets/pb-rosa.jpg", "assets/pb-rosa-2.jpg", "assets/pb-rosa-3.jpg"] }
+      ]
+    },
+    {
+      "id": "sm-terno",
+      "nome": "Terno Slim",
+      "categoria": "Terno",
+      "tecido": "Poliviscose com elastano",
+      "genero": "Masculino",
+      "descricao": "Terno slim em poliviscose com elastano: corte moderno, leve e confortável, do casamento ao escritório. Escolha o tamanho e a cor no Mercado Livre.",
+      "preco": 899.9,
+      "tamanhos": [],
+      "foto": "assets/terno-slim.jpg",
+      "galeria": ["assets/terno-slim-det.jpg"],
+      "link_ml": "https://produto.mercadolivre.com.br/MLB-7175465626-terno-slim-poliviscoseelastano-_JM",
+      "estoque": null,
+      "destaque": "",
+      "cores": []
+    },
+    {
+      "id": "sm-blazer-xadrez",
+      "nome": "Blazer Slim · Xadrez Cinza",
+      "categoria": "Terno",
+      "tecido": "Poliviscose com elastano",
+      "genero": "Masculino",
+      "descricao": "Blazer slim fit em xadrez cinza claro, dois botões. Estrutura leve com elastano para conforto o dia todo. Escolha o tamanho no Mercado Livre.",
+      "preco": 899.9,
+      "tamanhos": [],
+      "foto": "assets/blazer-xadrez.jpg",
+      "galeria": ["assets/blazer-det.jpg"],
+      "link_ml": "https://produto.mercadolivre.com.br/MLB-4898876695-blazer-masculino-slim-fit-xadrez-cinza-claro-dois-botoes-_JM",
+      "estoque": null,
+      "destaque": "Novo",
+      "cores": []
+    }
+  ]
+}

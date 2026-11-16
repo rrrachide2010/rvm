@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagamento · Social Modas</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0708">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pay-wrap {
+    min-height: 100dvh; display: grid; place-items: center; padding: 40px 20px;
+    background:
+      radial-gradient(120% 70% at 50% -8%, rgba(174,125,49,.22), transparent 58%),
+      linear-gradient(180deg, #2a0a12, #170609 55%, #0c0405);
+  }
+  .pay-card {
+    width: 100%; max-width: 440px; text-align: center;
+    background: linear-gradient(165deg, var(--surface), var(--ink-2));
+    border: 1px solid rgba(234,192,123,.16); border-radius: 26px;
+    box-shadow: 0 26px 60px -28px rgba(0,0,0,.85); padding: 42px 30px;
+  }
+  .pay-mark { font-family: var(--display); font-size: 16px; letter-spacing: .34em; text-transform: uppercase; color: var(--paper); margin: 0 0 28px; padding-left: .34em; }
+  .pay-icon { width: 76px; height: 76px; margin: 0 auto 22px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid currentColor; }
+  .pay-icon svg { width: 38px; height: 38px; }
+  .pay-ok { color: #6FCF97; } .pay-pend { color: var(--gold); } .pay-fail { color: #E29393; }
+  .pay-card h1 { font-family: var(--display); font-size: 26px; font-weight: 600; letter-spacing: .02em; margin: 0 0 12px; color: var(--paper); text-wrap: balance; }
+  .pay-card p { color: var(--muted); font-size: 14.5px; line-height: 1.6; margin: 0 auto; max-width: 34ch; }
+  .pay-ref { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: var(--faint); margin-top: 18px; }
+  .pay-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+  .pay-actions .btn { width: 100%; }
+</style>
+</head>
+<body>
+  <div class="pay-wrap">
+    <main class="pay-card">
+      <div class="pay-mark">Social Modas</div>
+      <div class="pay-icon pay-pend" id="payIcon"></div>
+      <h1 id="payTitle">Processando…</h1>
+      <p id="payMsg">Confirmando o seu pagamento.</p>
+      <p class="pay-ref" id="payRef" hidden></p>
+      <div class="pay-actions">
+        <a class="btn btn-gold" href="venda.html">Voltar à loja</a>
+        <a class="btn btn-quiet" href="https://wa.me/5515974050177" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var pago = (q.get('pago') || '').toLowerCase();
+      var status = (q.get('status') || q.get('collection_status') || '').toLowerCase();
+      var ref = q.get('external_reference') || '';
+
+      var estado = 'pend';
+      if (pago === 'sucesso' || status === 'approved') estado = 'ok';
+      else if (pago === 'falhou' || status === 'rejected' || status === 'cancelled') estado = 'fail';
+      else if (pago === 'pendente' || status === 'pending' || status === 'in_process') estado = 'pend';
+
+      var icons = {
+        ok:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>',
+        pend: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>',
+        fail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 7l10 10M17 7L7 17"/></svg>'
+      };
+      var txt = {
+        ok:   { t: 'Pagamento aprovado!', m: 'Recebemos seu pedido. Em breve confirmamos os detalhes com você pelo WhatsApp. Obrigado!', cls: 'pay-ok' },
+        pend: { t: 'Pagamento pendente', m: 'Estamos aguardando a confirmação — Pix ou boleto pode levar alguns minutos. Avisamos assim que aprovar.', cls: 'pay-pend' },
+        fail: { t: 'Pagamento não concluído', m: 'O pagamento não foi finalizado. Você pode tentar de novo na loja ou falar com a gente no WhatsApp.', cls: 'pay-fail' }
+      };
+
+      var ic = document.getElementById('payIcon');
+      ic.className = 'pay-icon ' + txt[estado].cls;
+      ic.innerHTML = icons[estado];
+      document.getElementById('payTitle').textContent = txt[estado].t;
+      document.getElementById('payMsg').textContent = txt[estado].m;
+      if (ref) { var r = document.getElementById('payRef'); r.textContent = 'Pedido ' + ref; r.hidden = false; }
+    })();
+  </script>
+</body>
+</html>

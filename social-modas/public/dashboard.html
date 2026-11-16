@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard · Social Modas</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .dash { max-width: 1180px; margin-inline: auto; padding: 100px var(--gut) 80px; }
+  .dash-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0 36px; }
+  .kpi { border: 1px solid var(--line); border-radius: 3px; padding: 20px;
+    background: linear-gradient(160deg, rgba(87,11,24,.26), rgba(11,7,8,.55)); }
+  .kpi .rot { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 8px; }
+  .kpi .num { font-family: var(--display); font-size: 30px; font-weight: 600; color: var(--gold);
+    font-variant-numeric: lining-nums; line-height: 1; }
+  .kpi .sub { font-size: 11.5px; color: var(--muted); margin-top: 6px; display: block; }
+  .kpi.alerta { border-color: rgba(255,154,138,.4); }
+  .kpi.alerta .num { color: #FF9A8A; }
+
+  .bloco { margin-bottom: 40px; }
+  .bloco h2 { font-family: var(--display); font-size: 17px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .05em; margin: 0 0 14px; text-align: left; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+
+  table.d { width: 100%; border-collapse: collapse; }
+  table.d th, table.d td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+  table.d th { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
+    background: rgba(87,11,24,.35); font-weight: 600; }
+  table.d td { color: var(--muted); }
+  table.d td.n { text-align: right; font-variant-numeric: lining-nums; color: var(--paper); }
+
+  .barra { height: 6px; background: rgba(234,192,123,.14); border-radius: 3px; overflow: hidden; }
+  .barra i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-deep), var(--gold)); }
+
+  .funil-linha { display: grid; grid-template-columns: 150px 1fr 60px; gap: 12px; align-items: center; margin-bottom: 10px; }
+  .funil-linha span:first-child { font-size: 12.5px; color: var(--muted); }
+  .funil-linha b { font-variant-numeric: lining-nums; text-align: right; color: var(--gold); font-size: 14px; }
+
+  .recuperar { border: 1px solid var(--line); border-radius: 3px; padding: 14px 16px; margin-bottom: 10px;
+    display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center;
+    background: rgba(23,16,19,.5); }
+  .recuperar h4 { font-size: 14px; margin: 0 0 4px; color: var(--paper); font-family: var(--body); font-weight: 500; }
+  .recuperar p { font-size: 12px; color: var(--faint); margin: 0; }
+  .recuperar .btn { padding: 8px 14px; font-size: 10.5px; min-height: 0; }
+
+  .aviso { border: 1px dashed var(--line-strong); background: rgba(87,11,24,.36);
+    border-radius: 2px; padding: 18px 20px; color: var(--gold); font-size: 13px; line-height: 1.75; }
+  .aviso code { font-family: ui-monospace, monospace; background: rgba(0,0,0,.35); padding: 1px 6px; border-radius: 2px; }
+  .vazio { color: var(--faint); font-size: 13px; padding: 18px 0; }
+
+  @media (max-width: 900px) { .kpis { grid-template-columns: repeat(2,1fr); } .cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site-header is-stuck" id="header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Social Modas, início">
+      <img class="brand-logo" src="assets/logo-mono.png" alt="" width="52" height="52" decoding="async">
+      <span class="brand-txt"><span class="brand-word">Social Modas</span></span>
+    </a>
+    <nav class="nav" id="mainNav" aria-label="Navegação principal">
+      <a href="dashboard.html" aria-current="page">Dashboard</a>
+      <a href="admin.html">Produtos</a>
+      <a href="venda.html">Loja</a>
+    </nav>
+  </div>
+</header>
+
+<main class="dash">
+  <div class="dash-head">
+    <div>
+      <span class="sec-num" style="justify-content:flex-start;">Painel</span>
+      <h1 class="h2" style="text-align:left;">Visão da operação</h1>
+    </div>
+    <span id="status" style="font-size:12.5px;color:var(--gold);"></span>
+  </div>
+
+  <div id="avisoBox"></div>
+  <div id="conteudo" hidden>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="cols">
+      <section class="bloco">
+        <h2>Funil de vendas · 30 dias</h2>
+        <div id="funil"></div>
+      </section>
+
+      <section class="bloco">
+        <h2>Produtos mais vistos</h2>
+        <table class="d"><tbody id="maisVistos"></tbody></table>
+      </section>
+    </div>
+
+    <section class="bloco">
+      <h2>Carrinhos abandonados · recuperação</h2>
+      <div id="abandonados"></div>
+    </section>
+
+    <div class="cols">
+      <section class="bloco">
+        <h2>Estoque baixo</h2>
+        <table class="d"><tbody id="estoque"></tbody></table>
+      </section>
+
+      <section class="bloco">
+        <h2>Visitantes por dia</h2>
+        <div id="porDia"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  var esc = function (s) { return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
+  var reais = function (c) { return brl.format((c || 0) / 100); };
+
+  var TOKEN = localStorage.getItem('sm_admin_token') || '';
+  function pedirToken() {
+    var t = prompt('Token de administrador (ADMIN_TOKEN da Vercel):', TOKEN || '');
+    if (t !== null) { TOKEN = t.trim(); localStorage.setItem('sm_admin_token', TOKEN); }
+    return TOKEN;
+  }
+
+  var NOMES = {
+    pageview: 'Visitou o site', ver_produto: 'Viu um produto',
+    add_carrinho: 'Colocou no carrinho', abrir_carrinho: 'Abriu o carrinho',
+    iniciar_checkout: 'Começou o checkout', pedido_enviado: 'Enviou o pedido',
+    avise_me: 'Pediu aviso de reposição', whatsapp_click: 'Clicou no WhatsApp'
+  };
+  var ORDEM = ['pageview','ver_produto','add_carrinho','iniciar_checkout','pedido_enviado'];
+
+  function semBanco(msg) {
+    $('#avisoBox').innerHTML =
+      '<p class="aviso"><strong>Dashboard aguardando o banco de dados.</strong><br>' +
+      'Os números de venda, estoque, leads e visitantes vêm do Postgres. ' +
+      'Para ligar: defina <code>DATABASE_URL</code> e <code>ADMIN_TOKEN</code> nas variáveis de ambiente da Vercel ' +
+      'e rode <code>db/schema.sql</code> e <code>db/schema-02-operacao.sql</code> no banco.' +
+      (msg ? '<br><br><span style="color:var(--muted)">Resposta da API: ' + esc(msg) + '</span>' : '') +
+      '</p>';
+  }
+
+  function carregar() {
+    $('#status').textContent = 'Carregando…';
+    if (!TOKEN && !pedirToken()) { $('#status').textContent = ''; return semBanco('token não informado'); }
+
+    fetch('/api/eventos', { headers: { 'Authorization': 'Bearer ' + TOKEN } })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, s: r.status, j: j }; }); })
+      .then(function (r) {
+        $('#status').textContent = '';
+        if (!r.ok) return semBanco(r.j.erro || ('HTTP ' + r.s));
+        desenhar(r.j);
+        $('#avisoBox').innerHTML = '';
+        $('#conteudo').hidden = false;
+      })
+      .catch(function (e) { $('#status').textContent = ''; semBanco(e.message); });
+  }
+
+  function desenhar(d) {
+    var r = d.resumo || {};
+
+    $('#kpis').innerHTML = [
+      { rot: 'Faturamento · 30d', num: reais(r.faturamento_30d), sub: (r.pedidos_30d || 0) + ' pedidos' },
+      { rot: 'Pedidos novos',     num: r.pedidos_novos || 0,     sub: 'aguardando atendimento' },
+      { rot: 'Visitantes · 30d',  num: r.visitantes_30d || 0,    sub: 'sessões únicas' },
+      { rot: 'Carrinhos abandonados', num: r.carrinhos_abandonados || 0, sub: 'para recuperar',
+        alerta: (r.carrinhos_abandonados || 0) > 0 },
+      { rot: 'Produtos ativos',   num: r.produtos_ativos || 0,   sub: 'publicados na loja' },
+      { rot: 'Esgotados',         num: r.produtos_esgotados || 0, sub: 'sem estoque',
+        alerta: (r.produtos_esgotados || 0) > 0 },
+      { rot: 'Leads em aberto',   num: r.leads_abertos || 0,     sub: 'ainda não contatados' }
+    ].map(function (k) {
+      return '<div class="kpi' + (k.alerta ? ' alerta' : '') + '">' +
+        '<span class="rot">' + k.rot + '</span>' +
+        '<span class="num">' + k.num + '</span>' +
+        '<span class="sub">' + k.sub + '</span></div>';
+    }).join('');
+
+    /* funil */
+    var mapa = {};
+    (d.funil || []).forEach(function (f) { mapa[f.tipo] = f.sessoes; });
+    var topo = mapa[ORDEM[0]] || 0;
+    $('#funil').innerHTML = ORDEM.map(function (t) {
+      var v = mapa[t] || 0;
+      var pct = topo ? Math.round(v / topo * 100) : 0;
+      return '<div class="funil-linha">' +
+        '<span>' + NOMES[t] + '</span>' +
+        '<span class="barra"><i style="width:' + pct + '%"></i></span>' +
+        '<b>' + v + '</b></div>';
+    }).join('') || '<p class="vazio">Sem dados ainda.</p>';
+
+    /* mais vistos */
+    $('#maisVistos').innerHTML = (d.mais_vistos || []).map(function (p) {
+      return '<tr><td>' + esc(p.nome || p.produto_id) + '</td><td class="n">' + p.visitas + '</td></tr>';
+    }).join('') || '<tr><td class="vazio">Nenhuma visualização registrada.</td></tr>';
+
+    /* carrinhos abandonados + recuperação por WhatsApp */
+    $('#abandonados').innerHTML = (d.carrinhos_abandonados || []).map(function (c) {
+      var itens = [];
+      try { itens = typeof c.itens === 'string' ? JSON.parse(c.itens) : (c.itens || []); } catch (e) {}
+      var nomes = itens.map(function (i) { return i.quantidade + '× ' + i.nome; }).join(', ');
+      var quando = new Date(c.criado_em).toLocaleDateString('pt-BR');
+      var msg = 'Olá' + (c.nome ? ' ' + c.nome : '') + '! Aqui é da Social Modas. ' +
+                'Vi que você separou ' + (nomes || 'algumas peças') + ' no nosso site e não finalizou. ' +
+                'Posso ajudar a fechar o pedido?';
+      var fone = (c.telefone || '').replace(/\D/g, '');
+      var wa = fone
+        ? '<a class="btn btn-gold" target="_blank" rel="noopener" href="https://wa.me/55' + fone +
+          '?text=' + encodeURIComponent(msg) + '">Recuperar</a>'
+        : '<span style="font-size:11px;color:var(--faint)">sem telefone</span>';
+      return '<div class="recuperar"><div>' +
+        '<h4>' + esc(c.nome || 'Visitante sem nome') + ' · ' + reais(c.total_centavos) + '</h4>' +
+        '<p>' + esc(nomes || 'carrinho vazio') + ' · ' + quando + '</p>' +
+        '</div>' + wa + '</div>';
+    }).join('') || '<p class="vazio">Nenhum carrinho abandonado. Ótimo sinal.</p>';
+
+    /* estoque baixo */
+    $('#estoque').innerHTML = (d.estoque_baixo || []).map(function (p) {
+      var cor = p.estoque === 0 ? '#FF9A8A' : 'var(--gold)';
+      return '<tr><td>' + esc(p.nome) + '</td><td class="n" style="color:' + cor + '">' +
+        (p.estoque === 0 ? 'esgotado' : p.estoque) + '</td></tr>';
+    }).join('') || '<tr><td class="vazio">Nenhum produto com estoque baixo.</td></tr>';
+
+    /* visitantes por dia */
+    var dias = d.por_dia || [];
+    var maxV = dias.reduce(function (m, x) { return Math.max(m, x.visitantes); }, 0);
+    $('#porDia').innerHTML = dias.map(function (x) {
+      var pct = maxV ? Math.round(x.visitantes / maxV * 100) : 0;
+      return '<div class="funil-linha">' +
+        '<span>' + new Date(x.dia).toLocaleDateString('pt-BR') + '</span>' +
+        '<span class="barra"><i style="width:' + pct + '%"></i></span>' +
+        '<b>' + x.visitantes + '</b></div>';
+    }).join('') || '<p class="vazio">Sem visitas registradas ainda.</p>';
+  }
+
+  carregar();
+})();
+</script>
+</body>
+</html>
