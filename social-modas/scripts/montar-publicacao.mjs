@@ -44,8 +44,9 @@ await rm(DESTINO, { recursive: true, force: true });
 await cp(OUT, DESTINO, { recursive: true });
 
 const vercel = {
-  // `/colecoes` vira `/colecoes/`, que é onde o export estático pôs o index.html.
-  trailingSlash: true,
+  // Sem `trailingSlash` aqui: na Vercel ele vale também para /api/* e põe um
+  // 308 na frente de toda chamada às funções. As páginas abrem com e sem a
+  // barra mesmo assim (conferido em produção em 2026-11-16).
   redirects: [
     // Endereços do site anterior que podem estar em links, posts e buscadores.
     { source: "/venda.html", destination: "/colecoes/", permanent: true },
