@@ -27,9 +27,9 @@ export function ProductCard({ produto, cor, sizes = "(min-width: 1024px) 24vw, (
   const esgotado = produto.estoque === 0;
 
   return (
-    <article className={`produto group relative ${className}`} data-id={produto.id}>
-      <Link href={href} className="block">
-        <div className="relative aspect-[3/4] overflow-hidden rounded-peca bg-sand">
+    <article className={`produto cartao group relative ${className}`} data-id={produto.id}>
+      <Link href={href} className="block p-3 pb-6">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-foto)] bg-superficie">
           <Foto src={capa} alt={`${produto.nome}${cor ? `, cor ${cor}` : ""}`} sizes={sizes} imgClassName="transition-[transform,opacity] duration-[900ms] ease-suave group-hover:scale-[1.03]" />
           {segunda ? (
             <Foto
@@ -40,24 +40,22 @@ export function ProductCard({ produto, cor, sizes = "(min-width: 1024px) 24vw, (
             />
           ) : null}
         </div>
-        <div className="mt-4 flex items-start justify-between gap-4">
-          <div>
-            <p className="rotulo">{NOMES_CATEGORIA[produto.categoria] ?? produto.categoria}</p>
-            <h3 className="mt-1.5 font-serif text-[1.1875rem] leading-snug text-graphite transition-colors group-hover:text-bordeaux">
-              {produto.nome}
-            </h3>
-            {produto.cores.length > 1 ? (
-              <p className="mt-1.5 flex items-center gap-1.5 text-legenda text-mute">
-                <span className="flex -space-x-1" aria-hidden="true">
-                  {produto.cores.slice(0, 5).map((c) => (
-                    <span key={c.nome} className="size-3 rounded-full border border-ivory ring-1 ring-graphite/10" style={{ background: c.hex }} />
-                  ))}
-                </span>
-                {produto.cores.length} cores
-              </p>
-            ) : null}
-          </div>
-          <p className="shrink-0 pt-6 text-[0.9375rem] font-medium text-graphite">
+        <div className="mt-5 flex flex-col items-center px-2 text-center">
+          <p className="rotulo">{NOMES_CATEGORIA[produto.categoria] ?? produto.categoria}</p>
+          <h3 className="mt-2 font-serif text-[1.0625rem] leading-snug text-creme transition-colors group-hover:text-ouro">
+            {produto.nome}
+          </h3>
+          {produto.cores.length > 1 ? (
+            <p className="mt-2 flex items-center gap-1.5 text-legenda text-nevoa">
+              <span className="flex -space-x-1" aria-hidden="true">
+                {produto.cores.slice(0, 5).map((c) => (
+                  <span key={c.nome} className="size-3 rounded-full border border-tinta ring-1 ring-creme/20" style={{ background: c.hex }} />
+                ))}
+              </span>
+              {produto.cores.length} cores
+            </p>
+          ) : null}
+          <p className="mt-3 font-serif text-[1.25rem] font-semibold text-ouro">
             {esgotado ? "Esgotado" : MARCA.mostrarPrecos && produto.preco ? brl.format(produto.preco) : "Consultar valor"}
           </p>
         </div>

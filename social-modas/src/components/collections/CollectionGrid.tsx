@@ -30,13 +30,13 @@ function Cartao({ colecao, ordem }: { colecao: Colecao; ordem: number }) {
         href={href}
         data-revelar
         style={{ "--ordem": ordem } as React.CSSProperties}
-        className={`sobre-bordeaux group relative flex flex-col justify-between overflow-hidden rounded-peca bg-bordeaux p-8 text-ivory sm:p-10 ${posicao}`}
+        className={`sobre-bordeaux group relative flex flex-col justify-between overflow-hidden rounded-peca bg-marsala p-8 text-creme sm:p-10 ${posicao}`}
       >
         <SimboloMarca className="absolute -right-10 -bottom-12 w-72 text-white/[0.05] transition-transform duration-[900ms] ease-suave group-hover:scale-105" />
-        <p className="rotulo !text-sand">Coleção</p>
+        <p className="rotulo !text-ouro">Coleção</p>
         <div className="relative">
-          <h3 className="font-serif text-[clamp(2.5rem,1.9rem+2.6vw,4rem)] leading-none text-ivory">{colecao.titulo}</h3>
-          <p className="mt-4 max-w-sm text-lead text-sand">{colecao.chamada}</p>
+          <h3 className="font-serif text-[clamp(2.5rem,1.9rem+2.6vw,4rem)] leading-none text-creme">{colecao.titulo}</h3>
+          <p className="mt-4 max-w-sm text-lead text-ouro">{colecao.chamada}</p>
           <span className="mt-8 inline-flex items-center gap-2 text-[0.8125rem] font-medium tracking-[0.12em] uppercase">
             {total > 0 ? `Ver ${total} ${total === 1 ? "opção" : "opções"}` : "Saiba como comprar"}
             <ArrowUpRight className="size-4 transition-transform duration-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.8} aria-hidden="true" />
@@ -51,7 +51,7 @@ function Cartao({ colecao, ordem }: { colecao: Colecao; ordem: number }) {
       href={href}
       data-revelar
       style={{ "--ordem": ordem } as React.CSSProperties}
-      className={`group relative flex flex-col justify-end overflow-hidden rounded-peca bg-sand p-7 sm:p-8 ${posicao}`}
+      className={`group relative flex flex-col justify-end overflow-hidden rounded-peca bg-superficie p-7 sm:p-8 ${posicao}`}
     >
       <Foto
         src={colecao.foto}
@@ -61,10 +61,10 @@ function Cartao({ colecao, ordem }: { colecao: Colecao; ordem: number }) {
         imgClassName="transition-transform duration-[1200ms] ease-suave group-hover:scale-[1.04]"
       />
       {/* Véu só na base, onde fica o texto: a foto continua limpa em cima. */}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-graphite/80 via-graphite/25 to-transparent" />
-      <div className="relative text-ivory">
+      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-tinta/80 via-ouro/25 to-transparent" />
+      <div className="relative text-creme">
         <h3 className="font-serif text-[clamp(1.75rem,1.45rem+1.3vw,2.5rem)] leading-none">{colecao.titulo}</h3>
-        <p className="mt-3 max-w-xs text-[0.9375rem] leading-relaxed text-ivory/90">{colecao.chamada}</p>
+        <p className="mt-3 max-w-xs text-[0.9375rem] leading-relaxed text-creme/90">{colecao.chamada}</p>
         <span className="mt-5 inline-flex items-center gap-2 text-[0.75rem] font-medium tracking-[0.14em] uppercase opacity-90 transition-opacity duration-400 group-hover:opacity-100">
           Ver {total} {total === 1 ? "opção" : "opções"}
           <ArrowUpRight className="size-4 transition-transform duration-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.8} aria-hidden="true" />

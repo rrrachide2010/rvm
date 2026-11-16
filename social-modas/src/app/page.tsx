@@ -70,7 +70,7 @@ export default function Inicio() {
       </section>
 
       {/* 03 · Peças em destaque */}
-      <section aria-labelledby="pecas" className="bg-papel py-secao">
+      <section aria-labelledby="pecas" className="bg-superficie py-secao">
         <div className="conteiner">
           <CabecalhoSecao id="pecas" rotulo="Vitrine" titulo="Peças para diferentes estilos." texto="Camisaria e alfaiataria para o trabalho, para a festa e para o dia a dia." />
           <div className="mt-14">
@@ -96,7 +96,7 @@ export default function Inicio() {
       </section>
 
       {/* 05 · Complete o visual */}
-      <section aria-labelledby="look" className="border-t border-linha bg-ivory py-secao">
+      <section aria-labelledby="look" className="border-t border-fio bg-tinta py-secao">
         <div className="conteiner">
           <CabecalhoSecao id="look" rotulo="Complete o visual" titulo="Um look, todas as peças." texto="Combinações prontas com peças do catálogo. Escolha um look e veja cada peça de perto." />
           <div className="mt-14">
@@ -121,13 +121,13 @@ export default function Inicio() {
           <span className="filete" aria-hidden="true" />
           Experiência Social Modas
         </p>
-        <h2 className="mt-5 text-h2 text-bordeaux">O atendimento certo faz a diferença.</h2>
-        <p className="mt-6 text-lead text-mute">Comprar roupa na loja é provar, tirar dúvida e sair com a peça certa.</p>
+        <h2 className="mt-5 text-h2 text-creme">O atendimento certo faz a diferença.</h2>
+        <p className="mt-6 text-lead text-nevoa">Comprar roupa na loja é provar, tirar dúvida e sair com a peça certa.</p>
         <dl className="mt-9 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           {BENEFICIOS.map((b) => (
-            <div key={b.titulo} className="border-t border-linha pt-4">
-              <dt className="font-medium text-graphite">{b.titulo}</dt>
-              <dd className="mt-1.5 text-[0.9375rem] text-mute">{b.texto}</dd>
+            <div key={b.titulo} className="border-t border-fio pt-4">
+              <dt className="font-medium text-creme">{b.titulo}</dt>
+              <dd className="mt-1.5 text-[0.9375rem] text-nevoa">{b.texto}</dd>
             </div>
           ))}
         </dl>
@@ -140,7 +140,7 @@ export default function Inicio() {
       </SplitEditorialSection>
 
       {/* 08 · Localizador de lojas */}
-      <section aria-labelledby="lojas" className="bg-papel py-secao">
+      <section aria-labelledby="lojas" className="bg-superficie py-secao">
         <div className="conteiner">
           <CabecalhoSecao id="lojas" rotulo="Lojas" titulo="Social Modas mais perto de você." texto="Encontre a sua cidade e fale direto com a loja." />
           <div className="mt-12" data-revelar>

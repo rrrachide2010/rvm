@@ -49,30 +49,30 @@ export default async function PaginaColecao({ params }: Params) {
               <span className="filete" aria-hidden="true" />
               Coleção
             </p>
-            <h1 className="mt-5 text-display text-bordeaux">{colecao.titulo}</h1>
-            <p className="mt-6 max-w-lg text-lead text-mute">{colecao.descricao}</p>
+            <h1 className="mt-5 text-display text-creme">{colecao.titulo}</h1>
+            <p className="mt-6 max-w-lg text-lead text-nevoa">{colecao.descricao}</p>
           </div>
           {colecao.foto ? (
-            <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-sand lg:aspect-[4/5]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-superficie lg:aspect-[4/5]">
               <Foto src={colecao.foto} alt={colecao.fotoAlt} sizes="(min-width: 1024px) 40vw, 100vw" prioridade posicao="50% 25%" />
             </div>
           ) : (
-            <div className="sobre-bordeaux relative flex aspect-[4/3] items-end overflow-hidden rounded-peca bg-bordeaux p-8 text-ivory">
+            <div className="sobre-bordeaux relative flex aspect-[4/3] items-end overflow-hidden rounded-peca bg-marsala p-8 text-creme">
               <SimboloMarca className="absolute -top-6 -right-10 w-80 text-white/[0.06]" />
-              <p className="relative max-w-xs font-serif text-h3 text-ivory">{colecao.chamada}</p>
+              <p className="relative max-w-xs font-serif text-h3 text-creme">{colecao.chamada}</p>
             </div>
           )}
         </div>
       </section>
 
-      <section aria-labelledby="pecas" className="border-t border-linha py-secao">
+      <section aria-labelledby="pecas" className="border-t border-fio py-secao">
         <div className="conteiner">
           {variantes.length > 0 ? (
             <>
               <h2 id="pecas" className="sr-only">
                 Peças da coleção
               </h2>
-              <p className="text-legenda text-mute">
+              <p className="text-legenda text-nevoa">
                 {variantes.length} {variantes.length === 1 ? "opção" : "opções"} entre peças e cores
               </p>
               <ul id="grade" className="mt-8 grid grid-cols-1 gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">

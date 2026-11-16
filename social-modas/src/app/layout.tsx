@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import "@fontsource-variable/inter";
-import "@fontsource-variable/playfair-display";
+import "@fontsource-variable/cinzel";
+import "@fontsource-variable/jost";
 import "./globals.css";
 import { Cabecalho } from "@/components/layout/Cabecalho";
 import { Rodape } from "@/components/layout/Rodape";
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f0e8",
+  themeColor: "#0b0708",
   width: "device-width",
   initialScale: 1,
 };
@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <a
           href="#conteudo"
-          className="fixed top-2 left-2 z-50 -translate-y-24 bg-bordeaux px-4 py-3 text-ivory transition-transform focus:translate-y-0"
+          className="fixed top-2 left-2 z-50 -translate-y-24 bg-marsala px-4 py-3 text-creme transition-transform focus:translate-y-0"
         >
           Pular para o conteúdo
         </a>

@@ -83,22 +83,22 @@ export default async function PaginaProduto({ params }: Params) {
             cabecalho={
               <>
                 <p className="rotulo">{categoria}</p>
-                <h1 className="mt-3 text-h1 text-bordeaux">{produto.nome}</h1>
-                <p className="mt-5 text-[1.375rem] font-medium text-graphite">
+                <h1 className="mt-3 text-h1 text-creme">{produto.nome}</h1>
+                <p className="mt-5 font-serif text-[1.5rem] font-semibold text-ouro">
                   {produto.estoque === 0 ? "Esgotado" : mostrarPreco ? brl.format(produto.preco!) : "Consultar valor"}
                 </p>
-                <p className="mt-6 text-lead text-mute">{produto.descricao}</p>
+                <p className="mt-6 text-lead text-nevoa">{produto.descricao}</p>
               </>
             }
           >
-            <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-linha pt-6 text-[0.9375rem]">
+            <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-fio pt-6 text-[0.9375rem]">
               <div>
                 <dt className="rotulo">Tecido</dt>
-                <dd className="mt-1 text-graphite">{produto.tecido}</dd>
+                <dd className="mt-1 text-creme">{produto.tecido}</dd>
               </div>
               <div>
                 <dt className="rotulo">Tamanhos</dt>
-                <dd className="mt-1 text-graphite">{produto.tamanhos.length ? produto.tamanhos.join(" · ") : "Consulte a loja"}</dd>
+                <dd className="mt-1 text-creme">{produto.tamanhos.length ? produto.tamanhos.join(" · ") : "Consulte a loja"}</dd>
               </div>
             </dl>
             <div className="mt-8">
@@ -109,7 +109,7 @@ export default async function PaginaProduto({ params }: Params) {
       </div>
 
       {outros.length ? (
-        <section aria-labelledby="combina" className="border-t border-linha bg-papel py-secao">
+        <section aria-labelledby="combina" className="border-t border-fio bg-superficie py-secao">
           <div className="conteiner">
             <CabecalhoSecao id="combina" rotulo="Complete o visual" titulo="Combina com" />
             <div className="mt-12">

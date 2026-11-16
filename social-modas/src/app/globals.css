@@ -3,37 +3,44 @@
 /* =========================================================================
    SOCIAL MODAS · DESIGN TOKENS
 
-   Uma fonte só para cor, tipo, espaço, borda e movimento. Os componentes
-   usam as classes do Tailwind geradas a partir daqui (bg-ivory,
-   text-bordeaux, font-serif...), nunca um hex solto.
+   Visual do site anterior (escuro, marsala e ouro, Cinzel + Jost) sobre a
+   estrutura e os textos do 2.0. Os componentes usam as classes geradas
+   daqui (bg-tinta, text-ouro, font-serif...), nunca um hex solto.
 
-   Contraste medido (WCAG):
-     graphite sobre ivory ........ 12,92   texto principal
-     bordeaux sobre ivory ........ 12,62   títulos, links, CTA
-     mute sobre ivory ............  6,28   texto de apoio
-     taupe-ink sobre ivory .......  5,73   rótulos e legendas
-     sand sobre bordeaux .........  8,84   texto em bloco bordeaux
-     ivory sobre bordeaux ........ 12,62   texto em bloco bordeaux
-   Taupe (#A48D79) dá 2,78 sobre ivory: só filete e detalhe, NUNCA texto.
-   Sand dá 1,43 sobre ivory: só fundo, NUNCA texto sobre claro.
+   Cada cor tem UM papel:
+     tinta ......... fundo da página
+     superficie .... blocos e cartões sobre o fundo
+     superficie-2 .. campos de formulário e cartões em destaque
+     creme ......... texto principal e títulos
+     nevoa ......... texto de apoio
+     fosco ......... rótulos pequenos
+     ouro .......... preço, link, rótulo de seção, detalhe, botão principal
+     marsala ....... bloco de destaque (texto creme/ouro por cima)
+     fio ........... linhas e divisórias
+
+   Contraste medido sobre a tinta (WCAG): creme 16,5 · nevoa 8,7 ·
+   fosco 5,8 · ouro 11,4. Sobre o marsala: creme 12,1 · ouro 8,4.
+   O auditor (`npm run contraste`) mede o texto renderizado: é ele que vale.
    ========================================================================= */
 @theme {
-  --color-bordeaux: #570b18;
-  --color-bordeaux-deep: #3e0711;
-  --color-ivory: #f5f0e8;
-  --color-sand: #d8c9b8;
-  --color-graphite: #29282b;
-  --color-taupe: #a48d79;
+  --color-tinta: #0b0708;
+  --color-superficie: #171013;
+  --color-superficie-2: #1f161a;
+  --color-creme: #f2ebe4;
+  --color-nevoa: #b5a9a2;
+  --color-fosco: #948884;
+  --color-ouro: #eac07b;
+  --color-ouro-claro: #fff3c3;
+  --color-ouro-escuro: #ae7d31;
+  --color-marsala: #570b18;
+  --color-marsala-funda: #290109;
+  --color-fio: rgb(234 192 123 / 0.16);
+  --color-fio-forte: rgb(234 192 123 / 0.34);
   --color-white: #ffffff;
-  --color-mute: #5e5658;
-  --color-taupe-ink: #6e5a4c;
-  --color-linha: #e2d7c9;
-  --color-papel: #fbf8f3;
 
-  /* Playfair e não Cormorant: o circunflexo da Cormorant é alto e solto, e em
-     português ele aparece em todo "você", "três" e "também" de título. */
-  --font-serif: "Playfair Display Variable", "Playfair Display", Georgia, serif;
-  --font-sans: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Cinzel nos títulos (sempre em caixa alta, como no site anterior) e Jost no texto. */
+  --font-serif: "Cinzel Variable", Cinzel, "Times New Roman", Georgia, serif;
+  --font-sans: "Jost Variable", Jost, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Escala tipográfica fluida: o tamanho cresce com a tela entre 360 e 1440px. */
   --text-display: clamp(2.5rem, 1.5rem + 4.4vw, 5.25rem);
@@ -57,6 +64,9 @@
   --spacing-gutter: clamp(1.25rem, 0.6rem + 2.8vw, 3rem);
 
   --radius-peca: 2px;
+  /* Cartões no estilo "widget" do site anterior: cantos bem arredondados. */
+  --radius-cartao: 24px;
+  --radius-foto: 18px;
 
   --ease-suave: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-entrada: cubic-bezier(0.16, 1, 0.3, 1);
@@ -88,45 +98,51 @@
     /* O cabeçalho é fixo: âncoras não podem parar escondidas embaixo dele. */
     scroll-padding-top: 5.5rem;
   }
+  html {
+    color-scheme: dark;
+  }
   body {
-    background: var(--color-ivory);
-    color: var(--color-graphite);
+    background: var(--color-tinta);
+    color: var(--color-creme);
     font-family: var(--font-sans);
     font-size: var(--text-corpo);
+    font-weight: 300;
     line-height: var(--text-corpo--line-height);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: clip;
   }
   ::selection {
-    background: var(--color-bordeaux);
-    color: var(--color-ivory);
+    background: var(--color-ouro);
+    color: var(--color-tinta);
   }
-  /* Ajustes do Inter (a de um andar, 1 sem serifa). Ficam presos ao Inter:
-     herdados pela fonte de título, trocariam os números dela por versaletes. */
-  body, input, select, button {
-    font-feature-settings: "cv11", "ss01";
-  }
-  .font-serif, h1, h2, h3 {
-    font-feature-settings: normal;
-  }
-  h1, h2, h3 {
+  /* Cinzel: caixa alta espaçada e peso 500, como no site anterior.
+     Ela não tem itálico; destaque é feito com o ouro, nunca inclinando. */
+  h1, h2, h3, .font-serif {
     font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-style: normal;
     text-wrap: balance;
   }
+  h1 em, h2 em, h3 em, .font-serif em {
+    font-style: normal;
+    color: var(--color-ouro);
+  }
+  /* Em preço e número, a Cinzel precisa de algarismos alinhados. */
+  .font-serif { font-variant-numeric: lining-nums; }
   p { text-wrap: pretty; }
   img { max-width: 100%; height: auto; }
 
   /* Foco sempre visível e sempre igual, em qualquer fundo. */
   :focus-visible {
-    outline: 2px solid var(--color-bordeaux);
+    outline: 2px solid var(--color-ouro);
     outline-offset: 3px;
     border-radius: 1px;
   }
   .sobre-bordeaux :focus-visible {
-    outline-color: var(--color-sand);
+    outline-color: var(--color-creme);
   }
 }
 
@@ -144,16 +160,34 @@
     font-size: var(--text-rotulo);
     line-height: var(--text-rotulo--line-height);
     font-weight: 500;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--color-taupe-ink);
+    color: var(--color-ouro);
   }
 
   .filete {
     display: block;
     width: 2.5rem;
     height: 1px;
-    background: var(--color-bordeaux);
+    background: linear-gradient(90deg, transparent, var(--color-ouro));
+  }
+
+  /* Cartão "widget" do site anterior: superfície em degradê, borda de fio
+     dourado, cantos de 24px e sombra profunda que cresce no hover. */
+  .cartao {
+    border: 1px solid var(--color-fio);
+    border-radius: var(--radius-cartao);
+    background: linear-gradient(165deg, var(--color-superficie), var(--color-tinta));
+    box-shadow: 0 16px 38px -20px rgb(0 0 0 / 0.75);
+    transition:
+      border-color var(--duracao-media) var(--ease-suave),
+      transform var(--duracao-lenta) var(--ease-entrada),
+      box-shadow var(--duracao-lenta) var(--ease-entrada);
+  }
+  .cartao:hover {
+    border-color: var(--color-fio-forte);
+    transform: translateY(-6px);
+    box-shadow: 0 30px 64px -24px rgb(0 0 0 / 0.72);
   }
 
   /* Link com sublinhado que cresce da esquerda. */
@@ -164,7 +198,7 @@
     gap: 0.5rem;
     padding-block: 0.375rem;
     font-weight: 500;
-    color: var(--color-bordeaux);
+    color: var(--color-ouro);
     text-decoration: none;
   }
   .link-editorial::after {

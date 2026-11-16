@@ -18,8 +18,8 @@ export function BrandStory() {
         <span className="filete" aria-hidden="true" />
         Nossa história
       </p>
-      <h2 className="mt-5 text-h2 text-bordeaux">Uma loja de cada vez, um cliente de cada vez.</h2>
-      <div className="prosa mt-6 text-lead text-mute">
+      <h2 className="mt-5 text-h2 text-creme">Uma loja de cada vez, um cliente de cada vez.</h2>
+      <div className="prosa mt-6 text-lead text-nevoa">
         <p>
           São {MARCA.tradicao} vestindo o {MARCA.regiao}. A Social Modas começou com uma loja e cresceu até virar
           uma rede, sem mudar o jeito de atender.

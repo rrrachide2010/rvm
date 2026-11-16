@@ -80,14 +80,14 @@ export function Cabecalho() {
         // bloco de contenção para filhos `fixed`, e o painel do menu ficaria
         // preso dentro dos 72px do cabeçalho, com altura zero.
         aberto
-          ? "bg-ivory shadow-[0_1px_0_var(--color-linha)]"
+          ? "bg-tinta shadow-[0_1px_0_var(--color-fio)]"
           : rolou
-            ? "bg-ivory/95 shadow-[0_1px_0_var(--color-linha)] backdrop-blur-md"
+            ? "bg-tinta/95 shadow-[0_1px_0_var(--color-fio)] backdrop-blur-md"
             : "bg-transparent",
       ].join(" ")}
     >
       <div className="conteiner flex h-[4.5rem] items-center justify-between gap-6">
-        <Link href="/" className="relative z-10 flex min-h-11 items-center text-bordeaux" aria-label="Social Modas, página inicial">
+        <Link href="/" className="relative z-10 flex min-h-11 items-center text-ouro" aria-label="Social Modas, página inicial">
           <Marca />
         </Link>
 
@@ -98,12 +98,12 @@ export function Cabecalho() {
                 <Link
                   href={item.href}
                   aria-current={ativo(item.href) ? "page" : undefined}
-                  className="group relative inline-flex min-h-11 items-center text-[0.8125rem] font-medium tracking-[0.1em] text-graphite uppercase transition-colors hover:text-bordeaux aria-[current=page]:text-bordeaux"
+                  className="group relative inline-flex min-h-11 items-center text-[0.8125rem] font-medium tracking-[0.1em] text-creme uppercase transition-colors hover:text-ouro aria-[current=page]:text-ouro"
                 >
                   {item.texto}
                   <span
                     aria-hidden="true"
-                    className="absolute inset-x-0 bottom-2.5 h-px origin-left scale-x-0 bg-bordeaux transition-transform duration-400 ease-suave group-hover:scale-x-100 group-aria-[current=page]:scale-x-100"
+                    className="absolute inset-x-0 bottom-2.5 h-px origin-left scale-x-0 bg-marsala transition-transform duration-400 ease-suave group-hover:scale-x-100 group-aria-[current=page]:scale-x-100"
                   />
                 </Link>
               </li>
@@ -112,13 +112,13 @@ export function Cabecalho() {
         </nav>
 
         <div className="flex items-center gap-1 lg:hidden">
-          <Link href="/lojas/" className="inline-flex size-11 items-center justify-center text-graphite hover:text-bordeaux" aria-label="Encontrar uma loja">
+          <Link href="/lojas/" className="inline-flex size-11 items-center justify-center text-creme hover:text-ouro" aria-label="Encontrar uma loja">
             <MapPin className="size-5" strokeWidth={1.6} aria-hidden="true" />
           </Link>
           <button
             ref={botaoRef}
             type="button"
-            className="relative z-10 inline-flex size-11 items-center justify-center text-graphite hover:text-bordeaux"
+            className="relative z-10 inline-flex size-11 items-center justify-center text-creme hover:text-ouro"
             aria-expanded={aberto}
             aria-controls="menu-movel"
             aria-label={aberto ? "Fechar menu" : "Abrir menu"}
@@ -136,32 +136,32 @@ export function Cabecalho() {
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            className="fixed inset-x-0 top-[4.5rem] bottom-0 overflow-y-auto bg-ivory motion-safe:animate-[menu-entrar_300ms_var(--ease-suave)_both] lg:hidden"
+            className="fixed inset-x-0 top-[4.5rem] bottom-0 overflow-y-auto bg-tinta motion-safe:animate-[menu-entrar_300ms_var(--ease-suave)_both] lg:hidden"
           >
-            <nav aria-label="Principal" className="conteiner border-t border-linha pt-6 pb-12">
+            <nav aria-label="Principal" className="conteiner border-t border-fio pt-6 pb-12">
               <ul>
                 {NAV_PRINCIPAL.map((item, i) => (
                   <li
                     key={item.href}
-                    className="border-b border-linha motion-safe:animate-[menu-entrar_300ms_var(--ease-suave)_both]"
+                    className="border-b border-fio motion-safe:animate-[menu-entrar_300ms_var(--ease-suave)_both]"
                     style={{ animationDelay: `${40 * i}ms` }}
                   >
                     <Link
                       href={item.href}
                       aria-current={ativo(item.href) ? "page" : undefined}
-                      className="flex min-h-16 items-center justify-between font-serif text-[1.5rem] text-graphite aria-[current=page]:text-bordeaux"
+                      className="flex min-h-16 items-center justify-between font-serif text-[1.5rem] text-creme aria-[current=page]:text-ouro"
                     >
                       {item.texto}
                     </Link>
                   </li>
                 ))}
-                <li className="border-b border-linha">
-                  <Link href="/journal/" className="flex min-h-16 items-center font-serif text-[1.5rem] text-graphite">
+                <li className="border-b border-fio">
+                  <Link href="/journal/" className="flex min-h-16 items-center font-serif text-[1.5rem] text-creme">
                     Social Journal
                   </Link>
                 </li>
               </ul>
-              <Link href="/lojas/" className="mt-8 flex min-h-12 items-center justify-center gap-2 bg-bordeaux px-6 text-[0.8125rem] font-medium tracking-[0.12em] text-ivory uppercase">
+              <Link href="/lojas/" className="mt-8 flex min-h-12 items-center justify-center gap-2 bg-marsala px-6 text-[0.8125rem] font-medium tracking-[0.12em] text-creme uppercase">
                 <MapPin className="size-4" strokeWidth={1.8} aria-hidden="true" />
                 Encontrar uma loja
               </Link>

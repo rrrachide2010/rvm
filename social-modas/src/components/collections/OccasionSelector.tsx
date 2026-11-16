@@ -65,19 +65,19 @@ export function OccasionSelector({ ocasioes, produtos }: { ocasioes: Ocasiao[]; 
               onClick={() => setAtiva(i)}
               className={[
                 "group relative shrink-0 text-left transition-colors duration-400",
-                "min-h-11 rounded-full border px-5 lg:flex lg:min-h-0 lg:items-baseline lg:gap-5 lg:rounded-none lg:border-0 lg:border-b lg:border-linha lg:px-0 lg:py-5",
+                "min-h-11 rounded-full border px-5 lg:flex lg:min-h-0 lg:items-baseline lg:gap-5 lg:rounded-none lg:border-0 lg:border-b lg:border-fio lg:px-0 lg:py-5",
                 selecionada
-                  ? "border-bordeaux bg-bordeaux text-ivory lg:bg-transparent lg:text-bordeaux"
-                  : "border-graphite/20 text-graphite hover:text-bordeaux",
+                  ? "border-ouro bg-marsala text-creme lg:bg-transparent lg:text-ouro"
+                  : "border-creme/20 text-creme hover:text-ouro",
               ].join(" ")}
             >
-              <span className="hidden font-sans text-rotulo text-taupe-ink tabular-nums lg:inline" aria-hidden="true">
+              <span className="hidden font-sans text-rotulo text-fosco tabular-nums lg:inline" aria-hidden="true">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="text-[0.875rem] font-medium lg:font-serif lg:text-[1.5rem] lg:leading-tight lg:font-normal">{o.titulo}</span>
               <span
                 aria-hidden="true"
-                className={`absolute bottom-[-1px] left-0 hidden h-px bg-bordeaux transition-[width] duration-[600ms] ease-suave lg:block ${selecionada ? "w-full" : "w-0"}`}
+                className={`absolute bottom-[-1px] left-0 hidden h-px bg-marsala transition-[width] duration-[600ms] ease-suave lg:block ${selecionada ? "w-full" : "w-0"}`}
               />
             </button>
           );
@@ -95,28 +95,28 @@ export function OccasionSelector({ ocasioes, produtos }: { ocasioes: Ocasiao[]; 
             transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
             className="grid grid-cols-1 gap-8 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:items-end"
           >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-sand">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-superficie">
               <Foto src={atual.foto} alt={atual.fotoAlt} sizes="(min-width: 1024px) 28vw, (min-width: 640px) 45vw, 100vw" posicao="50% 25%" />
             </div>
             <div>
-              <p className="font-serif text-h3 text-bordeaux">{atual.resumo}</p>
-              <p className="mt-4 text-mute">{atual.texto}</p>
+              <p className="font-serif text-h3 text-ouro">{atual.resumo}</p>
+              <p className="mt-4 text-nevoa">{atual.texto}</p>
               <p className="mt-6 rotulo">Peças para esta ocasião</p>
-              <ul className="mt-2 divide-y divide-linha border-y border-linha">
+              <ul className="mt-2 divide-y divide-fio border-y border-fio">
                 {atual.produtos.map((id) => {
                   const p = produtos[id];
                   if (!p) return null;
                   return (
                     <li key={id}>
-                      <Link href={`/produtos/${id}/`} className="flex min-h-11 items-center justify-between gap-3 text-[0.9375rem] text-graphite hover:text-bordeaux">
+                      <Link href={`/produtos/${id}/`} className="flex min-h-11 items-center justify-between gap-3 text-[0.9375rem] text-creme hover:text-ouro">
                         {p.nome}
-                        <ArrowRight className="size-4 shrink-0 text-taupe-ink" strokeWidth={1.6} aria-hidden="true" />
+                        <ArrowRight className="size-4 shrink-0 text-fosco" strokeWidth={1.6} aria-hidden="true" />
                       </Link>
                     </li>
                   );
                 })}
               </ul>
-              <p className="mt-4 text-legenda text-taupe-ink">{atual.notaFeminina}</p>
+              <p className="mt-4 text-legenda text-fosco">{atual.notaFeminina}</p>
               <Link href={`/ocasioes/${atual.slug}/`} className="link-editorial mt-6">
                 Tudo para {atual.titulo.toLowerCase()}
                 <ArrowRight className="size-4" strokeWidth={1.8} aria-hidden="true" />

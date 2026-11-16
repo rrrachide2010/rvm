@@ -40,32 +40,32 @@ export default async function PaginaOcasiao({ params }: Params) {
               <span className="filete" aria-hidden="true" />
               Vista a ocasião
             </p>
-            <h1 className="mt-5 text-display text-bordeaux">{ocasiao.titulo}</h1>
-            <p className="mt-6 font-serif text-h3 text-graphite">{ocasiao.resumo}</p>
-            <p className="mt-5 max-w-lg text-lead text-mute">{ocasiao.texto}</p>
+            <h1 className="mt-5 text-display text-creme">{ocasiao.titulo}</h1>
+            <p className="mt-6 font-serif text-h3 text-creme">{ocasiao.resumo}</p>
+            <p className="mt-5 max-w-lg text-lead text-nevoa">{ocasiao.texto}</p>
 
             <h2 className="mt-12 rotulo">Dicas para acertar</h2>
             <ol className="mt-4 space-y-4">
               {ocasiao.dicas.map((d, i) => (
-                <li key={d} className="flex gap-5 border-t border-linha pt-4">
-                  <span className="font-serif text-[1.5rem] leading-none text-bordeaux tabular-nums" aria-hidden="true">
+                <li key={d} className="flex gap-5 border-t border-fio pt-4">
+                  <span className="font-serif text-[1.5rem] leading-none text-ouro tabular-nums" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-graphite">{d}</span>
+                  <span className="text-creme">{d}</span>
                 </li>
               ))}
             </ol>
-            <p className="mt-8 text-legenda text-taupe-ink">{ocasiao.notaFeminina}</p>
+            <p className="mt-8 text-legenda text-fosco">{ocasiao.notaFeminina}</p>
           </div>
-          <div className="relative aspect-[4/5] self-start overflow-hidden rounded-peca bg-sand lg:sticky lg:top-24">
+          <div className="relative aspect-[4/5] self-start overflow-hidden rounded-peca bg-superficie lg:sticky lg:top-24">
             <Foto src={ocasiao.foto} alt={ocasiao.fotoAlt} sizes="(min-width: 1024px) 40vw, 100vw" prioridade posicao="50% 25%" />
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="pecas" className="border-t border-linha bg-papel py-secao">
+      <section aria-labelledby="pecas" className="border-t border-fio bg-superficie py-secao">
         <div className="conteiner">
-          <h2 id="pecas" className="text-h2 text-bordeaux">
+          <h2 id="pecas" className="text-h2 text-creme">
             Peças para {ocasiao.titulo.toLowerCase()}
           </h2>
           <ul id="grade" className="mt-12 grid grid-cols-1 gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
@@ -76,12 +76,12 @@ export default async function PaginaOcasiao({ params }: Params) {
             ))}
           </ul>
 
-          <nav aria-label="Outras ocasiões" className="mt-20 border-t border-linha pt-8">
+          <nav aria-label="Outras ocasiões" className="mt-20 border-t border-fio pt-8">
             <p className="rotulo">Outras ocasiões</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {OCASIOES.filter((o) => o.slug !== ocasiao.slug).map((o) => (
                 <li key={o.slug}>
-                  <Link href={`/ocasioes/${o.slug}/`} className="inline-flex min-h-11 items-center rounded-full border border-graphite/20 px-5 text-[0.875rem] text-graphite transition-colors hover:border-bordeaux hover:text-bordeaux">
+                  <Link href={`/ocasioes/${o.slug}/`} className="inline-flex min-h-11 items-center rounded-full border border-creme/20 px-5 text-[0.875rem] text-creme transition-colors hover:border-ouro hover:text-ouro">
                     {o.titulo}
                   </Link>
                 </li>

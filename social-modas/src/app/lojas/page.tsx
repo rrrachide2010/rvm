@@ -22,9 +22,9 @@ export default function Lojas() {
         <div className="mt-12 grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-20">
           <div>
             <CabecalhoSecao nivel="h1" rotulo="Lojas" titulo="Social Modas mais perto de você." texto="Busque pela sua cidade. Em cada uma, você fala direto com a equipe que atende ali." />
-            <div className="mt-10 border-t border-linha pt-6">
-              <p className="font-medium text-graphite">Não achou a sua cidade?</p>
-              <p className="mt-1.5 text-[0.9375rem] text-mute">O atendimento online indica a loja mais próxima e tira dúvidas sobre peças e tamanhos.</p>
+            <div className="mt-10 border-t border-fio pt-6">
+              <p className="font-medium text-creme">Não achou a sua cidade?</p>
+              <p className="mt-1.5 text-[0.9375rem] text-nevoa">O atendimento online indica a loja mais próxima e tira dúvidas sobre peças e tamanhos.</p>
               <a href={linkWhatsApp(MARCA.whatsappCentral.numero, "Olá, Social Modas! Qual a loja mais perto de mim?")} target="_blank" rel="noopener noreferrer" className="link-editorial mt-3">
                 <IconeWhatsApp className="size-4" />
                 {MARCA.whatsappCentral.exibicao}

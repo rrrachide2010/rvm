@@ -84,7 +84,7 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
       {/* Galeria */}
       <div className="lg:sticky lg:top-24 lg:self-start">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-[4.5rem_minmax(0,1fr)] sm:gap-4">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-peca bg-sand sm:order-2">
+          <div className="relative aspect-[3/4] overflow-hidden rounded-peca bg-superficie sm:order-2">
             <LazyMotion features={domAnimation} strict>
 <AnimatePresence initial={false}>
               <m.div
@@ -109,7 +109,7 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
                     onClick={() => setFoto(i)}
                     aria-pressed={i === foto}
                     aria-label={`Ver foto ${i + 1}`}
-                    className={`relative block aspect-[3/4] w-16 overflow-hidden rounded-peca bg-sand transition-opacity sm:w-full ${i === foto ? "ring-2 ring-bordeaux ring-offset-2 ring-offset-ivory" : "opacity-70 hover:opacity-100"}`}
+                    className={`relative block aspect-[3/4] w-16 overflow-hidden rounded-peca bg-superficie transition-opacity sm:w-full ${i === foto ? "ring-2 ring-ouro ring-offset-2 ring-offset-ivory" : "opacity-70 hover:opacity-100"}`}
                   >
                     <Image src={f} alt="" fill sizes="80px" className="object-cover" />
                   </button>
@@ -126,7 +126,7 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
 
         {cores.length > 0 ? (
           <fieldset className="mt-8">
-            <legend className="text-[0.9375rem] text-graphite">
+            <legend className="text-[0.9375rem] text-creme">
               Cor: <span className="font-medium">{cor?.nome}</span>
             </legend>
             <div className="mt-3 flex flex-wrap gap-2.5">
@@ -138,7 +138,7 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
                   aria-pressed={i === indiceCor}
                   aria-label={c.nome}
                   title={c.nome}
-                  className={`relative size-11 rounded-full border border-graphite/15 transition-shadow duration-400 ${i === indiceCor ? "ring-2 ring-bordeaux ring-offset-[3px] ring-offset-ivory" : "hover:ring-1 hover:ring-graphite/40 hover:ring-offset-2 hover:ring-offset-ivory"}`}
+                  className={`relative size-11 rounded-full border border-creme/15 transition-shadow duration-400 ${i === indiceCor ? "ring-2 ring-ouro ring-offset-[3px] ring-offset-ivory" : "hover:ring-1 hover:ring-creme/40 hover:ring-offset-2 hover:ring-offset-ivory"}`}
                   style={{ background: c.hex }}
                 />
               ))}
@@ -159,7 +159,7 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
               <ExternalLink className="size-4" strokeWidth={1.8} aria-hidden="true" />
             </a>
           ) : null}
-          <p className="text-legenda text-mute">
+          <p className="text-legenda text-nevoa">
             {linkMl
               ? "Pagamento, frete e parcelamento acontecem no ambiente do Mercado Livre."
               : "Esta peça é vendida nas lojas. Consulte a reserva abaixo."}
@@ -169,23 +169,23 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
         {children}
 
         {/* Reserva na loja */}
-        <section aria-labelledby="reserva" className="mt-10 rounded-peca border border-linha bg-papel p-6 sm:p-8">
-          <h2 id="reserva" className="font-serif text-h3 text-bordeaux">
+        <section aria-labelledby="reserva" className="mt-10 rounded-peca border border-fio bg-superficie p-6 sm:p-8">
+          <h2 id="reserva" className="font-serif text-h3 text-creme">
             Prefere provar na loja?
           </h2>
-          <p className="mt-2 text-[0.9375rem] text-mute">
+          <p className="mt-2 text-[0.9375rem] text-nevoa">
             Escolha a cidade e o tamanho. A mensagem chega pronta no WhatsApp da loja, e a equipe confirma se a peça está disponível.
           </p>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor={idUnidade} className="text-[0.875rem] font-medium text-graphite">
+              <label htmlFor={idUnidade} className="text-[0.875rem] font-medium text-creme">
                 Cidade
               </label>
               <select
                 id={idUnidade}
                 value={unidade}
                 onChange={(e) => setUnidade(e.target.value)}
-                className="mt-1.5 h-12 w-full rounded-peca border border-graphite/25 bg-white px-3 text-graphite"
+                className="mt-1.5 h-12 w-full rounded-peca border border-creme/25 bg-superficie-2 px-3 text-creme"
               >
                 <option value="">Escolha a cidade</option>
                 {unidades.map((u) => (
@@ -196,14 +196,14 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
               </select>
             </div>
             <div>
-              <label htmlFor={idTamanho} className="text-[0.875rem] font-medium text-graphite">
+              <label htmlFor={idTamanho} className="text-[0.875rem] font-medium text-creme">
                 Tamanho
               </label>
               <select
                 id={idTamanho}
                 value={tamanho}
                 onChange={(e) => setTamanho(e.target.value)}
-                className="mt-1.5 h-12 w-full rounded-peca border border-graphite/25 bg-white px-3 text-graphite"
+                className="mt-1.5 h-12 w-full rounded-peca border border-creme/25 bg-superficie-2 px-3 text-creme"
               >
                 <option value="">{tamanhos.length ? "Escolha o tamanho" : "Ainda não sei"}</option>
                 {tamanhos.map((t) => (
@@ -227,12 +227,12 @@ export function ProdutoInterativo({ id, nome, cores, fotosSemCor, tamanhos, link
               Consultar reserva
             </a>
           ) : (
-            <button type="button" disabled className={classeBotao("contorno", "mt-6 w-full cursor-not-allowed opacity-50 hover:border-graphite/30 hover:text-graphite")}>
+            <button type="button" disabled className={classeBotao("contorno", "mt-6 w-full cursor-not-allowed opacity-50 hover:border-creme/30 hover:text-creme")}>
               <IconeWhatsApp className="size-4" />
               Escolha a cidade para consultar
             </button>
           )}
-          <p className="mt-3 text-legenda text-taupe-ink">A reserva só vale depois da confirmação da loja.</p>
+          <p className="mt-3 text-legenda text-fosco">A reserva só vale depois da confirmação da loja.</p>
         </section>
       </div>
     </div>

@@ -63,7 +63,7 @@ export function ProductCarousel({ children, rotulo, grade = false }: { children:
             onClick={() => rolar(-1)}
             disabled={inicio}
             aria-label="Peças anteriores"
-            className="inline-flex size-12 items-center justify-center rounded-full border border-graphite/25 text-graphite transition-colors hover:border-bordeaux hover:text-bordeaux disabled:cursor-default disabled:opacity-35 disabled:hover:border-graphite/25 disabled:hover:text-graphite"
+            className="inline-flex size-12 items-center justify-center rounded-full border border-creme/25 text-creme transition-colors hover:border-ouro hover:text-ouro disabled:cursor-default disabled:opacity-35 disabled:hover:border-creme/25 disabled:hover:text-creme"
           >
             <ChevronLeft className="size-5" strokeWidth={1.6} aria-hidden="true" />
           </button>
@@ -72,7 +72,7 @@ export function ProductCarousel({ children, rotulo, grade = false }: { children:
             onClick={() => rolar(1)}
             disabled={fim}
             aria-label="Próximas peças"
-            className="inline-flex size-12 items-center justify-center rounded-full border border-graphite/25 text-graphite transition-colors hover:border-bordeaux hover:text-bordeaux disabled:cursor-default disabled:opacity-35 disabled:hover:border-graphite/25 disabled:hover:text-graphite"
+            className="inline-flex size-12 items-center justify-center rounded-full border border-creme/25 text-creme transition-colors hover:border-ouro hover:text-ouro disabled:cursor-default disabled:opacity-35 disabled:hover:border-creme/25 disabled:hover:text-creme"
           >
             <ChevronRight className="size-5" strokeWidth={1.6} aria-hidden="true" />
           </button>

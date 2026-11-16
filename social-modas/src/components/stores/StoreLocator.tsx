@@ -35,7 +35,7 @@ export function StoreLocator({ compacto = false }: { compacto?: boolean }) {
           <label htmlFor={idBusca} className="sr-only">
             Buscar por cidade
           </label>
-          <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-taupe-ink" strokeWidth={1.8} aria-hidden="true" />
+          <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-fosco" strokeWidth={1.8} aria-hidden="true" />
           <input
             id={idBusca}
             type="search"
@@ -43,7 +43,7 @@ export function StoreLocator({ compacto = false }: { compacto?: boolean }) {
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Digite sua cidade"
             autoComplete="address-level2"
-            className="h-12 w-full rounded-peca border border-graphite/25 bg-white pr-4 pl-11 text-[1rem] text-graphite placeholder:text-mute focus:border-bordeaux focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bordeaux"
+            className="h-12 w-full rounded-peca border border-creme/25 bg-superficie-2 pr-4 pl-11 text-[1rem] text-creme placeholder:text-nevoa focus:border-ouro focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ouro"
           />
         </div>
         {estados.length > 1 ? (
@@ -55,7 +55,7 @@ export function StoreLocator({ compacto = false }: { compacto?: boolean }) {
               id={idEstado}
               value={estado}
               onChange={(e) => setEstado(e.target.value)}
-              className="h-12 w-full rounded-peca border border-graphite/25 bg-white px-4 text-graphite sm:w-auto"
+              className="h-12 w-full rounded-peca border border-creme/25 bg-superficie-2 px-4 text-creme sm:w-auto"
             >
               <option value="todos">Todos os estados</option>
               {estados.map((uf) => (
@@ -68,16 +68,16 @@ export function StoreLocator({ compacto = false }: { compacto?: boolean }) {
         ) : null}
       </div>
 
-      <p className="mt-4 text-legenda text-mute" aria-live="polite">
+      <p className="mt-4 text-legenda text-nevoa" aria-live="polite">
         {resultado.length === 0
           ? "Nenhuma cidade encontrada."
           : `${resultado.length} ${resultado.length === 1 ? "cidade" : "cidades"} com atendimento Social Modas.`}
       </p>
 
       {resultado.length === 0 ? (
-        <div className="mt-6 rounded-peca border border-linha bg-papel p-6">
-          <p className="font-serif text-h3 text-graphite">Ainda não encontramos essa cidade.</p>
-          <p className="mt-2 text-mute">Fale com a gente pelo WhatsApp: a equipe indica a loja mais perto de você.</p>
+        <div className="mt-6 rounded-peca border border-fio bg-superficie p-6">
+          <p className="font-serif text-h3 text-creme">Ainda não encontramos essa cidade.</p>
+          <p className="mt-2 text-nevoa">Fale com a gente pelo WhatsApp: a equipe indica a loja mais perto de você.</p>
           <a
             href={linkWhatsApp(MARCA.whatsappCentral.numero, `Olá, Social Modas! Qual a loja mais perto de ${busca.trim() || "mim"}?`)}
             target="_blank"
@@ -102,23 +102,23 @@ export function StoreLocator({ compacto = false }: { compacto?: boolean }) {
 function CartaoUnidade({ unidade: u }: { unidade: Unidade }) {
   const rota = rotaNoMapa(u);
   return (
-    <li className="flex flex-col rounded-peca border border-linha bg-white p-6">
+    <li className="flex flex-col rounded-peca border border-fio bg-superficie-2 p-6">
       <div className="flex items-start justify-between gap-4">
-        <h3 className="font-serif text-[1.4375rem] leading-tight text-bordeaux">{u.cidade}</h3>
+        <h3 className="font-serif text-[1.4375rem] leading-tight text-ouro">{u.cidade}</h3>
         <span className="rotulo pt-2">{u.estado}</span>
       </div>
       {u.endereco ? (
-        <address className="mt-3 flex gap-2 text-[0.9375rem] text-graphite not-italic">
-          <MapPin className="mt-1 size-4 shrink-0 text-taupe-ink" strokeWidth={1.8} aria-hidden="true" />
+        <address className="mt-3 flex gap-2 text-[0.9375rem] text-creme not-italic">
+          <MapPin className="mt-1 size-4 shrink-0 text-fosco" strokeWidth={1.8} aria-hidden="true" />
           <span>
             {u.endereco}
             {u.bairro ? `, ${u.bairro}` : ""}
           </span>
         </address>
       ) : (
-        <p className="mt-3 text-[0.9375rem] text-mute">Atendimento e endereço da loja pelo WhatsApp.</p>
+        <p className="mt-3 text-[0.9375rem] text-nevoa">Atendimento e endereço da loja pelo WhatsApp.</p>
       )}
-      {u.horario ? <p className="mt-2 text-legenda text-mute">{u.horario}</p> : null}
+      {u.horario ? <p className="mt-2 text-legenda text-nevoa">{u.horario}</p> : null}
 
       <div className="mt-auto flex flex-wrap gap-x-6 gap-y-1 pt-5">
         <a

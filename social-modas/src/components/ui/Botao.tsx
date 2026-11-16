@@ -3,18 +3,23 @@ import type { ComponentProps, ReactNode } from "react";
 
 type Variante = "primario" | "contorno" | "claro" | "contorno-claro";
 
+/* Dourado do site anterior: degradê por cima de um fundo ouro sólido (o
+   sólido é o que o auditor de contraste e quem tem o degradê desligado veem). */
+const OURO =
+  "bg-ouro bg-[linear-gradient(135deg,var(--color-ouro-escuro),var(--color-ouro)_45%,var(--color-ouro-claro)_62%,var(--color-ouro)_80%,var(--color-ouro-escuro))] text-[#1a0509] font-semibold shadow-[0_6px_26px_rgb(234_192_123/0.14)] hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgb(234_192_123/0.28)]";
+
 const ESTILOS: Record<Variante, string> = {
-  primario: "bg-bordeaux text-ivory hover:bg-bordeaux-deep",
-  contorno: "border border-graphite/30 text-graphite hover:border-bordeaux hover:text-bordeaux",
-  claro: "bg-ivory text-bordeaux hover:bg-white",
-  "contorno-claro": "border border-sand/60 text-ivory hover:border-ivory hover:bg-ivory/5",
+  primario: OURO,
+  contorno: "border border-fio-forte bg-ouro/[0.03] text-creme hover:-translate-y-0.5 hover:border-ouro hover:bg-ouro/[0.09]",
+  claro: OURO,
+  "contorno-claro": "border border-fio-forte text-creme hover:-translate-y-0.5 hover:border-ouro hover:bg-ouro/[0.09]",
 };
 
 export const classeBotao = (variante: Variante = "primario", extra = "") =>
   [
     "group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-peca px-7",
     "text-[0.8125rem] font-medium tracking-[0.12em] uppercase",
-    "transition-[background-color,border-color,color,transform] duration-400 ease-suave",
+    "transition-[background-color,border-color,color,transform,box-shadow] duration-400 ease-suave",
     "active:translate-y-px",
     ESTILOS[variante],
     extra,

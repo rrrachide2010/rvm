@@ -9,8 +9,8 @@ export default function NaoEncontrada() {
           <span className="filete" aria-hidden="true" />
           Página não encontrada
         </p>
-        <h1 className="mt-5 max-w-2xl text-h1 text-bordeaux">Esta página saiu da vitrine.</h1>
-        <p className="mt-5 max-w-md text-lead text-mute">O endereço pode ter mudado. As coleções e as lojas continuam no mesmo lugar.</p>
+        <h1 className="mt-5 max-w-2xl text-h1 text-creme">Esta página saiu da vitrine.</h1>
+        <p className="mt-5 max-w-md text-lead text-nevoa">O endereço pode ter mudado. As coleções e as lojas continuam no mesmo lugar.</p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Botao href="/colecoes/">
             Ver coleções

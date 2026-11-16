@@ -57,7 +57,7 @@ export function LookBuilder({ looks, mostrarPrecos }: { looks: LookResolvido[]; 
   return (
     <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
       <div className="relative">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-sand">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-superficie">
           <LazyMotion features={domAnimation} strict>
 <AnimatePresence initial={false}>
             <m.div
@@ -73,7 +73,7 @@ export function LookBuilder({ looks, mostrarPrecos }: { looks: LookResolvido[]; 
           </AnimatePresence>
 </LazyMotion>
         </div>
-        <p className="mt-3 text-legenda text-taupe-ink" aria-live="polite">
+        <p className="mt-3 text-legenda text-fosco" aria-live="polite">
           {peca.papel}: {peca.nome}
           {peca.cor ? `, ${peca.cor}` : ""}
         </p>
@@ -87,7 +87,7 @@ export function LookBuilder({ looks, mostrarPrecos }: { looks: LookResolvido[]; 
               type="button"
               aria-pressed={i === lookAtivo}
               onClick={() => escolherLook(i)}
-              className="min-h-11 rounded-full border border-graphite/20 px-5 text-[0.875rem] font-medium text-graphite transition-colors duration-400 hover:border-bordeaux hover:text-bordeaux aria-pressed:border-bordeaux aria-pressed:bg-bordeaux aria-pressed:text-ivory"
+              className="min-h-11 rounded-full border border-creme/20 px-5 text-[0.875rem] font-medium text-creme transition-colors duration-400 hover:border-ouro hover:text-ouro aria-pressed:border-ouro aria-pressed:bg-marsala aria-pressed:text-creme"
             >
               {l.titulo}
             </button>
@@ -95,9 +95,9 @@ export function LookBuilder({ looks, mostrarPrecos }: { looks: LookResolvido[]; 
         </div>
 
         <p className="mt-10 rotulo">{look.ocasiao}</p>
-        <p className="mt-3 font-serif text-h3 text-graphite">{look.texto}</p>
+        <p className="mt-3 font-serif text-h3 text-creme">{look.texto}</p>
 
-        <ul className="mt-8 divide-y divide-linha border-y border-linha" aria-label={`Peças do look ${look.titulo}`}>
+        <ul className="mt-8 divide-y divide-fio border-y border-fio" aria-label={`Peças do look ${look.titulo}`}>
           {look.pecas.map((p, i) => {
             const ativa = i === pecaAtiva;
             return (
@@ -107,17 +107,17 @@ export function LookBuilder({ looks, mostrarPrecos }: { looks: LookResolvido[]; 
                   onClick={() => setPecaAtiva(i)}
                   aria-pressed={ativa}
                   aria-label={`Mostrar ${p.papel.toLowerCase()}: ${p.nome}`}
-                  className={`relative aspect-[3/4] w-16 shrink-0 overflow-hidden rounded-peca bg-sand outline-offset-2 transition-shadow duration-400 ${ativa ? "ring-2 ring-bordeaux ring-offset-2 ring-offset-ivory" : "opacity-80 hover:opacity-100"}`}
+                  className={`relative aspect-[3/4] w-16 shrink-0 overflow-hidden rounded-peca bg-superficie outline-offset-2 transition-shadow duration-400 ${ativa ? "ring-2 ring-ouro ring-offset-2 ring-offset-ivory" : "opacity-80 hover:opacity-100"}`}
                 >
                   <Foto src={p.foto} alt="" sizes="64px" />
                 </button>
                 <div className="min-w-0 flex-1">
                   <p className="rotulo">{p.papel}</p>
-                  <p className="mt-1 truncate text-[0.9375rem] font-medium text-graphite">
+                  <p className="mt-1 truncate text-[0.9375rem] font-medium text-creme">
                     {p.nome}
-                    {p.cor ? <span className="font-normal text-mute">, {p.cor}</span> : null}
+                    {p.cor ? <span className="font-normal text-nevoa">, {p.cor}</span> : null}
                   </p>
-                  {mostrarPrecos && p.preco ? <p className="mt-0.5 text-legenda text-mute">{brl.format(p.preco)}</p> : null}
+                  {mostrarPrecos && p.preco ? <p className="mt-0.5 text-legenda text-nevoa">{brl.format(p.preco)}</p> : null}
                 </div>
                 <Link href={p.href} className="link-editorial shrink-0 text-[0.875rem]">
                   Ver peça
@@ -129,12 +129,12 @@ export function LookBuilder({ looks, mostrarPrecos }: { looks: LookResolvido[]; 
         </ul>
 
         {mostrarPrecos && total ? (
-          <p className="mt-5 flex items-baseline justify-between text-[0.9375rem] text-graphite">
+          <p className="mt-5 flex items-baseline justify-between text-[0.9375rem] text-creme">
             <span>Peças do look</span>
             <span className="font-medium">{brl.format(total)}</span>
           </p>
         ) : null}
-        <p className="mt-3 text-legenda text-taupe-ink">{look.complemento}</p>
+        <p className="mt-3 text-legenda text-fosco">{look.complemento}</p>
 
         <a href={look.whatsapp} target="_blank" rel="noopener noreferrer" className={classeBotao("contorno", "mt-8 w-full sm:w-auto")}>
           <IconeWhatsApp className="size-4" />

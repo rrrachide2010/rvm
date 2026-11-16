@@ -18,17 +18,17 @@ export function Breadcrumbs({ itens }: { itens: Migalha[] }) {
   };
   return (
     <>
-      <nav aria-label="Você está em" className="text-legenda text-mute">
+      <nav aria-label="Você está em" className="text-legenda text-nevoa">
         <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
           {todos.map((m, i) => (
             <li key={`${m.texto}-${i}`} className="flex items-center gap-2">
-              {i > 0 ? <span aria-hidden="true" className="text-taupe">/</span> : null}
+              {i > 0 ? <span aria-hidden="true" className="text-fosco">/</span> : null}
               {m.href && i < todos.length - 1 ? (
-                <Link href={m.href} className="inline-flex min-h-8 items-center hover:text-bordeaux">
+                <Link href={m.href} className="inline-flex min-h-8 items-center hover:text-ouro">
                   {m.texto}
                 </Link>
               ) : (
-                <span aria-current="page" className="text-graphite">{m.texto}</span>
+                <span aria-current="page" className="text-creme">{m.texto}</span>
               )}
             </li>
           ))}

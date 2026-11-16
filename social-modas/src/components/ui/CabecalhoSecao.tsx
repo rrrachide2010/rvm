@@ -16,14 +16,14 @@ export function CabecalhoSecao({ rotulo, titulo, texto, alinhamento = "esquerda"
   const centro = alinhamento === "centro";
   return (
     <div className={`max-w-2xl ${centro ? "mx-auto text-center" : ""}`} data-revelar>
-      <p className={`rotulo flex items-center gap-3 ${centro ? "justify-center" : ""} ${claro ? "!text-sand" : ""}`}>
-        <span className={`filete ${claro ? "!bg-sand" : ""}`} aria-hidden="true" />
+      <p className={`rotulo flex items-center gap-3 ${centro ? "justify-center" : ""}`}>
+        <span className="filete" aria-hidden="true" />
         {rotulo}
       </p>
-      <Titulo id={id} className={`mt-5 ${nivel === "h1" ? "text-h1" : "text-h2"} ${claro ? "text-ivory" : "text-bordeaux"}`}>
+      <Titulo id={id} className={`mt-5 text-creme ${nivel === "h1" ? "text-h1" : "text-h2"}`}>
         {titulo}
       </Titulo>
-      {texto ? <p className={`mt-5 text-lead ${claro ? "text-sand" : "text-mute"}`}>{texto}</p> : null}
+      {texto ? <p className={`mt-5 text-lead ${claro ? "text-creme/85" : "text-nevoa"}`}>{texto}</p> : null}
     </div>
   );
 }

@@ -29,16 +29,16 @@ export default function GuiaDeTamanhos() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
-          <section aria-labelledby="masculino" className="border-t border-graphite/80 pt-8">
-            <h2 id="masculino" className="text-h2 text-bordeaux">
+          <section aria-labelledby="masculino" className="border-t border-creme/80 pt-8">
+            <h2 id="masculino" className="text-h2 text-creme">
               Masculino
             </h2>
             <div className="mt-8">
               <SizeGuide genero="Masculino" completo />
             </div>
           </section>
-          <section aria-labelledby="feminino" className="border-t border-graphite/80 pt-8">
-            <h2 id="feminino" className="text-h2 text-bordeaux">
+          <section aria-labelledby="feminino" className="border-t border-creme/80 pt-8">
+            <h2 id="feminino" className="text-h2 text-creme">
               Feminino
             </h2>
             <div className="mt-8">
@@ -47,10 +47,10 @@ export default function GuiaDeTamanhos() {
           </section>
         </div>
 
-        <div className="mt-20 flex flex-col gap-6 rounded-peca bg-papel p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+        <div className="mt-20 flex flex-col gap-6 rounded-peca bg-superficie p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div>
-            <p className="font-serif text-h3 text-graphite">Ficou entre dois tamanhos?</p>
-            <p className="mt-2 text-mute">Mande suas medidas. A equipe compara com a modelagem da peça.</p>
+            <p className="font-serif text-h3 text-creme">Ficou entre dois tamanhos?</p>
+            <p className="mt-2 text-nevoa">Mande suas medidas. A equipe compara com a modelagem da peça.</p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Botao href={linkWhatsApp(MARCA.whatsappCentral.numero, "Olá, Social Modas! Quero ajuda com o tamanho. Minhas medidas são:")} externo>

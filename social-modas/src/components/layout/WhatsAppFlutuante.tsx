@@ -10,7 +10,7 @@ export function WhatsAppFlutuante() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar com a Social Modas no WhatsApp"
-      className="group fixed right-4 bottom-4 z-30 inline-flex size-14 items-center justify-center rounded-full bg-graphite text-ivory shadow-[0_10px_30px_-12px_rgb(41_40_43/0.6)] transition-[transform,background-color] duration-400 ease-suave hover:-translate-y-0.5 hover:bg-bordeaux sm:right-6 sm:bottom-6"
+      className="group fixed right-4 bottom-4 z-30 inline-flex size-14 items-center justify-center rounded-full bg-marsala text-creme shadow-[0_10px_30px_-12px_rgb(41_40_43/0.6)] transition-[transform,background-color] duration-400 ease-suave hover:-translate-y-0.5 hover:bg-marsala sm:right-6 sm:bottom-6"
     >
       <IconeWhatsApp className="size-6" />
     </a>

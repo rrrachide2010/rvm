@@ -23,10 +23,10 @@ export function EditorialHero() {
             <span className="filete" aria-hidden="true" />
             Moda feminina e masculina
           </p>
-          <h1 id="hero-titulo" className="mt-7 text-display text-bordeaux motion-safe:animate-revelar-titulo motion-safe:[animation-delay:120ms]">
-            A primeira impressão também veste.
+          <h1 id="hero-titulo" className="mt-7 text-display text-creme motion-safe:animate-revelar-titulo motion-safe:[animation-delay:120ms]">
+            A primeira impressão <em className="block">também veste.</em>
           </h1>
-          <p className="mt-7 max-w-md text-lead text-mute motion-safe:animate-[revelar-titulo_900ms_var(--ease-entrada)_300ms_both]">
+          <p className="mt-7 max-w-md text-lead text-nevoa motion-safe:animate-[revelar-titulo_900ms_var(--ease-entrada)_300ms_both]">
             Moda feminina e masculina para acompanhar você em cada ocasião.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row motion-safe:animate-[revelar-titulo_900ms_var(--ease-entrada)_420ms_both]">
@@ -38,13 +38,13 @@ export function EditorialHero() {
               Encontrar uma loja
             </Botao>
           </div>
-          <p className="mt-12 hidden max-w-sm border-t border-linha pt-5 text-legenda text-mute lg:block">
+          <p className="mt-12 hidden max-w-sm border-t border-fio pt-5 text-legenda text-nevoa lg:block">
             Atendimento em {listaCidades}.
           </p>
         </div>
 
         <div className="relative">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-sand motion-safe:animate-surgir lg:ml-auto lg:aspect-[3/4] lg:max-h-[82svh] lg:w-auto">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-peca bg-superficie motion-safe:animate-surgir lg:ml-auto lg:aspect-[3/4] lg:max-h-[82svh] lg:w-auto">
             <div className="parallax-suave absolute -inset-y-6 inset-x-0">
               <Foto
                 src="/assets/look-3.jpg"
@@ -55,7 +55,7 @@ export function EditorialHero() {
               />
             </div>
           </div>
-          <figure className="absolute -bottom-8 -left-6 hidden w-[34%] overflow-hidden rounded-peca border-[6px] border-ivory shadow-[0_24px_48px_-28px_rgb(41_40_43/0.5)] lg:block">
+          <figure className="absolute -bottom-8 -left-6 hidden w-[34%] overflow-hidden rounded-peca border-[6px] border-tinta shadow-[0_24px_48px_-28px_rgb(41_40_43/0.5)] lg:block">
             <div className="relative aspect-[3/4]">
               <Foto src="/assets/pb-branco-3.jpg" alt="Detalhe de camisa social branca" sizes="16vw" />
             </div>
